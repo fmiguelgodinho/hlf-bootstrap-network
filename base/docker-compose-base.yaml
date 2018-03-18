@@ -1,0 +1,153 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+
+  orderer.blockchain.fgodinho.com:
+    container_name: orderer.blockchain.fgodinho.com
+    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # enabled TLS
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer
+    volumes:
+    - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    - ../crypto-config/ordererOrganizations/blockchain.fgodinho.com/orderers/orderer.blockchain.fgodinho.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/blockchain.fgodinho.com/orderers/orderer.blockchain.fgodinho.com/tls/:/var/hyperledger/orderer/tls
+    - orderer.blockchain.fgodinho.com:/var/hyperledger/production/orderer
+    ports:
+      - 7050:7050
+
+  peer0.blockchain.fgodinho.com:
+    container_name: peer0.blockchain.fgodinho.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain.fgodinho.com
+      - CORE_PEER_ADDRESS=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_LOCALMSPID=PeersMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain.fgodinho.com:/var/hyperledger/production
+    ports:
+      - 7051:7051
+      - 7053:7053
+
+  peer1.blockchain.fgodinho.com:
+    container_name: peer1.blockchain.fgodinho.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.blockchain.fgodinho.com
+      - CORE_PEER_ADDRESS=peer1.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_LOCALMSPID=PeersMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer1.blockchain.fgodinho.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer1.blockchain.fgodinho.com/tls:/etc/hyperledger/fabric/tls
+        - peer1.blockchain.fgodinho.com:/var/hyperledger/production
+
+    ports:
+      - 8051:7051
+      - 8053:7053
+
+  peer2.blockchain.fgodinho.com:
+    container_name: peer2.blockchain.fgodinho.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer2.blockchain.fgodinho.com
+      - CORE_PEER_ADDRESS=peer2.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_LOCALMSPID=PeersMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer2.blockchain.fgodinho.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer2.blockchain.fgodinho.com/tls:/etc/hyperledger/fabric/tls
+        - peer2.blockchain.fgodinho.com:/var/hyperledger/production
+    ports:
+      - 9051:7051
+      - 9053:7053
+
+  peer3.blockchain.fgodinho.com:
+    container_name: peer3.blockchain.fgodinho.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer3.blockchain.fgodinho.com
+      - CORE_PEER_ADDRESS=peer3.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_LOCALMSPID=PeersMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer3.blockchain.fgodinho.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer3.blockchain.fgodinho.com/tls:/etc/hyperledger/fabric/tls
+        - peer3.blockchain.fgodinho.com:/var/hyperledger/production
+    ports:
+      - 10051:7051
+      - 10053:7053
+
+  peer4.blockchain.fgodinho.com:
+    container_name: peer4.blockchain.fgodinho.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer4.blockchain.fgodinho.com
+      - CORE_PEER_ADDRESS=peer4.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer4.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_LOCALMSPID=PeersMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer4.blockchain.fgodinho.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer4.blockchain.fgodinho.com/tls:/etc/hyperledger/fabric/tls
+        - peer4.blockchain.fgodinho.com:/var/hyperledger/production
+    ports:
+      - 11051:7051
+      - 11053:7053
+
+  peer5.blockchain.fgodinho.com:
+    container_name: peer5.blockchain.fgodinho.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer5.blockchain.fgodinho.com
+      - CORE_PEER_ADDRESS=peer5.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer5.blockchain.fgodinho.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_LOCALMSPID=PeersMSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer5.blockchain.fgodinho.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain.fgodinho.com/peers/peer5.blockchain.fgodinho.com/tls:/etc/hyperledger/fabric/tls
+        - peer5.blockchain.fgodinho.com:/var/hyperledger/production
+    ports:
+      - 12051:7051
+      - 12053:7053

@@ -1,0 +1,111 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer.blockchain.fgodinho.com:
+  peer0.blockchain.fgodinho.com:
+  peer1.blockchain.fgodinho.com:
+  peer2.blockchain.fgodinho.com:
+  peer3.blockchain.fgodinho.com:
+  peer4.blockchain.fgodinho.com:
+  peer5.blockchain.fgodinho.com:
+
+networks:
+  bootstrap:
+
+services:
+
+  orderer.blockchain.fgodinho.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.blockchain.fgodinho.com
+    container_name: orderer.blockchain.fgodinho.com
+    networks:
+      - bootstrap
+
+  peer0.blockchain.fgodinho.com:
+    container_name: peer0.blockchain.fgodinho.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain.fgodinho.com
+    networks:
+      - bootstrap
+
+  peer1.blockchain.fgodinho.com:
+    container_name: peer1.blockchain.fgodinho.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.blockchain.fgodinho.com
+    networks:
+      - bootstrap
+
+  peer2.blockchain.fgodinho.com:
+    container_name: peer2.blockchain.fgodinho.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer2.blockchain.fgodinho.com
+    networks:
+      - bootstrap
+
+  peer3.blockchain.fgodinho.com:
+    container_name: peer3.blockchain.fgodinho.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer3.blockchain.fgodinho.com
+    networks:
+      - bootstrap
+
+  peer4.blockchain.fgodinho.com:
+    container_name: peer4.blockchain.fgodinho.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer4.blockchain.fgodinho.com
+    networks:
+      - bootstrap
+
+  peer5.blockchain.fgodinho.com:
+    container_name: peer5.blockchain.fgodinho.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer5.blockchain.fgodinho.com
+    networks:
+      - bootstrap
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_LOCALMSPID=PeersMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/users/Admin@blockchain.fgodinho.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME} ${DELAY}; sleep $TIMEOUT'
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      - orderer.blockchain.fgodinho.com
+      - peer0.blockchain.fgodinho.com
+      - peer1.blockchain.fgodinho.com
+      - peer2.blockchain.fgodinho.com
+      - peer3.blockchain.fgodinho.com
+      - peer4.blockchain.fgodinho.com
+      - peer5.blockchain.fgodinho.com
+    networks:
+      - bootstrap
