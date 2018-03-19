@@ -24,7 +24,7 @@ Profiles:
                 Organizations:
                     - *Org1
     OneOrgChannel:
-        Consortium: BootstrapConsortium
+        Consortium: SampleConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
