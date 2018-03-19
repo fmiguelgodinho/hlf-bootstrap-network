@@ -7,8 +7,8 @@ version: '2'
 
 services:
 
-  orderer.blockchain.fgodinho.com:
-    container_name: orderer.blockchain.fgodinho.com
+  orderer.consensus.fgodinho.com:
+    container_name: orderer.consensus.fgodinho.com
     image: hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
@@ -26,9 +26,9 @@ services:
     command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-    - ../crypto-config/ordererOrganizations/blockchain.fgodinho.com/orderers/orderer.blockchain.fgodinho.com/msp:/var/hyperledger/orderer/msp
-    - ../crypto-config/ordererOrganizations/blockchain.fgodinho.com/orderers/orderer.blockchain.fgodinho.com/tls/:/var/hyperledger/orderer/tls
-    - orderer.blockchain.fgodinho.com:/var/hyperledger/production/orderer
+    - ../crypto-config/ordererOrganizations/consensus.fgodinho.com/orderers/orderer.consensus.fgodinho.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/consensus.fgodinho.com/orderers/orderer.consensus.fgodinho.com/tls/:/var/hyperledger/orderer/tls
+    - orderer.consensus.fgodinho.com:/var/hyperledger/production/orderer
     ports:
       - 7050:7050
 

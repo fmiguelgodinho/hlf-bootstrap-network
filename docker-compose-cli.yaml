@@ -6,7 +6,7 @@
 version: '2'
 
 volumes:
-  orderer.blockchain.fgodinho.com:
+  orderer.consensus.fgodinho.com:
   peer0.blockchain.fgodinho.com:
   peer1.blockchain.fgodinho.com:
   peer2.blockchain.fgodinho.com:
@@ -19,11 +19,11 @@ networks:
 
 services:
 
-  orderer.blockchain.fgodinho.com:
+  orderer.consensus.fgodinho.com:
     extends:
       file:   base/docker-compose-base.yaml
-      service: orderer.blockchain.fgodinho.com
-    container_name: orderer.blockchain.fgodinho.com
+      service: orderer.consensus.fgodinho.com
+    container_name: orderer.consensus.fgodinho.com
     networks:
       - bootstrap
 
@@ -100,7 +100,7 @@ services:
         - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
-      - orderer.blockchain.fgodinho.com
+      - orderer.consensus.fgodinho.com
       - peer0.blockchain.fgodinho.com
       - peer1.blockchain.fgodinho.com
       - peer2.blockchain.fgodinho.com
