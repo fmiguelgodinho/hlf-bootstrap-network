@@ -6,72 +6,72 @@
 version: '2'
 
 volumes:
-  orderer.consensus.fgodinho.com:
-  peer0.blockchain.fgodinho.com:
-  peer1.blockchain.fgodinho.com:
-  peer2.blockchain.fgodinho.com:
-  peer3.blockchain.fgodinho.com:
-  peer4.blockchain.fgodinho.com:
-  peer5.blockchain.fgodinho.com:
+  orderer.fgodinho.com:
+  peer0.fgodinho.com:
+  peer1.fgodinho.com:
+  peer2.fgodinho.com:
+  peer3.fgodinho.com:
+  peer4.fgodinho.com:
+  peer5.fgodinho.com:
 
 networks:
   bootstrap:
 
 services:
 
-  orderer.consensus.fgodinho.com:
+  orderer.fgodinho.com:
     extends:
       file:   base/docker-compose-base.yaml
-      service: orderer.consensus.fgodinho.com
-    container_name: orderer.consensus.fgodinho.com
+      service: orderer.fgodinho.com
+    container_name: orderer.fgodinho.com
     networks:
       - bootstrap
 
-  peer0.blockchain.fgodinho.com:
-    container_name: peer0.blockchain.fgodinho.com
+  peer0.fgodinho.com:
+    container_name: peer0.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer0.blockchain.fgodinho.com
+      service: peer0.fgodinho.com
     networks:
       - bootstrap
 
-  peer1.blockchain.fgodinho.com:
-    container_name: peer1.blockchain.fgodinho.com
+  peer1.fgodinho.com:
+    container_name: peer1.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer1.blockchain.fgodinho.com
+      service: peer1.fgodinho.com
     networks:
       - bootstrap
 
-  peer2.blockchain.fgodinho.com:
-    container_name: peer2.blockchain.fgodinho.com
+  peer2.fgodinho.com:
+    container_name: peer2.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer2.blockchain.fgodinho.com
+      service: peer2.fgodinho.com
     networks:
       - bootstrap
 
-  peer3.blockchain.fgodinho.com:
-    container_name: peer3.blockchain.fgodinho.com
+  peer3.fgodinho.com:
+    container_name: peer3.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer3.blockchain.fgodinho.com
+      service: peer3.fgodinho.com
     networks:
       - bootstrap
 
-  peer4.blockchain.fgodinho.com:
-    container_name: peer4.blockchain.fgodinho.com
+  peer4.fgodinho.com:
+    container_name: peer4.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer4.blockchain.fgodinho.com
+      service: peer4.fgodinho.com
     networks:
       - bootstrap
 
-  peer5.blockchain.fgodinho.com:
-    container_name: peer5.blockchain.fgodinho.com
+  peer5.fgodinho.com:
+    container_name: peer5.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer5.blockchain.fgodinho.com
+      service: peer5.fgodinho.com
     networks:
       - bootstrap
 
@@ -84,28 +84,27 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - CORE_LOGGING_LEVEL=DEBUG
       - CORE_PEER_ID=cli
-      - CORE_PEER_ADDRESS=peer0.blockchain.fgodinho.com:7051
+      - CORE_PEER_ADDRESS=peer0.fgodinho.com:7051
       - CORE_PEER_LOCALMSPID=PeersMSP
       - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/tls/server.crt
-      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/tls/server.key
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/peers/peer0.blockchain.fgodinho.com/tls/ca.crt
-      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain.fgodinho.com/users/Admin@blockchain.fgodinho.com/msp
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/users/Admin@fgodinho.com/msp
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:
         - /var/run/:/host/var/run/
-        - ./../chaincode/:/opt/gopath/src/github.com/hyperledger/fabric/examples/chaincode/go
+        - ./chaincode/:/opt/gopath/src/github.com/hyperledger/fabric/chaincode/go
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
-        #- ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
-      - orderer.consensus.fgodinho.com
-      - peer0.blockchain.fgodinho.com
-      - peer1.blockchain.fgodinho.com
-      - peer2.blockchain.fgodinho.com
-      - peer3.blockchain.fgodinho.com
-      - peer4.blockchain.fgodinho.com
-      - peer5.blockchain.fgodinho.com
+      - orderer.fgodinho.com
+      - peer0.fgodinho.com
+      - peer1.fgodinho.com
+      - peer2.fgodinho.com
+      - peer3.fgodinho.com
+      - peer4.fgodinho.com
+      - peer5.fgodinho.com
     networks:
       - bootstrap
