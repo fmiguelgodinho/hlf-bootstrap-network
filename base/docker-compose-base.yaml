@@ -7,8 +7,8 @@ version: '2'
 
 services:
 
-  orderer.fgodinho.com:
-    container_name: orderer.fgodinho.com
+  orderer0.fgodinho.com:
+    container_name: orderer0.fgodinho.com
     image: hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
@@ -17,6 +17,15 @@ services:
       - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # kafka
+      - ORDERER_GENERAL_LISTENPORT=7050
+      - CONFIGTX_ORDERER_ORDERERTYPE=kafka
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
+      - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
+      - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
+      - ORDERER_KAFKA_VERBOSE=true
+      - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
+      - ORDERER_GENERAL_LEDGERTYPE=ram
       # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
@@ -26,11 +35,46 @@ services:
     command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer.fgodinho.com/msp:/var/hyperledger/orderer/msp
-    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer.fgodinho.com/tls/:/var/hyperledger/orderer/tls
-    - orderer.fgodinho.com:/var/hyperledger/production/orderer
+    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/tls/:/var/hyperledger/orderer/tls
+    - orderer0.fgodinho.com:/var/hyperledger/production/orderer
     ports:
       - 7050:7050
+
+  orderer1.fgodinho.com:
+    container_name: orderer1.fgodinho.com
+    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # kafka
+      - ORDERER_GENERAL_LISTENPORT=7050
+      - CONFIGTX_ORDERER_ORDERERTYPE=kafka
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
+      - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
+      - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
+      - ORDERER_KAFKA_VERBOSE=true
+      - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
+      - ORDERER_GENERAL_LEDGERTYPE=ram
+      # enabled TLS
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer
+    volumes:
+    - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer1.fgodinho.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer1.fgodinho.com/tls/:/var/hyperledger/orderer/tls
+    - orderer1.fgodinho.com:/var/hyperledger/production/orderer
+    ports:
+      - 8050:7050
+
 
   peer0.fgodinho.com:
     container_name: peer0.fgodinho.com
