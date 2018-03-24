@@ -11,6 +11,7 @@ networks:
 services:
 
   zookeeper0:
+    container_name: zookeeper0
     extends:
       file: base/docker-compose-kafka-base.yaml
       service: zookeeper
@@ -21,6 +22,7 @@ services:
       - bootstrap
 
   zookeeper1:
+    container_name: zookeeper1
     extends:
       file: base/docker-compose-kafka-base.yaml
       service: zookeeper
@@ -31,6 +33,7 @@ services:
       - bootstrap
 
   zookeeper2:
+    container_name: zookeeper2
     extends:
       file: base/docker-compose-kafka-base.yaml
       service: zookeeper
@@ -41,6 +44,7 @@ services:
       - bootstrap
 
   kafka0:
+    container_name: kafka0
     extends:
       file: base/docker-compose-kafka-base.yaml
       service: kafka
@@ -57,6 +61,7 @@ services:
       - bootstrap
 
   kafka1:
+    container_name: kafka1
     extends:
       file: base/docker-compose-kafka-base.yaml
       service: kafka
@@ -73,6 +78,7 @@ services:
       - bootstrap
 
   kafka2:
+    container_name: kafka2
     extends:
       file: base/docker-compose-kafka-base.yaml
       service: kafka
@@ -89,6 +95,7 @@ services:
       - bootstrap
 
   kafka3:
+    container_name: kafka3
     extends:
       file: base/docker-compose-kafka-base.yaml
       service: kafka
