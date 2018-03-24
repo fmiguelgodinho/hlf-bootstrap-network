@@ -9,7 +9,7 @@ docker volume prune -f
 docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml up -d
 
 # wait for Hyperledger Fabric to start
-export FABRIC_START_TIMEOUT=30
+export FABRIC_START_TIMEOUT=120
 sleep ${FABRIC_START_TIMEOUT}
 
 # export environment variables for docker network
