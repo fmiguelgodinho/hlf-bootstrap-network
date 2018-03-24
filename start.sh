@@ -2,11 +2,11 @@
 set -ev
 
 # fully reboot docker containers and network, removing volumes
-docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml down
+docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml down
 
 docker volume prune -f
 
-docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml up -d
+docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml up -d
 
 # wait for Hyperledger Fabric to start
 export FABRIC_START_TIMEOUT=120
