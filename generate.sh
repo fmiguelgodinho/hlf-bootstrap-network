@@ -1,9 +1,6 @@
 #!/bin/sh
-#
-# Copyright IBM Corp All Rights Reserved
-#
-# SPDX-License-Identifier: Apache-2.0
-#
+set -e
+
 export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
 export FABRIC_CFG_PATH=${PWD}
 CHANNEL_NAME=mainchannel
@@ -19,8 +16,15 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-# generate genesis block for orderer
-configtxgen -profile OneOrgOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+while true; do
+    read -p "Going to proceed with a Kafka-based ordering service (Y to continue, N for BFTsmart)?" yn
+    case $yn in
+        [Yy]* ) echo "Generating Kafka-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisKafka -outputBlock ./channel-artifacts/genesis.block; break;;
+        [Nn]* ) echo "Generating BFTsmart-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisBFTsmart -outputBlock ./channel-artifacts/genesis.block; break;;
+        * ) echo "Please answer Y or N.";;
+    esac
+done
+
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate orderer genesis block..."
   exit 1

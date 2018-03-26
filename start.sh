@@ -1,15 +1,18 @@
 #!/bin/bash
-set -ev
+set -e
 
 # fully reboot docker containers and network, removing volumes
-docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml down
-
-docker volume prune -f
-
-docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml up -d
+while true; do
+    read -p "What do you want to run (Y for Kafka HLF, N for BFTsmart HLF)?" yn
+    case $yn in
+        [Yy]* ) docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml down; docker volume prune -f; docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml up -d; break;;
+        [Nn]* ) docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-bftsmart.yaml down; docker volume prune -f; docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-bftsmart.yaml up -d break;;
+        * ) echo "Please answer Y or N.";;
+    esac
+done
 
 # wait for Hyperledger Fabric to start
-export FABRIC_START_TIMEOUT=120
+export FABRIC_START_TIMEOUT=150
 sleep ${FABRIC_START_TIMEOUT}
 
 # export environment variables for docker network

@@ -1,0 +1,77 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+networks:
+  bootstrap:
+
+services:
+
+  bft-replica0:
+    container_name: bft-replica0
+    extends:
+      file: base/docker-compose-bftsmart-base.yaml
+      service: bft-replica
+    environment:
+      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
+    command: ./startReplica.sh 0
+    networks:
+      - bootstrap
+
+
+  bft-replica1:
+    container_name: bft-replica1
+    extends:
+      file: base/docker-compose-bftsmart-base.yaml
+      service: bft-replica
+    environment:
+      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
+    command: ./startReplica.sh 1
+    networks:
+      - bootstrap
+
+
+  bft-replica2:
+    container_name: bft-replica2
+    extends:
+      file: base/docker-compose-bftsmart-base.yaml
+      service: bft-replica
+    environment:
+      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
+    command: ./startReplica.sh 2
+    networks:
+      - bootstrap
+
+  bft-replica3:
+    container_name: bft-replica3
+    extends:
+      file: base/docker-compose-bftsmart-base.yaml
+      service: bft-replica
+    environment:
+      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
+    command: ./startReplica.sh 3
+    networks:
+      - bootstrap
+
+  bft-frontend0:
+    container_name: bft-frontend0
+#  orderer0.fgodinho.com:
+#    depends_on:
+#      - bft-replica0
+#      - bft-replica1
+#      - bft-replica2
+#      - bft-replica3
+
+#  orderer1.fgodinho.com:
+#    depends_on:
+#      - bft-replica0
+#      - bft-replica1
+#      - bft-replica2
+#      - bft-replica3

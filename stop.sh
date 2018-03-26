@@ -1,11 +1,12 @@
 #!/bin/bash
-#
-# Copyright IBM Corp All Rights Reserved
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-# Exit on first error, print all commands.
-set -ev
+set -e
 
 # Shut down the Docker containers that might be currently running.
-docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml stop
+while true; do
+    read -p "What are you running (Y for Kafka HLF, N for BFTsmart HLF)?" yn
+    case $yn in
+        [Yy]* ) docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml stop; break;;
+        [Nn]* ) docker-compose -f docker-compose-cli.yaml -f docker-compose-couch.yaml -f docker-compose-bftsmart.yaml stop; break;;
+        * ) echo "Please answer Y or N.";;
+    esac
+done
