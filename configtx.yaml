@@ -17,7 +17,7 @@ Profiles:
     OneOrgOrdererGenesisKafka:
         Orderer:
             <<: *OrdererDefaults
-            OrdererType: bftsmart
+            OrdererType: kafka
             Organizations:
                 - *OrdererOrg
         Consortiums:

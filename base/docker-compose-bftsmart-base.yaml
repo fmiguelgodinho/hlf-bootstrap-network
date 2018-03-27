@@ -9,7 +9,10 @@ services:
 
   bft-replica:
     image: fgodinho/gassy-octopus
-    volumes:
-        - /var/run/:/host/var/run/
     ports:
       - '11000'
+
+  bft-frontend:
+    image: fgodinho/gassy-octopus
+    ports:
+      - '9999'
