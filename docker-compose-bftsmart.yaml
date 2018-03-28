@@ -60,45 +60,22 @@ services:
     networks:
       - bootstrap
 
-  bft-frontend0:
-    container_name: bft-frontend0
-    extends:
-      file: base/docker-compose-bftsmart-base.yaml
-      service: bft-frontend
-    environment:
-      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
-    command: ./startFrontend.sh 1000 10 9999
-    networks:
-      - bootstrap
-    depends_on:
-      - bft-replica0
-      - bft-replica1
-      - bft-replica2
-      - bft-replica3
-
-  bft-frontend1:
-    container_name: bft-frontend1
-    extends:
-      file: base/docker-compose-bftsmart-base.yaml
-      service: bft-frontend
-    environment:
-      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
-    command: ./startFrontend.sh 2000 10 9999
-    networks:
-      - bootstrap
-    depends_on:
-      - bft-replica0
-      - bft-replica1
-      - bft-replica2
-      - bft-replica3
-
-
   orderer0.fgodinho.com:
+    environment:
+      - BFTSMART_FRONTEND_ID=1000
+    command: ./orderer-bftfrontend.sh
     depends_on:
-      - bft-frontend0
+      - bft-replica0
+      - bft-replica1
+      - bft-replica2
+      - bft-replica3
 
   orderer1.fgodinho.com:
+    environment:
+      - BFTSMART_FRONTEND_ID=2000
+    command: ./orderer-bftfrontend.sh
     depends_on:
-      - bft-frontend1
+      - bft-replica0
+      - bft-replica1
+      - bft-replica2
+      - bft-replica3

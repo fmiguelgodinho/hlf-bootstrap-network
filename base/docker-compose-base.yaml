@@ -9,7 +9,8 @@ services:
 
   orderer0.fgodinho.com:
     container_name: orderer0.fgodinho.com
-    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    image: fgodinho/gassy-octopus-orderer
+    #hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -26,13 +27,17 @@ services:
       - ORDERER_KAFKA_VERBOSE=true
       - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
       - ORDERER_GENERAL_LEDGERTYPE=ram
+      # BFTsmart
+      - BFTSMART_RECVPORT=9999
+      - BFTSMART_CONNECTION_POOL_SIZE=10
+      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
       # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: orderer
+    #command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp:/var/hyperledger/orderer/msp
@@ -43,7 +48,8 @@ services:
 
   orderer1.fgodinho.com:
     container_name: orderer1.fgodinho.com
-    image: hyperledger/fabric-orderer:$IMAGE_TAG
+    image: fgodinho/gassy-octopus-orderer
+    #hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -60,13 +66,17 @@ services:
       - ORDERER_KAFKA_VERBOSE=true
       - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
       - ORDERER_GENERAL_LEDGERTYPE=ram
+      # BFTsmart
+      - BFTSMART_RECVPORT=9999
+      - BFTSMART_CONNECTION_POOL_SIZE=10
+      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
       # enabled TLS
       - ORDERER_GENERAL_TLS_ENABLED=true
       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: orderer
+    #command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer1.fgodinho.com/msp:/var/hyperledger/orderer/msp

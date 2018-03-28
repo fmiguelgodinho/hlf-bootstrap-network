@@ -11,8 +11,3 @@ services:
     image: fgodinho/gassy-octopus
     ports:
       - '11000'
-
-  bft-frontend:
-    image: fgodinho/gassy-octopus
-    ports:
-      - '9999'
