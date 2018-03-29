@@ -12,7 +12,7 @@ services:
     environment:
       - BFTSMART_ORDERER_MSPID=OrdererMSP
       - BFTSMART_REPLICA_CERTIFICATE=/opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart/config/sampleconfig/signcerts/peer.pem
-      - BFTSMART_REPLICA_PRIVKEY=PRIVKEY=/opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart/config/sampleconfig/keystore/key.pem
+      - BFTSMART_REPLICA_PRIVKEY=/opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart/config/sampleconfig/keystore/key.pem
       - BFTSMART_PARELLELISM=10
       - BFTSMART_BLOCKS_PER_THREAD=10000
       - BFTSMART_RECEIVERS=1000,2000
