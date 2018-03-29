@@ -10,7 +10,6 @@ services:
   orderer0.fgodinho.com:
     container_name: orderer0.fgodinho.com
     image: fgodinho/gassy-octopus-orderer
-    #hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -37,7 +36,7 @@ services:
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    #command: orderer
+    command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp:/var/hyperledger/orderer/msp
@@ -49,7 +48,6 @@ services:
   orderer1.fgodinho.com:
     container_name: orderer1.fgodinho.com
     image: fgodinho/gassy-octopus-orderer
-    #hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -76,7 +74,7 @@ services:
       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    #command: orderer
+    command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer1.fgodinho.com/msp:/var/hyperledger/orderer/msp

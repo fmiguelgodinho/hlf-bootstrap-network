@@ -43,3 +43,14 @@ if [ "$?" -ne 0 ]; then
   echo "Failed to generate anchor peer update for Org1MSP..."
   exit 1
 fi
+
+#copy key and certificates in case of bft smart
+# TODO:REPLACE BY SOMETHING BETTER, WE'RE REUSING CERTIFICATES :(
+#mkdir crypto-config/bftsmart
+#cp -r crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/keystore crypto-config/bftsmart/
+#cd crypto-config/bftsmart/keystore
+#mv $(ls) key.pem
+#cd ../../..
+#cp -r crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/signcerts crypto-config/bftsmart/
+#cd crypto-config/bftsmart/signcerts
+#mv $(ls) peer.pem
