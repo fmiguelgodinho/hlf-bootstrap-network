@@ -55,7 +55,7 @@ done
 docker exec \
 -e "CORE_PEER_ADDRESS=peer0.fgodinho.com:7051" \
 cli peer chaincode instantiate -o orderer0.fgodinho.com:7050 --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/tlscacerts/tlsca.fgodinho.com-cert.pem -C ${CHANNEL_NAME} \
--n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -c '{"Args":[""]}' -P "OR ('OrderersMSP.member','PeersMSP.member')"
+-n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -c '{"Args":[""]}' -P "OR ('OrdererMSP.member','PeersMSP.member')"
 
 sleep 15
 
