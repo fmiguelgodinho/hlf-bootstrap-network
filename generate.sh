@@ -19,8 +19,8 @@ fi
 while true; do
     read -p "Going to proceed with a Kafka-based ordering service (Y to continue, N for BFTsmart)?" yn
     case $yn in
-        [Yy]* ) echo "Generating Kafka-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisKafka -outputBlock ./channel-artifacts/genesis.block; break;;
-        [Nn]* ) echo "Generating BFTsmart-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisBFTsmart -outputBlock ./channel-artifacts/genesis.block; break;;
+        [Yy]* ) echo "Generating Kafka-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisKafka -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
+        [Nn]* ) echo "Generating BFTsmart-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisBFTsmart -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
         * ) echo "Please answer Y or N.";;
     esac
 done
@@ -46,11 +46,11 @@ fi
 
 #copy key and certificates in case of bft smart
 # TODO:REPLACE BY SOMETHING BETTER, WE'RE REUSING CERTIFICATES :(
-#mkdir crypto-config/bftsmart
-#cp -r crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/keystore crypto-config/bftsmart/
-#cd crypto-config/bftsmart/keystore
-#mv $(ls) key.pem
-#cd ../../..
-#cp -r crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/signcerts crypto-config/bftsmart/
-#cd crypto-config/bftsmart/signcerts
-#mv $(ls) peer.pem
+mkdir crypto-config/bftsmart
+cp -r crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/keystore crypto-config/bftsmart/
+cd crypto-config/bftsmart/keystore
+mv $(ls) key.pem
+cd ../../..
+cp -r crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/signcerts crypto-config/bftsmart/
+cd crypto-config/bftsmart/signcerts
+mv $(ls) peer.pem

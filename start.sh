@@ -12,7 +12,7 @@ while true; do
 done
 
 # wait for Hyperledger Fabric to start
-export FABRIC_START_TIMEOUT=150
+export FABRIC_START_TIMEOUT=50
 sleep ${FABRIC_START_TIMEOUT}
 
 # export environment variables for docker network
@@ -23,6 +23,8 @@ export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric
 export CHANNEL_NAME=mainchannel
 export CORE_PEER_TLS_ENABLED=true
 
+echo "1. Creating channel $CHANNEL_NAME"
+
 # Create the channel
 docker exec \
 -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/tls/ca.crt" \
@@ -31,18 +33,36 @@ docker exec \
 -e "CORE_PEER_ADDRESS=peer0.fgodinho.com:7051" \
 cli peer channel create -o orderer0.fgodinho.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/channel.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/tlscacerts/tlsca.fgodinho.com-cert.pem -t 30
 
+
+echo "2. Peers will start joining channel $CHANNEL_NAME"
+sleep 15
+
 # peer joins channel
 for ((i=0; i<=5; i++)); do
     docker exec \
-    -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/tls/ca.crt" \
+    -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/peers/peer$i.fgodinho.com/tls/ca.crt" \
     -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/users/Admin@fgodinho.com/msp" \
     -e "CORE_PEER_LOCALMSPID=PeersMSP" \
     -e "CORE_PEER_ADDRESS=peer$i.fgodinho.com:7051" \
     cli peer channel join -b ${CHANNEL_NAME}.block
+
 done
+
+echo "3. Updating channel $CHANNEL_NAME information"
+sleep 15
+
+docker exec \
+-e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/tls/ca.crt" \
+-e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/fgodinho.com/users/Admin@fgodinho.com/msp" \
+-e "CORE_PEER_LOCALMSPID=PeersMSP" \
+-e "CORE_PEER_ADDRESS=peer0.fgodinho.com:7051" \
+cli peer channel update -o orderer0.fgodinho.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/PeersMSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/tlscacerts/tlsca.fgodinho.com-cert.pem
+
 
 # chaincode deployment
 export CHAINCODE_FILENAME_NOEXT=econtract
+
+echo "4. Installing chaincode $CHAINCODE_FILENAME_NOEXT on peers"
 
 # install chaincode on peer
 for ((i=0; i<=5; i++)); do
@@ -51,15 +71,19 @@ for ((i=0; i<=5; i++)); do
   cli peer chaincode install -n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -p github.com/hyperledger/fabric/chaincode/go/${CHAINCODE_FILENAME_NOEXT}
 done
 
+echo "5. Instantiating chaincode $CHAINCODE_FILENAME_NOEXT on channel $CHANNEL_NAME"
+
 # instantiate chain code - CHANGE ARGS AS YOU WISH
 docker exec \
 -e "CORE_PEER_ADDRESS=peer0.fgodinho.com:7051" \
-cli peer chaincode instantiate -o orderer0.fgodinho.com:7050 --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/tlscacerts/tlsca.fgodinho.com-cert.pem -C ${CHANNEL_NAME} \
--n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -c '{"Args":[""]}' -P "OR ('OrdererMSP.member','PeersMSP.member')"
+cli peer chaincode instantiate -o orderer0.fgodinho.com:7050 -C ${CHANNEL_NAME} -n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -c '{"Args":[""]}' -P "OR ('PeersMSP.member','PeersMSP.member')" --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/tlscacerts/tlsca.fgodinho.com-cert.pem
 
-sleep 15
+echo "6. Invoking chaincode $CHAINCODE_FILENAME_NOEXT on channel $CHANNEL_NAME"
+sleep 30
 
 # invoke ledger initiation
 docker exec \
 -e "CORE_PEER_ADDRESS=peer0.fgodinho.com:7051" \
 cli peer chaincode invoke -o orderer0.fgodinho.com:7050 --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/tlscacerts/tlsca.fgodinho.com-cert.pem -C ${CHANNEL_NAME} -n ${CHAINCODE_FILENAME_NOEXT} -c '{"function":"initLedger","Args":[""]}'
+
+echo "7. DONE!"
