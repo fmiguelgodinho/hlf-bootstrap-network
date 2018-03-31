@@ -21,6 +21,7 @@ networks:
 services:
 
   orderer0.fgodinho.com:
+    dns_search: .
     container_name: orderer0.fgodinho.com
     extends:
       file: base/docker-compose-base.yaml
@@ -29,6 +30,7 @@ services:
       - bootstrap
 
   orderer1.fgodinho.com:
+    dns_search: .
     container_name: orderer1.fgodinho.com
     extends:
       file: base/docker-compose-base.yaml
@@ -37,6 +39,7 @@ services:
       - bootstrap
 
   peer0.fgodinho.com:
+    dns_search: .
     container_name: peer0.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
@@ -45,6 +48,7 @@ services:
       - bootstrap
 
   peer1.fgodinho.com:
+    dns_search: .
     container_name: peer1.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
@@ -53,6 +57,7 @@ services:
       - bootstrap
 
   peer2.fgodinho.com:
+    dns_search: .
     container_name: peer2.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
@@ -61,6 +66,7 @@ services:
       - bootstrap
 
   peer3.fgodinho.com:
+    dns_search: .
     container_name: peer3.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
@@ -69,6 +75,7 @@ services:
       - bootstrap
 
   peer4.fgodinho.com:
+    dns_search: .
     container_name: peer4.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
@@ -77,6 +84,7 @@ services:
       - bootstrap
 
   peer5.fgodinho.com:
+    dns_search: .
     container_name: peer5.fgodinho.com
     extends:
       file:  base/docker-compose-base.yaml
