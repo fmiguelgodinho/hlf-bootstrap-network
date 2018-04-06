@@ -1,0 +1,20 @@
+{
+    "name": "hlf-bootstrap",
+    "version": "1.0.0",
+    "description": "Hyperledger Fabric Bootstrap Application",
+    "main": "fabcar.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "fabric-client": "~1.1.0",
+        "grpc": "^1.6.0"
+    },
+    "author": "Francisco Godinho",
+    "license": "Apache-2.0",
+    "keywords": [
+        "Hyperledger",
+        "Fabric",
+        "Client"
+    ]
+}
