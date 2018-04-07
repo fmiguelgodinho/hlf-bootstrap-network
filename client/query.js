@@ -43,7 +43,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	crypto_suite.setCryptoKeyStore(crypto_store);
 	fabric_client.setCryptoSuite(crypto_suite);
 
-	var privKey = fs.readFileSync('../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/keystore/154390bc7e2e7db15e20f4dbd249367f6b620eeb2b48cf867010b6196e21e029_sk').toString();
+	var privKey = fs.readFileSync('../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/keystore/User1@fgodinho.com-priv.pem').toString();
 	var signCrt = fs.readFileSync('../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/signcerts/User1@fgodinho.com-cert.pem').toString();
 
 	// get the enrolled user from persistence, this user will sign all requests

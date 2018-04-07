@@ -44,6 +44,7 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
+
 #copy key and certificates in case of bft smart
 # TODO:REPLACE BY SOMETHING BETTER, WE'RE REUSING CERTIFICATES :(
 mkdir crypto-config/bftsmart
@@ -54,3 +55,8 @@ cd ../../..
 cp -r crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp/signcerts crypto-config/bftsmart/
 cd crypto-config/bftsmart/signcerts
 mv $(ls) peer.pem
+
+
+#copy key to easier name in case of users
+cd ../../../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/keystore
+cp $(ls) User1@fgodinho.com-priv.pem
