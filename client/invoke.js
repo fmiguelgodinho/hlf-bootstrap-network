@@ -32,7 +32,7 @@ channel.addOrderer(orderer);
 
 //
 var member_user = null;
-var store_path = path.join(__dirname, '.hfc-key-store');
+var store_path = path.join(__dirname, '.hfc-keystore');
 console.log('Store path:'+store_path);
 var tx_id = null;
 
@@ -87,16 +87,29 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	var proposalResponses = results[0];
 	var proposal = results[1];
 	let isProposalGood = false;
-	if (proposalResponses && proposalResponses[0].response &&
-		proposalResponses[0].response.status === 200) {
+
+	if (proposalResponses) {
+		var okResponses = 0;
+		for (var i = 0; i < proposalResponses.length; i++) {
+			if (proposalResponses[i].response &&
+				proposalResponses[i].response.status === 200) {
+					okResponses++;
+			}
+		}
+
+		if (okResponses == proposalResponses.length) {
 			isProposalGood = true;
-			console.log('Transaction proposal was good');
+			console.log('Transaction proposal was good (accepted by ' + okResponses + ' endorsers)');
 		} else {
 			console.error('Transaction proposal was bad');
 		}
+	} else {
+		console.error('Transaction proposal was bad');
+	}
+
 	if (isProposalGood) {
 		console.log(util.format(
-			'Successfully sent Proposal and received ProposalResponse: Status - %s, message - "%s"',
+			'Successfully sent Proposal and received ProposalResponse (from first response): Status - %s, message - "%s"',
 			proposalResponses[0].response.status, proposalResponses[0].response.message));
 
 		// build up the request for the orderer to have the transaction committed
