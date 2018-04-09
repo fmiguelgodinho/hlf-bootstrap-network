@@ -74,13 +74,13 @@ Organizations:
         # ID to load the MSP definition as
         ID: PeersMSP
 
-        MSPDir: crypto-config/peerOrganizations/fgodinho.com/msp
+        MSPDir: crypto-config/peerOrganizations/blockchain-a.com/msp
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.fgodinho.com
+            - Host: peer0.blockchain-a.com
               Port: 7051
 
 

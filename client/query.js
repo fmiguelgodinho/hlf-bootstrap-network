@@ -20,8 +20,8 @@ var fabric_client = new Fabric_Client();
 // setup the fabric network
 var channel = fabric_client.newChannel('mainchannel');
 var peer = fabric_client.newPeer('grpcs://localhost:7051', {
-	pem: fs.readFileSync('../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/tlscacerts/tlsca.fgodinho.com-cert.pem').toString(),
-	'ssl-target-name-override': 'peer0.fgodinho.com'
+	pem: fs.readFileSync('../crypto-config/peerOrganizations/blockchain-a.com/users/User1@blockchain-a.com/msp/tlscacerts/tlsca.blockchain-a.com-cert.pem').toString(),
+	'ssl-target-name-override': 'peer0.blockchain-a.com'
 });
 channel.addPeer(peer);
 
@@ -43,12 +43,12 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	crypto_suite.setCryptoKeyStore(crypto_store);
 	fabric_client.setCryptoSuite(crypto_suite);
 
-	var privKey = fs.readFileSync('../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/keystore/User1@fgodinho.com-priv.pem').toString();
-	var signCrt = fs.readFileSync('../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/signcerts/User1@fgodinho.com-cert.pem').toString();
+	var privKey = fs.readFileSync('../crypto-config/peerOrganizations/blockchain-a.com/users/User1@blockchain-a.com/msp/keystore/User1@blockchain-a.com-priv.pem').toString();
+	var signCrt = fs.readFileSync('../crypto-config/peerOrganizations/blockchain-a.com/users/User1@blockchain-a.com/msp/signcerts/User1@blockchain-a.com-cert.pem').toString();
 
 	// get the enrolled user from persistence, this user will sign all requests
 	return fabric_client.createUser({
-		username: 'User1@fgodinho.com',
+		username: 'User1@blockchain-a.com',
 		mspid: 'PeersMSP',
 		cryptoContent: {
 			privateKeyPEM: privKey,

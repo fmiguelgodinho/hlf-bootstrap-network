@@ -58,5 +58,5 @@ mv $(ls) peer.pem
 
 
 #copy key to easier name in case of users
-cd ../../../crypto-config/peerOrganizations/fgodinho.com/users/User1@fgodinho.com/msp/keystore
-cp $(ls) User1@fgodinho.com-priv.pem
+cd ../../../crypto-config/peerOrganizations/blockchain-a.com/users/User1@blockchain-a.com/msp/keystore
+cp $(ls) User1@blockchain-a.com-priv.pem

@@ -84,128 +84,128 @@ services:
       - 8050:7050
 
 
-  peer0.fgodinho.com:
-    container_name: peer0.fgodinho.com
+  peer0.blockchain-a.com:
+    container_name: peer0.blockchain-a.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer0.fgodinho.com
-      - CORE_PEER_ADDRESS=peer0.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.fgodinho.com:7051
+      - CORE_PEER_ID=peer0.blockchain-a.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer0.fgodinho.com/tls:/etc/hyperledger/fabric/tls
-        - peer0.fgodinho.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer0.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer0.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-a.com:/var/hyperledger/production
     ports:
       - 7051:7051
       - 7053:7053
 
-  peer1.fgodinho.com:
-    container_name: peer1.fgodinho.com
+  peer1.blockchain-a.com:
+    container_name: peer1.blockchain-a.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer1.fgodinho.com
-      - CORE_PEER_ADDRESS=peer1.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.fgodinho.com:7051
+      - CORE_PEER_ID=peer1.blockchain-a.com
+      - CORE_PEER_ADDRESS=peer1.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer1.fgodinho.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer1.fgodinho.com/tls:/etc/hyperledger/fabric/tls
-        - peer1.fgodinho.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer1.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer1.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
+        - peer1.blockchain-a.com:/var/hyperledger/production
 
     ports:
       - 8051:7051
       - 8053:7053
 
-  peer2.fgodinho.com:
-    container_name: peer2.fgodinho.com
+  peer2.blockchain-a.com:
+    container_name: peer2.blockchain-a.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer2.fgodinho.com
-      - CORE_PEER_ADDRESS=peer2.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.fgodinho.com:7051
+      - CORE_PEER_ID=peer2.blockchain-a.com
+      - CORE_PEER_ADDRESS=peer2.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer2.fgodinho.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer2.fgodinho.com/tls:/etc/hyperledger/fabric/tls
-        - peer2.fgodinho.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer2.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer2.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
+        - peer2.blockchain-a.com:/var/hyperledger/production
     ports:
       - 9051:7051
       - 9053:7053
 
-  peer3.fgodinho.com:
-    container_name: peer3.fgodinho.com
+  peer3.blockchain-a.com:
+    container_name: peer3.blockchain-a.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer3.fgodinho.com
-      - CORE_PEER_ADDRESS=peer3.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.fgodinho.com:7051
+      - CORE_PEER_ID=peer3.blockchain-a.com
+      - CORE_PEER_ADDRESS=peer3.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer3.fgodinho.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer3.fgodinho.com/tls:/etc/hyperledger/fabric/tls
-        - peer3.fgodinho.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer3.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer3.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
+        - peer3.blockchain-a.com:/var/hyperledger/production
     ports:
       - 10051:7051
       - 10053:7053
 
-  peer4.fgodinho.com:
-    container_name: peer4.fgodinho.com
+  peer4.blockchain-a.com:
+    container_name: peer4.blockchain-a.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer4.fgodinho.com
-      - CORE_PEER_ADDRESS=peer4.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer4.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.fgodinho.com:7051
+      - CORE_PEER_ID=peer4.blockchain-a.com
+      - CORE_PEER_ADDRESS=peer4.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer4.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer4.fgodinho.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer4.fgodinho.com/tls:/etc/hyperledger/fabric/tls
-        - peer4.fgodinho.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer4.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer4.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
+        - peer4.blockchain-a.com:/var/hyperledger/production
     ports:
       - 11051:7051
       - 11053:7053
 
-  peer5.fgodinho.com:
-    container_name: peer5.fgodinho.com
+  peer5.blockchain-a.com:
+    container_name: peer5.blockchain-a.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer5.fgodinho.com
-      - CORE_PEER_ADDRESS=peer5.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer5.fgodinho.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.fgodinho.com:7051
+      - CORE_PEER_ID=peer5.blockchain-a.com
+      - CORE_PEER_ADDRESS=peer5.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer5.blockchain-a.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer5.fgodinho.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/fgodinho.com/peers/peer5.fgodinho.com/tls:/etc/hyperledger/fabric/tls
-        - peer5.fgodinho.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer5.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer5.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
+        - peer5.blockchain-a.com:/var/hyperledger/production
     ports:
       - 12051:7051
       - 12053:7053
