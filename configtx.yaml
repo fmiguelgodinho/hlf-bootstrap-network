@@ -14,7 +14,7 @@
 ################################################################################
 Profiles:
 
-    OneOrgOrdererGenesisKafka:
+    2P1OGenesis_Kafka:
         Orderer:
             <<: *OrdererDefaults
             OrdererType: kafka
@@ -26,7 +26,7 @@ Profiles:
                     - *Org1
                     - *Org2
 
-    OneOrgOrdererGenesisBFTsmart:
+    2P1OGenesis_BFTsmart:
         Orderer:
             <<: *OrdererDefaults
             OrdererType: bftsmart
@@ -38,7 +38,7 @@ Profiles:
                     - *Org1
                     - *Org2
 
-    OneOrgChannel:
+    2PSecureChannel:
         Consortium: SampleConsortium
         Application:
             <<: *ApplicationDefaults

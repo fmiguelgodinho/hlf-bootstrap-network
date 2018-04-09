@@ -19,8 +19,8 @@ fi
 while true; do
     read -p "Going to proceed with a Kafka-based ordering service (Y to continue, N for BFTsmart)?" yn
     case $yn in
-        [Yy]* ) echo "Generating Kafka-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisKafka -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
-        [Nn]* ) echo "Generating BFTsmart-based genesis block..."; configtxgen -profile OneOrgOrdererGenesisBFTsmart -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
+        [Yy]* ) echo "Generating Kafka-based genesis block..."; configtxgen -profile 2P1OGenesis_Kafka -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
+        [Nn]* ) echo "Generating BFTsmart-based genesis block..."; configtxgen -profile 2P1OGenesis_BFTsmart -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
         * ) echo "Please answer Y or N.";;
     esac
 done
@@ -31,19 +31,19 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # generate channel configuration transaction
-configtxgen -profile OneOrgChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+configtxgen -profile 2PSecureChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate channel configuration transaction..."
   exit 1
 fi
 
 # generate anchor peer transactions
-configtxgen -profile OneOrgChannel -outputAnchorPeersUpdate ./channel-artifacts/PeersAMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PeersA
+configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/PeersAMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PeersA
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate anchor peer update for Org1MSP..."
   exit 1
 fi
-configtxgen -profile OneOrgChannel -outputAnchorPeersUpdate ./channel-artifacts/PeersBMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PeersB
+configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/PeersBMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PeersB
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate anchor peer update for Org2MSP..."
   exit 1
