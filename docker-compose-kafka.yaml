@@ -6,7 +6,7 @@
 version: '2'
 
 networks:
-  bootstrap:
+  osn:
 
 services:
 
@@ -20,7 +20,7 @@ services:
       - ZOO_MY_ID=1
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     networks:
-      - bootstrap
+      - osn
 
   zookeeper1:
     dns_search: .
@@ -32,7 +32,7 @@ services:
       - ZOO_MY_ID=2
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     networks:
-      - bootstrap
+      - osn
 
   zookeeper2:
     dns_search: .
@@ -44,7 +44,7 @@ services:
       - ZOO_MY_ID=3
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     networks:
-      - bootstrap
+      - osn
 
   kafka0:
     dns_search: .
@@ -62,7 +62,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - bootstrap
+      - osn
 
   kafka1:
     dns_search: .
@@ -80,7 +80,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - bootstrap
+      - osn
 
   kafka2:
     dns_search: .
@@ -98,7 +98,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - bootstrap
+      - osn
 
   kafka3:
     dns_search: .
@@ -116,7 +116,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - bootstrap
+      - osn
 
   orderer0.consensus.com:
     depends_on:
