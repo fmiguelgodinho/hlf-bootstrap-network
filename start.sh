@@ -12,7 +12,7 @@ while true; do
 done
 
 # wait for Hyperledger Fabric to start
-export FABRIC_START_TIMEOUT=50
+export FABRIC_START_TIMEOUT=60
 sleep ${FABRIC_START_TIMEOUT}
 
 # export environment variables for docker network

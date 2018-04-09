@@ -11,6 +11,7 @@ networks:
 services:
 
   bft-replica0:
+    dns_search: .
     container_name: bft-replica0
     extends:
       file: base/docker-compose-bftsmart-base.yaml
@@ -24,6 +25,7 @@ services:
 
 
   bft-replica1:
+    dns_search: .
     container_name: bft-replica1
     extends:
       file: base/docker-compose-bftsmart-base.yaml
@@ -37,6 +39,7 @@ services:
 
 
   bft-replica2:
+    dns_search: .
     container_name: bft-replica2
     extends:
       file: base/docker-compose-bftsmart-base.yaml
@@ -49,6 +52,7 @@ services:
       - bootstrap
 
   bft-replica3:
+    dns_search: .
     container_name: bft-replica3
     extends:
       file: base/docker-compose-bftsmart-base.yaml

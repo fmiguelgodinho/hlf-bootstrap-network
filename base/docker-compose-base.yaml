@@ -17,8 +17,8 @@ services:
       - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # kafka
       - ORDERER_GENERAL_LISTENPORT=7050
+      # kafka
       - CONFIGTX_ORDERER_ORDERERTYPE=kafka
       - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
       - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
@@ -55,8 +55,8 @@ services:
       - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      # kafka
       - ORDERER_GENERAL_LISTENPORT=7050
+      # kafka
       - CONFIGTX_ORDERER_ORDERERTYPE=kafka
       - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
       - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s

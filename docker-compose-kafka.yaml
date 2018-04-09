@@ -11,6 +11,7 @@ networks:
 services:
 
   zookeeper0:
+    dns_search: .
     container_name: zookeeper0
     extends:
       file: base/docker-compose-kafka-base.yaml
@@ -22,6 +23,7 @@ services:
       - bootstrap
 
   zookeeper1:
+    dns_search: .
     container_name: zookeeper1
     extends:
       file: base/docker-compose-kafka-base.yaml
@@ -33,6 +35,7 @@ services:
       - bootstrap
 
   zookeeper2:
+    dns_search: .
     container_name: zookeeper2
     extends:
       file: base/docker-compose-kafka-base.yaml
@@ -44,6 +47,7 @@ services:
       - bootstrap
 
   kafka0:
+    dns_search: .
     container_name: kafka0
     extends:
       file: base/docker-compose-kafka-base.yaml
@@ -61,6 +65,7 @@ services:
       - bootstrap
 
   kafka1:
+    dns_search: .
     container_name: kafka1
     extends:
       file: base/docker-compose-kafka-base.yaml
@@ -78,6 +83,7 @@ services:
       - bootstrap
 
   kafka2:
+    dns_search: .
     container_name: kafka2
     extends:
       file: base/docker-compose-kafka-base.yaml
@@ -95,6 +101,7 @@ services:
       - bootstrap
 
   kafka3:
+    dns_search: .
     container_name: kafka3
     extends:
       file: base/docker-compose-kafka-base.yaml

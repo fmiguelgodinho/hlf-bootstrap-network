@@ -10,6 +10,7 @@ networks:
 
 services:
   couchdb0:
+    dns_search: .
     container_name: couchdb0
     image: hyperledger/fabric-couchdb:$IMAGE_TAG
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
@@ -37,6 +38,7 @@ services:
       - couchdb0
 
   couchdb1:
+    dns_search: .
     container_name: couchdb1
     image: hyperledger/fabric-couchdb:$IMAGE_TAG
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
@@ -64,6 +66,7 @@ services:
       - couchdb1
 
   couchdb2:
+    dns_search: .
     container_name: couchdb2
     image: hyperledger/fabric-couchdb:$IMAGE_TAG
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
@@ -91,6 +94,7 @@ services:
       - couchdb2
 
   couchdb3:
+    dns_search: .
     container_name: couchdb3
     image: hyperledger/fabric-couchdb:$IMAGE_TAG
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
@@ -118,6 +122,7 @@ services:
       - couchdb3
 
   couchdb4:
+    dns_search: .
     container_name: couchdb4
     image: hyperledger/fabric-couchdb:$IMAGE_TAG
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
@@ -145,6 +150,7 @@ services:
       - couchdb4
 
   couchdb5:
+    dns_search: .
     container_name: couchdb5
     image: hyperledger/fabric-couchdb:$IMAGE_TAG
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
