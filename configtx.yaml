@@ -24,6 +24,7 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *Org1
+                    - *Org2
 
     OneOrgOrdererGenesisBFTsmart:
         Orderer:
@@ -35,6 +36,7 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *Org1
+                    - *Org2
 
     OneOrgChannel:
         Consortium: SampleConsortium
@@ -42,6 +44,7 @@ Profiles:
             <<: *ApplicationDefaults
             Organizations:
                 - *Org1
+                - *Org2
 
 ################################################################################
 #
@@ -69,10 +72,10 @@ Organizations:
     - &Org1
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: Peers
+        Name: PeersA
 
         # ID to load the MSP definition as
-        ID: PeersMSP
+        ID: PeersAMSP
 
         MSPDir: crypto-config/peerOrganizations/blockchain-a.com/msp
 
@@ -83,6 +86,16 @@ Organizations:
             - Host: peer0.blockchain-a.com
               Port: 7051
 
+    - &Org2
+        Name: PeersB
+
+        ID: PeersBMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-b.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-b.com
+              Port: 7051
 
 ################################################################################
 #

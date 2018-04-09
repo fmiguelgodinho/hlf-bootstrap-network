@@ -49,7 +49,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	// get the enrolled user from persistence, this user will sign all requests
 	return fabric_client.createUser({
 		username: 'User1@blockchain-a.com',
-		mspid: 'PeersMSP',
+		mspid: 'PeersAMSP',
 		cryptoContent: {
 			privateKeyPEM: privKey,
 			signedCertPEM: signCrt
