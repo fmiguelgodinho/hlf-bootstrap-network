@@ -111,7 +111,7 @@ services:
     networks:
       - bootstrap
 
-  orderer0.fgodinho.com:
+  orderer0.consensus.com:
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -121,7 +121,7 @@ services:
       - kafka2
       - kafka3
 
-  orderer1.fgodinho.com:
+  orderer1.consensus.com:
     depends_on:
       - zookeeper0
       - zookeeper1

@@ -25,8 +25,8 @@ var peer = fabric_client.newPeer('grpcs://localhost:7051', {
 });
 channel.addPeer(peer);
 var orderer = fabric_client.newOrderer('grpcs://localhost:7050', {
-	pem: fs.readFileSync('../crypto-config/ordererOrganizations/fgodinho.com/tlsca/tlsca.fgodinho.com-cert.pem').toString(),
-	'ssl-target-name-override': 'orderer0.fgodinho.com'
+	pem: fs.readFileSync('../crypto-config/ordererOrganizations/consensus.com/tlsca/tlsca.fgodinho.com-cert.pem').toString(),
+	'ssl-target-name-override': 'orderer0.consensus.com'
 });
 channel.addOrderer(orderer);
 

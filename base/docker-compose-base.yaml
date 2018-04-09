@@ -7,8 +7,8 @@ version: '2'
 
 services:
 
-  orderer0.fgodinho.com:
-    container_name: orderer0.fgodinho.com
+  orderer0.consensus.com:
+    container_name: orderer0.consensus.com
     image: fgodinho/gassy-octopus-orderer
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
@@ -39,14 +39,14 @@ services:
     command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/msp:/var/hyperledger/orderer/msp
-    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer0.fgodinho.com/tls/:/var/hyperledger/orderer/tls
-    - orderer0.fgodinho.com:/var/hyperledger/production/orderer
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/tls/:/var/hyperledger/orderer/tls
+    - orderer0.consensus.com:/var/hyperledger/production/orderer
     ports:
       - 7050:7050
 
-  orderer1.fgodinho.com:
-    container_name: orderer1.fgodinho.com
+  orderer1.consensus.com:
+    container_name: orderer1.consensus.com
     image: fgodinho/gassy-octopus-orderer
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
@@ -77,9 +77,9 @@ services:
     command: orderer
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer1.fgodinho.com/msp:/var/hyperledger/orderer/msp
-    - ../crypto-config/ordererOrganizations/fgodinho.com/orderers/orderer1.fgodinho.com/tls/:/var/hyperledger/orderer/tls
-    - orderer1.fgodinho.com:/var/hyperledger/production/orderer
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer1.consensus.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer1.consensus.com/tls/:/var/hyperledger/orderer/tls
+    - orderer1.consensus.com:/var/hyperledger/production/orderer
     ports:
       - 8050:7050
 

@@ -6,8 +6,8 @@
 version: '2'
 
 volumes:
-  orderer0.fgodinho.com:
-  orderer1.fgodinho.com:
+  orderer0.consensus.com:
+  orderer1.consensus.com:
   peer0.fgodinho.com:
   peer1.fgodinho.com:
   peer2.fgodinho.com:
@@ -20,21 +20,21 @@ networks:
 
 services:
 
-  orderer0.fgodinho.com:
+  orderer0.consensus.com:
     dns_search: .
-    container_name: orderer0.fgodinho.com
+    container_name: orderer0.consensus.com
     extends:
       file: base/docker-compose-base.yaml
-      service: orderer0.fgodinho.com
+      service: orderer0.consensus.com
     networks:
       - bootstrap
 
-  orderer1.fgodinho.com:
+  orderer1.consensus.com:
     dns_search: .
-    container_name: orderer1.fgodinho.com
+    container_name: orderer1.consensus.com
     extends:
       file: base/docker-compose-base.yaml
-      service: orderer1.fgodinho.com
+      service: orderer1.consensus.com
     networks:
       - bootstrap
 
@@ -116,8 +116,8 @@ services:
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
-      - orderer0.fgodinho.com
-      - orderer1.fgodinho.com
+      - orderer0.consensus.com
+      - orderer1.consensus.com
       - peer0.fgodinho.com
       - peer1.fgodinho.com
       - peer2.fgodinho.com

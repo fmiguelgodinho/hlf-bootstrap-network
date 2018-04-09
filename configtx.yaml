@@ -64,7 +64,7 @@ Organizations:
         ID: OrdererMSP
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: crypto-config/ordererOrganizations/fgodinho.com/msp
+        MSPDir: crypto-config/ordererOrganizations/consensus.com/msp
 
     - &Org1
         # DefaultOrg defines the organization which is used in the sampleconfig
@@ -99,8 +99,8 @@ Orderer: &OrdererDefaults
     OrdererType: solo
 
     Addresses:
-        - orderer0.fgodinho.com:7050
-        - orderer1.fgodinho.com:7050
+        - orderer0.consensus.com:7050
+        - orderer1.consensus.com:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s

@@ -60,7 +60,7 @@ services:
     networks:
       - bootstrap
 
-  orderer0.fgodinho.com:
+  orderer0.consensus.com:
     environment:
       - BFTSMART_FRONTEND_ID=1000
     command: ./orderer-bftfrontend.sh
@@ -70,7 +70,7 @@ services:
       - bft-replica2
       - bft-replica3
 
-  orderer1.fgodinho.com:
+  orderer1.consensus.com:
     environment:
       - BFTSMART_FRONTEND_ID=2000
     command: ./orderer-bftfrontend.sh
