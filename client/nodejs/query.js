@@ -20,7 +20,7 @@ var fabric_client = new Fabric_Client();
 // setup the fabric network
 var channel = fabric_client.newChannel('mainchannel');
 var peer = fabric_client.newPeer('grpcs://localhost:7051', {
-	pem: fs.readFileSync('../../crypto-config/peerOrganizations/blockchain-a.com/users/User1@blockchain-a.com/msp/tlscacerts/tlsca.blockchain-a.com-cert.pem').toString(),
+	pem: fs.readFileSync('../../crypto-config/peerOrganizations/blockchain-a.com/tlsca/tlsca.blockchain-a.com-cert.pem').toString(),
 	'ssl-target-name-override': 'peer0.blockchain-a.com'
 });
 channel.addPeer(peer);

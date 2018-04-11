@@ -51,27 +51,42 @@ public class BootstrapClient {
         // example's PeerAdmin json file)
         // and PeerAdmin.priv (copy from
         // cd96d5260ad4757551ed4a5a991e62130f8008a0bf996e4e4b84cd097a747fec-priv)
-        User user = new BootstrapUser("crt", "User1@fgodinho.com");
+        User user = new BootstrapUser("crt", "User1@blockchain-a.com");
         // "Log in"
         client.setUserContext(user);
      
-        File tlsCrt = Paths.get("crt", "tlsca.fgodinho.com-cert.pem").toFile();
+        File tlsACrt = Paths.get("../../crypto-config/peerOrganizations/blockchain-a.com/tlsca", "tlsca.blockchain-a.com-cert.pem").toFile();
+        File tlsBCrt = Paths.get("../../crypto-config/peerOrganizations/blockchain-b.com/tlsca", "tlsca.blockchain-b.com-cert.pem").toFile();
+        File tlsOrdCrt = Paths.get("../../crypto-config/ordererOrganizations/consensus.com/tlsca", "tlsca.consensus.com-cert.pem").toFile();
         
-        if (!tlsCrt.exists())
-        	throw new RuntimeException("Missing TLS cert file");
+        if (!tlsACrt.exists() || !tlsBCrt.exists())
+        	throw new RuntimeException("Missing TLS cert files");
         
-        Properties secProperties = new Properties();
-        secProperties.setProperty("hostnameOverride", "peer0.fgodinho.com");
-        secProperties.setProperty("sslProvider", "openSSL");
-        secProperties.setProperty("negotiationType", "TLS");
-        secProperties.setProperty("pemFile", tlsCrt.getAbsolutePath());
+        Properties secPeerAProperties = new Properties();
+        secPeerAProperties.setProperty("hostnameOverride", "peer0.blockchain-a.com");
+        secPeerAProperties.setProperty("sslProvider", "openSSL");
+        secPeerAProperties.setProperty("negotiationType", "TLS");
+        secPeerAProperties.setProperty("pemFile", tlsACrt.getAbsolutePath());
+        
+        Properties secPeerBProperties = new Properties();
+        secPeerBProperties.setProperty("hostnameOverride", "peer0.blockchain-b.com");
+        secPeerBProperties.setProperty("sslProvider", "openSSL");
+        secPeerBProperties.setProperty("negotiationType", "TLS");
+        secPeerBProperties.setProperty("pemFile", tlsBCrt.getAbsolutePath());
+        
+        Properties secOrdererProperties = new Properties();
+        secOrdererProperties.setProperty("hostnameOverride", "orderer0.consensus.com");
+        secOrdererProperties.setProperty("sslProvider", "openSSL");
+        secOrdererProperties.setProperty("negotiationType", "TLS");
+        secOrdererProperties.setProperty("pemFile", tlsOrdCrt.getAbsolutePath());
         //secProperties.setProperty("trustServerCertificate", "true");
         
         // Instantiate channel
         Channel channel = client.newChannel("mainchannel");
-        channel.addPeer(client.newPeer("peer0.fgodinho.com", "grpcs://localhost:7051", secProperties));
+        channel.addPeer(client.newPeer("peer0.blockchain-a.com", "grpcs://localhost:7051", secPeerAProperties));
+        channel.addPeer(client.newPeer("peer0.blockchain-b.com", "grpcs://localhost:10051", secPeerBProperties));
         // It always wants orderer, otherwise even query does not work
-        channel.addOrderer(client.newOrderer("orderer0.fgodinho.com", "grpc://localhost:7050"));
+        channel.addOrderer(client.newOrderer("orderer0.consensus.com", "grpcs://localhost:7050", secOrdererProperties));
         channel.initialize();
 
         // below is querying and setting new owner
@@ -135,7 +150,7 @@ public class BootstrapClient {
 class BootstrapUser implements User {
 	
 
-    public static final String PeerOrganizationsMSPID = "PeersMSP";
+    public static final String PeerOrganizationsMSPID = "PeersAMSP";
 	
     private final String certFolder;
     private final String userName;
@@ -172,7 +187,7 @@ class BootstrapUser implements User {
             @Override
             public PrivateKey getKey() {
                 try {
-                    return loadPrivateKey(Paths.get(certFolder, userName + ".priv"));
+                    return loadPrivateKey(Paths.get(certFolder, userName + "-priv.pem"));
                 } catch (Exception e) {
                     return null;
                 }
@@ -181,7 +196,7 @@ class BootstrapUser implements User {
             @Override
             public String getCert() {
                 try {
-                	return new String(Files.readAllBytes(Paths.get(certFolder, userName + ".cert")));
+                	return new String(Files.readAllBytes(Paths.get(certFolder, userName + "-cert.pem")));
                 } catch (Exception e) {
                     return "";
                 }
