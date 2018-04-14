@@ -10,6 +10,7 @@ import org.hyperledger.fabric.sdk.Orderer;
 import org.hyperledger.fabric.sdk.Peer;
 import org.hyperledger.fabric.sdk.ProposalResponse;
 import org.hyperledger.fabric.sdk.QueryByChaincodeRequest;
+import org.hyperledger.fabric.sdk.TransactionProposalRequest;
 import org.hyperledger.fabric.sdk.exception.CryptoException;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
@@ -63,11 +64,11 @@ public class HLFJavaClient {
     	Security.addProvider(new BouncyCastleProvider());
     	
         // create fabric-ca client
-//        HFCAClient caClient = getHfCaClient("http://localhost:7054", null);
+//      HFCAClient caClient = getHfCaClient("http://localhost:7054", null);
 
         // enroll or load admin
-//        AppUser admin = getAdmin(caClient);
-//        log.info(admin);
+//      AppUser admin = getAdmin(caClient);
+//      log.info(admin);
 
         // register and enroll new user
         AppUser appUser = getUser(HLF_CLIENT_CRT_PATH, HLF_CLIENT_KEY_PATH, HLF_USER_NAME);
@@ -81,8 +82,14 @@ public class HLFJavaClient {
         // get HFC channel using the client
         Channel channel = getChannel(client);
         log.info("Channel: " + channel.getName());
+        
+        // call invoke
+        addProperty(client, new String[] {"PROPERTY1", "doge", "Example of a marvelous doge", "nil", "shock and awe", "20"});
+        
+        // wait a few secs...
+        Thread.sleep(10000);
 
-        // call query blockchain example
+        // call query blockchain
         queryAll(client);
     }
 
@@ -105,13 +112,47 @@ public class HLFJavaClient {
         // CC function to be called
         qpr.setFcn("queryAll");
         Collection<ProposalResponse> res = channel.queryByChaincode(qpr);
+        
+        System.out.println("Sending query request, function 'queryAll', through chaincode '" + HLF_CHAINCODE_NAME + "'...");
+        
         // display response
         for (ProposalResponse pres : res) {
             String stringResponse = new String(pres.getChaincodeActionResponsePayload());
             log.info(stringResponse);
             System.out.println(stringResponse);
         }
+
     }
+    
+    static void addProperty(HFClient client, String[] property) throws ProposalException, InvalidArgumentException {
+        // get channel instance from client
+        Channel channel = client.getChannel(HLF_CHANNEL_NAME);
+        // create chaincode request
+        TransactionProposalRequest tpr = client.newTransactionProposalRequest();
+        // build cc id providing the chaincode name. Version is omitted here.
+        ChaincodeID CCId = ChaincodeID.newBuilder().setName(HLF_CHAINCODE_NAME).build();
+        tpr.setChaincodeID(CCId);
+        // CC function to be called
+        tpr.setFcn("addProperty");
+        tpr.setArgs(property);
+        
+        System.out.println("Sending transaction proposal, function 'addProperty', through chaincode '" + HLF_CHAINCODE_NAME + "'...");
+
+        Collection<ProposalResponse> res = channel.sendTransactionProposal(tpr);
+        // display response
+        for (ProposalResponse pres : res) {
+            String stringResponse = "Response from endorser is: " + pres.getChaincodeActionResponseStatus();
+            log.info(stringResponse);
+            System.out.println(stringResponse);
+        }
+        
+        System.out.println("Collecting endorsements and sending transaction...");
+
+        // send transaction with endorsements
+        channel.sendTransaction(res);
+        System.out.println("Transaction sent.");
+    }
+
 
     /**
      * Initialize and get HF channel
