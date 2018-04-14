@@ -9,11 +9,11 @@ volumes:
   orderer0.consensus.com:
   orderer1.consensus.com:
   peer0.blockchain-a.com:
-  peer1.blockchain-a.com:
-  peer2.blockchain-a.com:
   peer0.blockchain-b.com:
-  peer1.blockchain-b.com:
-  peer2.blockchain-b.com:
+  peer0.blockchain-c.com:
+  peer0.blockchain-d.com:
+  peer0.blockchain-e.com:
+  peer0.blockchain-f.com:
 
 networks:
   hlf:
@@ -50,21 +50,21 @@ services:
     networks:
       - hlf
 
-  peer1.blockchain-a.com:
+  peer0.blockchain-c.com:
     dns_search: .
-    container_name: peer1.blockchain-a.com
+    container_name: peer0.blockchain-c.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer1.blockchain-a.com
+      service: peer0.blockchain-c.com
     networks:
       - hlf
 
-  peer2.blockchain-a.com:
+  peer0.blockchain-d.com:
     dns_search: .
-    container_name: peer2.blockchain-a.com
+    container_name: peer0.blockchain-d.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer2.blockchain-a.com
+      service: peer0.blockchain-d.com
     networks:
       - hlf
 
@@ -77,21 +77,21 @@ services:
     networks:
       - hlf
 
-  peer1.blockchain-b.com:
+  peer0.blockchain-e.com:
     dns_search: .
-    container_name: peer1.blockchain-b.com
+    container_name: peer0.blockchain-e.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer1.blockchain-b.com
+      service: peer0.blockchain-e.com
     networks:
       - hlf
 
-  peer2.blockchain-b.com:
+  peer0.blockchain-f.com:
     dns_search: .
-    container_name: peer2.blockchain-b.com
+    container_name: peer0.blockchain-f.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer2.blockchain-b.com
+      service: peer0.blockchain-f.com
     networks:
       - hlf
 
@@ -122,10 +122,10 @@ services:
       - orderer0.consensus.com
       - orderer1.consensus.com
       - peer0.blockchain-a.com
-      - peer1.blockchain-a.com
-      - peer2.blockchain-a.com
+      - peer0.blockchain-c.com
+      - peer0.blockchain-d.com
       - peer0.blockchain-b.com
-      - peer1.blockchain-b.com
-      - peer2.blockchain-b.com
+      - peer0.blockchain-e.com
+      - peer0.blockchain-f.com
     networks:
       - hlf

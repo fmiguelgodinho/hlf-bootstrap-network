@@ -25,6 +25,10 @@ Profiles:
                 Organizations:
                     - *Org1
                     - *Org2
+                    - *Org3
+                    - *Org4
+                    - *Org5
+                    - *Org6
 
     2P1OGenesis_BFTsmart:
         Orderer:
@@ -37,6 +41,10 @@ Profiles:
                 Organizations:
                     - *Org1
                     - *Org2
+                    - *Org3
+                    - *Org4
+                    - *Org5
+                    - *Org6
 
     2PSecureChannel:
         Consortium: SampleConsortium
@@ -45,6 +53,10 @@ Profiles:
             Organizations:
                 - *Org1
                 - *Org2
+                - *Org3
+                - *Org4
+                - *Org5
+                - *Org6
 
 ################################################################################
 #
@@ -97,6 +109,49 @@ Organizations:
             - Host: peer0.blockchain-b.com
               Port: 7051
 
+    - &Org3
+        Name: PeersC
+
+        ID: PeersCMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-c.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-c.com
+              Port: 7051
+
+    - &Org4
+        Name: PeersD
+
+        ID: PeersDMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-d.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-d.com
+              Port: 7051
+
+    - &Org5
+        Name: PeersE
+
+        ID: PeersEMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-e.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-e.com
+              Port: 7051
+
+    - &Org6
+        Name: PeersF
+
+        ID: PeersFMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-f.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-f.com
+              Port: 7051
 ################################################################################
 #
 #   SECTION: Orderer

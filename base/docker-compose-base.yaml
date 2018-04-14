@@ -104,49 +104,6 @@ services:
       - 7051:7051
       - 7053:7053
 
-  peer1.blockchain-a.com:
-    container_name: peer1.blockchain-a.com
-    extends:
-      file: peer-base.yaml
-      service: peer-base
-    environment:
-      - CORE_PEER_ID=peer1.blockchain-a.com
-      - CORE_PEER_ADDRESS=peer1.blockchain-a.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.blockchain-a.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
-      - CORE_PEER_LOCALMSPID=PeersAMSP
-    command: peer node start #--peer-chaincodedev=true
-    volumes:
-        - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer1.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer1.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
-        - peer1.blockchain-a.com:/var/hyperledger/production
-
-    ports:
-      - 8051:7051
-      - 8053:7053
-
-  peer2.blockchain-a.com:
-    container_name: peer2.blockchain-a.com
-    extends:
-      file: peer-base.yaml
-      service: peer-base
-    environment:
-      - CORE_PEER_ID=peer2.blockchain-a.com
-      - CORE_PEER_ADDRESS=peer2.blockchain-a.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.blockchain-a.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
-      - CORE_PEER_LOCALMSPID=PeersAMSP
-    command: peer node start #--peer-chaincodedev=true
-    volumes:
-        - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer2.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer2.blockchain-a.com/tls:/etc/hyperledger/fabric/tls
-        - peer2.blockchain-a.com:/var/hyperledger/production
-    ports:
-      - 9051:7051
-      - 9053:7053
-
   peer0.blockchain-b.com:
     container_name: peer0.blockchain-b.com
     extends:
@@ -168,44 +125,89 @@ services:
       - 10051:7051
       - 10053:7053
 
-  peer1.blockchain-b.com:
-    container_name: peer1.blockchain-b.com
+  peer0.blockchain-c.com:
+    container_name: peer0.blockchain-c.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer1.blockchain-b.com
-      - CORE_PEER_ADDRESS=peer1.blockchain-b.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.blockchain-b.com:7051
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-b.com:7051
-      - CORE_PEER_LOCALMSPID=PeersBMSP
+      - CORE_PEER_ID=peer0.blockchain-c.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-c.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-c.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
+      - CORE_PEER_LOCALMSPID=PeersCMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/blockchain-b.com/peers/peer1.blockchain-b.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/blockchain-b.com/peers/peer1.blockchain-b.com/tls:/etc/hyperledger/fabric/tls
-        - peer1.blockchain-b.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-c.com/peers/peer0.blockchain-c.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-c.com/peers/peer0.blockchain-c.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-c.com:/var/hyperledger/production
+
+    ports:
+      - 8051:7051
+      - 8053:7053
+
+  peer0.blockchain-d.com:
+    container_name: peer0.blockchain-d.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-d.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-d.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-d.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
+      - CORE_PEER_LOCALMSPID=PeersDMSP
+    command: peer node start #--peer-chaincodedev=true
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-d.com/peers/peer0.blockchain-d.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-d.com/peers/peer0.blockchain-d.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-d.com:/var/hyperledger/production
+    ports:
+      - 9051:7051
+      - 9053:7053
+
+
+
+  peer0.blockchain-e.com:
+    container_name: peer0.blockchain-e.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-e.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-e.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-e.com:7051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-b.com:7051
+      - CORE_PEER_LOCALMSPID=PeersEMSP
+    command: peer node start #--peer-chaincodedev=true
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-e.com/peers/peer0.blockchain-e.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-e.com/peers/peer0.blockchain-e.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-e.com:/var/hyperledger/production
     ports:
       - 11051:7051
       - 11053:7053
 
-  peer2.blockchain-b.com:
-    container_name: peer2.blockchain-b.com
+  peer0.blockchain-f.com:
+    container_name: peer0.blockchain-f.com
     extends:
       file: peer-base.yaml
       service: peer-base
     environment:
-      - CORE_PEER_ID=peer2.blockchain-b.com
-      - CORE_PEER_ADDRESS=peer2.blockchain-b.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.blockchain-b.com:7051
+      - CORE_PEER_ID=peer0.blockchain-f.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-f.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-f.com:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-b.com:7051
-      - CORE_PEER_LOCALMSPID=PeersBMSP
+      - CORE_PEER_LOCALMSPID=PeersFMSP
     command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
-        - ../crypto-config/peerOrganizations/blockchain-b.com/peers/peer2.blockchain-b.com/msp:/etc/hyperledger/fabric/msp
-        - ../crypto-config/peerOrganizations/blockchain-b.com/peers/peer2.blockchain-b.com/tls:/etc/hyperledger/fabric/tls
-        - peer2.blockchain-b.com:/var/hyperledger/production
+        - ../crypto-config/peerOrganizations/blockchain-f.com/peers/peer0.blockchain-f.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-f.com/peers/peer0.blockchain-f.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-f.com:/var/hyperledger/production
     ports:
       - 12051:7051
       - 12053:7053

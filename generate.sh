@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 export PATH=$GOPATH/src/github.com/hyperledger/fabric/build/bin:${PWD}/../bin:${PWD}:$PATH
@@ -37,18 +37,15 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-# generate anchor peer transactions
-configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/PeersAMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PeersA
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org1MSP..."
-  exit 1
-fi
-configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/PeersBMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PeersB
-if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org2MSP..."
-  exit 1
-fi
-
+for l in {a..f}; do
+  L=${l^^}
+  # generate anchor peer transactions
+  configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/Peers${L}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Peers${L}
+  if [ "$?" -ne 0 ]; then
+    echo "Failed to generate anchor peer update for Peers${L}MSP..."
+    exit 1
+  fi
+done
 
 #copy key and certificates in case of bft smart
 # TODO:REPLACE BY SOMETHING BETTER, WE'RE REUSING CERTIFICATES :(

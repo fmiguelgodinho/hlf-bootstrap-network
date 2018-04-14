@@ -61,7 +61,7 @@ PeerOrgs:
     # name collisions
     # ---------------------------------------------------------------------------
     Template:
-      Count: 3
+      Count: 1
       # Start: 5
       # Hostname: {{.Prefix}}{{.Index}} # default
     # ---------------------------------------------------------------------------
@@ -75,6 +75,34 @@ PeerOrgs:
   - Name: PeersB
     Domain: blockchain-b.com
     Template:
-      Count: 3
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersC
+    Domain: blockchain-c.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersD
+    Domain: blockchain-d.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersE
+    Domain: blockchain-e.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersF
+    Domain: blockchain-f.com
+    Template:
+      Count: 1
     Users:
       Count: 1
