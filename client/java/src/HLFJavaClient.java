@@ -164,25 +164,55 @@ public class HLFJavaClient {
      */
     static Channel getChannel(HFClient client) throws InvalidArgumentException, TransactionException {
         
-        File tlsACrt = Paths.get("../../crypto-config/peerOrganizations/blockchain-a.com/tlsca", "tlsca.blockchain-a.com-cert.pem").toFile();
-        File tlsBCrt = Paths.get("../../crypto-config/peerOrganizations/blockchain-b.com/tlsca", "tlsca.blockchain-b.com-cert.pem").toFile();
-        File tlsOrdCrt = Paths.get("../../crypto-config/ordererOrganizations/consensus.com/tlsca", "tlsca.consensus.com-cert.pem").toFile();
-        
+    	Channel channel = client.newChannel(HLF_CHANNEL_NAME);
     	
-        if (!tlsACrt.exists() || !tlsBCrt.exists() || !tlsOrdCrt.exists())
+    	class PeerOrgPort {
+    		public String org;
+    		public int port;
+    		
+    		public PeerOrgPort(String org, int port) {
+    			this.org = org;
+    			this.port = port;
+    		}
+    	}
+    	
+    	PeerOrgPort[] peers = new PeerOrgPort[] {
+    		new PeerOrgPort("a", 7051),
+    		new PeerOrgPort("b", 10051),
+    		new PeerOrgPort("c", 8051),
+    		new PeerOrgPort("d", 9051),
+    		new PeerOrgPort("e", 11051),
+    		new PeerOrgPort("f", 12051)
+    	};
+    	
+    	
+    	for (int i = 0; i < peers.length; i++) {
+    		File tlsCrt = Paths.get("../../crypto-config/peerOrganizations/blockchain-" + peers[i].org + ".com/tlsca", "tlsca.blockchain-" + peers[i].org + ".com-cert.pem").toFile();
+            
+            if (!tlsCrt.exists())
+            	throw new RuntimeException("Missing TLS cert files");
+            
+            Properties secPeerProperties = new Properties();
+            secPeerProperties.setProperty("hostnameOverride", "peer0.blockchain-" + peers[i].org + ".com");
+            secPeerProperties.setProperty("sslProvider", "openSSL");
+            secPeerProperties.setProperty("negotiationType", "TLS");
+            secPeerProperties.setProperty("pemFile", tlsCrt.getAbsolutePath());
+            
+            Peer peer = client.newPeer("peer0.blockchain-" + peers[i].org + ".com", "grpcs://localhost:"  + peers[i].port, secPeerProperties);
+            channel.addPeer(peer);
+            
+            
+            if (peers[i].org.equals("a")) {
+	            // eventhub name and endpoint in fabcar network
+	            EventHub eventHub = client.newEventHub("eventhub01", "grpcs://localhost:7053", secPeerProperties);
+	            channel.addEventHub(eventHub);
+            }
+    	}
+    	
+    	
+    	File tlsOrdCrt = Paths.get("../../crypto-config/ordererOrganizations/consensus.com/tlsca", "tlsca.consensus.com-cert.pem").toFile();
+        if (!tlsOrdCrt.exists())
         	throw new RuntimeException("Missing TLS cert files");
-        
-        Properties secPeerAProperties = new Properties();
-        secPeerAProperties.setProperty("hostnameOverride", "peer0.blockchain-a.com");
-        secPeerAProperties.setProperty("sslProvider", "openSSL");
-        secPeerAProperties.setProperty("negotiationType", "TLS");
-        secPeerAProperties.setProperty("pemFile", tlsACrt.getAbsolutePath());
-        
-        Properties secPeerBProperties = new Properties();
-        secPeerBProperties.setProperty("hostnameOverride", "peer0.blockchain-b.com");
-        secPeerBProperties.setProperty("sslProvider", "openSSL");
-        secPeerBProperties.setProperty("negotiationType", "TLS");
-        secPeerBProperties.setProperty("pemFile", tlsBCrt.getAbsolutePath());
         
         Properties secOrdererProperties = new Properties();
         secOrdererProperties.setProperty("hostnameOverride", "orderer0.consensus.com");
@@ -190,20 +220,9 @@ public class HLFJavaClient {
         secOrdererProperties.setProperty("negotiationType", "TLS");
         secOrdererProperties.setProperty("pemFile", tlsOrdCrt.getAbsolutePath());
     	
-    	// initialize channel
-        // peer name and endpoint in fabcar network
-        Peer peerA = client.newPeer("peer0.blockchain-a.com", "grpcs://localhost:7051", secPeerAProperties);
-        Peer peerB = client.newPeer("peer0.blockchain-b.com", "grpcs://localhost:10051", secPeerBProperties);
-        // eventhub name and endpoint in fabcar network
-        EventHub eventHub = client.newEventHub("eventhub01", "grpcs://localhost:7053", secPeerAProperties);
-        // orderer name and endpoint in fabcar network
+    	// orderer name and endpoint in fabcar network
         Orderer orderer = client.newOrderer("orderer0.consensus.com", "grpcs://localhost:7050", secOrdererProperties);
         
-        
-        Channel channel = client.newChannel(HLF_CHANNEL_NAME);
-        channel.addPeer(peerA);
-        channel.addPeer(peerB);
-        channel.addEventHub(eventHub);
         channel.addOrderer(orderer);
         channel.initialize();
         
