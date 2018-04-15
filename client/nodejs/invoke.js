@@ -19,17 +19,22 @@ var fabric_client = new Fabric_Client();
 
 // setup the fabric network
 var channel = fabric_client.newChannel('mainchannel');
-var peerA = fabric_client.newPeer('grpcs://localhost:7051', {
-	pem: fs.readFileSync('../../crypto-config/peerOrganizations/blockchain-a.com/tlsca/tlsca.blockchain-a.com-cert.pem').toString(),
-	'ssl-target-name-override': 'peer0.blockchain-a.com'
-});
-var peerB = fabric_client.newPeer('grpcs://localhost:10051', {
-	pem: fs.readFileSync('../../crypto-config/peerOrganizations/blockchain-b.com/tlsca/tlsca.blockchain-b.com-cert.pem').toString(),
-	'ssl-target-name-override': 'peer0.blockchain-b.com'
-});
-channel.addPeer(peerA);
-channel.addPeer(peerB);
 
+var peer_ports = [
+	{org: 'a', port: 7051},
+	{org: 'b', port: 10051},
+	{org: 'c', port: 8051},
+	{org: 'd', port: 9051},
+	{org: 'e', port: 11051},
+	{org: 'f', port: 12051}
+];
+for (var i = 0; i < peer_ports.length; i++) {
+	var peer = fabric_client.newPeer('grpcs://localhost:' + peer_ports[i].port, {
+		pem: fs.readFileSync('../../crypto-config/peerOrganizations/blockchain-' + peer_ports[i].org + '.com/tlsca/tlsca.blockchain-' + peer_ports[i].org + '.com-cert.pem').toString(),
+		'ssl-target-name-override': 'peer0.blockchain-' + peer_ports[i].org + '.com'
+	});
+	channel.addPeer(peer);
+}
 var orderer = fabric_client.newOrderer('grpcs://localhost:7050', {
 	pem: fs.readFileSync('../../crypto-config/ordererOrganizations/consensus.com/tlsca/tlsca.consensus.com-cert.pem').toString(),
 	'ssl-target-name-override': 'orderer0.consensus.com'
