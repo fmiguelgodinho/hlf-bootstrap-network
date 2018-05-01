@@ -9,7 +9,7 @@ services:
 
   orderer0.consensus.com:
     container_name: orderer0.consensus.com
-    image: fgodinho/gassy-octopus-orderer
+    image: fgodinho/orderer
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
@@ -47,7 +47,7 @@ services:
 
   orderer1.consensus.com:
     container_name: orderer1.consensus.com
-    image: fgodinho/gassy-octopus-orderer
+    image: fgodinho/orderer
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
