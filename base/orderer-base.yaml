@@ -1,0 +1,33 @@
+
+version: '2'
+
+services:
+  orderer-base:
+    image: fgodinho/orderer:$IMAGE_TAG #hyperledger/fabric-orderer:$IMAGE_TAG
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_LISTENPORT=7050
+      # kafka
+      - CONFIGTX_ORDERER_ORDERERTYPE=kafka
+      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
+      - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
+      - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
+      - ORDERER_KAFKA_VERBOSE=true
+      - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
+      - ORDERER_GENERAL_LEDGERTYPE=ram
+      # BFTsmart
+      - BFTSMART_RECVPORT=9999
+      - BFTSMART_CONNECTION_POOL_SIZE=10
+      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
+      # enabled TLS
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer

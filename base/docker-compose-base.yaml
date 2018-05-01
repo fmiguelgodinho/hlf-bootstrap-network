@@ -9,34 +9,9 @@ services:
 
   orderer0.consensus.com:
     container_name: orderer0.consensus.com
-    image: fgodinho/orderer
-    environment:
-      - ORDERER_GENERAL_LOGLEVEL=debug
-      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
-      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      - ORDERER_GENERAL_LISTENPORT=7050
-      # kafka
-      - CONFIGTX_ORDERER_ORDERERTYPE=kafka
-      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
-      - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
-      - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
-      - ORDERER_KAFKA_VERBOSE=true
-      - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
-      - ORDERER_GENERAL_LEDGERTYPE=ram
-      # BFTsmart
-      - BFTSMART_RECVPORT=9999
-      - BFTSMART_CONNECTION_POOL_SIZE=10
-      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
-      # enabled TLS
-      - ORDERER_GENERAL_TLS_ENABLED=true
-      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: orderer
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp:/var/hyperledger/orderer/msp
@@ -47,34 +22,9 @@ services:
 
   orderer1.consensus.com:
     container_name: orderer1.consensus.com
-    image: fgodinho/orderer
-    environment:
-      - ORDERER_GENERAL_LOGLEVEL=debug
-      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
-      - ORDERER_GENERAL_GENESISMETHOD=file
-      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
-      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
-      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
-      - ORDERER_GENERAL_LISTENPORT=7050
-      # kafka
-      - CONFIGTX_ORDERER_ORDERERTYPE=kafka
-      - CONFIGTX_ORDERER_KAFKA_BROKERS=[kafka0:9092,kafka1:9092,kafka2:9092,kafka3:9092]
-      - ORDERER_KAFKA_RETRY_SHORTINTERVAL=1s
-      - ORDERER_KAFKA_RETRY_SHORTTOTAL=30s
-      - ORDERER_KAFKA_VERBOSE=true
-      - CONFIGTX_ORDERER_ADDRESSES=[127.0.0.1:7050]
-      - ORDERER_GENERAL_LEDGERTYPE=ram
-      # BFTsmart
-      - BFTSMART_RECVPORT=9999
-      - BFTSMART_CONNECTION_POOL_SIZE=10
-      - BFTSMART_REPLICAS=0 bft-replica0 11000,1 bft-replica1 11000,2 bft-replica2 11000,3 bft-replica3 11000
-      # enabled TLS
-      - ORDERER_GENERAL_TLS_ENABLED=true
-      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
-      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
-      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
-    command: orderer
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
     volumes:
     - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
     - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer1.consensus.com/msp:/var/hyperledger/orderer/msp
@@ -94,7 +44,6 @@ services:
       - CORE_PEER_ADDRESS=peer0.blockchain-a.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersAMSP
-    command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/blockchain-a.com/peers/peer0.blockchain-a.com/msp:/etc/hyperledger/fabric/msp
@@ -115,7 +64,6 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-b.com:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-b.com:7051
       - CORE_PEER_LOCALMSPID=PeersBMSP
-    command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/blockchain-b.com/peers/peer0.blockchain-b.com/msp:/etc/hyperledger/fabric/msp
@@ -136,7 +84,6 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-c.com:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersCMSP
-    command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/blockchain-c.com/peers/peer0.blockchain-c.com/msp:/etc/hyperledger/fabric/msp
@@ -158,7 +105,6 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-d.com:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-a.com:7051
       - CORE_PEER_LOCALMSPID=PeersDMSP
-    command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/blockchain-d.com/peers/peer0.blockchain-d.com/msp:/etc/hyperledger/fabric/msp
@@ -181,7 +127,6 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-e.com:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-b.com:7051
       - CORE_PEER_LOCALMSPID=PeersEMSP
-    command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/blockchain-e.com/peers/peer0.blockchain-e.com/msp:/etc/hyperledger/fabric/msp
@@ -202,7 +147,6 @@ services:
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-f.com:7051
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.blockchain-b.com:7051
       - CORE_PEER_LOCALMSPID=PeersFMSP
-    command: peer node start #--peer-chaincodedev=true
     volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/blockchain-f.com/peers/peer0.blockchain-f.com/msp:/etc/hyperledger/fabric/msp
