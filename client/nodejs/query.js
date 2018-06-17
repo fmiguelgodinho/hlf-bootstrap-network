@@ -63,9 +63,9 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 
 	const request = {
 		//targets : --- letting this default to the peers assigned to the channel
-		chaincodeId: 'econtract',
-		fcn: 'queryAll',
-		args: ['']
+		chaincodeId: 'xcc',
+		fcn: 'query',
+		args: ['280f06d6-2c1d-48fc-a5ba-3bfacc42ba08', 'true']
 	};
 
 	// send the query proposal to the peer

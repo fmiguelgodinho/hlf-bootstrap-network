@@ -58,7 +58,7 @@ for l in {a..f}; do
 done
 
 # chaincode deployment
-export CHAINCODE_FILENAME_NOEXT=econtract
+export CHAINCODE_FILENAME_NOEXT=xcc
 
 echo "4. Installing chaincode $CHAINCODE_FILENAME_NOEXT on peers"
 

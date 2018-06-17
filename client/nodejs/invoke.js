@@ -85,9 +85,9 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	// must send the proposal to endorsing peers
 	var request = {
 		//targets: let default to the peer assigned to the client
-		chaincodeId: 'econtract',
-		fcn: 'addProperty',
-		args: ['PROPERTY1', 'doge', 'Example of a marvelous doge', 'nil', 'shock and awe', '20'],
+		chaincodeId: 'xcc',
+		fcn: 'put',
+		args: ['280f06d6-2c1d-48fc-a5ba-3bfacc42ba08', '{"foo":123, "bar":"abc"}'],
 		chainId: 'mainchannel',
 		txId: tx_id
 	};
