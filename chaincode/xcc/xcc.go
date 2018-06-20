@@ -21,15 +21,15 @@ type SmartContract struct {
 }
 
 type ExtendedContractProperties struct {
-	signatureType					string `json:"signature-type"`			// multisig, threshsig, set?
-	signingNodes					[]string `json:"signing-nodes"`
-	consensusType					string `json:"consensus-type"`			// bft, failstop
-	consensusNodes				[]string `json:"consensus-nodes"`
+	SignatureType					string `json:"signature-type"`			// multisig, threshsig, set?
+	SigningNodes					[]string `json:"signing-nodes"`
+	ConsensusType					string `json:"consensus-type"`			// bft, failstop
+	ConsensusNodes				[]string `json:"consensus-nodes"`
 }
 
 type ApplicationSpecificProperties struct {
-	maxRecords						int `json:"max-records"`
-	totalRecords					int `json:"total-records"`
+	MaxRecords						int `json:"max-records"`
+	TotalRecords					int `json:"total-records"`
 	// ...for example purposes only
 }
 
@@ -236,8 +236,8 @@ func (s *SmartContract) put(APIstub shim.ChaincodeStubInterface, args []string) 
 	}
 
 	// perform application specific validation
-	if appProps.totalRecords == appProps.maxRecords {
-		return shim.Error("Max number of records reached (total: " + appProps.totalRecords + ", max: " + appProps.maxRecords + ")!")
+	if appProps.TotalRecords == appProps.MaxRecords {
+		return shim.Error(fmt.Sprintf("Max number of records reached (total: %d, max: %d)!",  appProps.TotalRecords,  appProps.MaxRecords))
 	}
 
 	dataCompositeKey, err := APIstub.CreateCompositeKey("data", []string{args[0]})
@@ -255,7 +255,7 @@ func (s *SmartContract) put(APIstub shim.ChaincodeStubInterface, args []string) 
 	APIstub.PutState(dataCompositeKey, dataAsBytes)		//store according to key
 
 	if exists == nil {
-		appProps.totalRecords++
+		appProps.TotalRecords++
 		// update app specific properties
 		propertyAsBytes, _ := json.Marshal(appProps)
 		APIstub.PutState(appPropsCompositeKey, propertyAsBytes)

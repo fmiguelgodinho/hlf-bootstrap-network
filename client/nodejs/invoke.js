@@ -87,7 +87,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		//targets: let default to the peer assigned to the client
 		chaincodeId: 'xcc',
 		fcn: 'put',
-		args: ['280f06d6-2c1d-48fc-a5ba-3bfacc42ba08', '{"foo":123, "bar":"abc"}'],
+		args: ['280f06d6-2c1d-48fc-a5ba-3bfacc42ba08', '{"foo":123, "bar":"abcd"}'],
 		chainId: 'mainchannel',
 		txId: tx_id
 	};
