@@ -25,7 +25,6 @@ type ExtendedContractProperties struct {
 	signingNodes					[]string `json:"signing-nodes"`
 	consensusType					string `json:"consensus-type"`			// bft, failstop
 	consensusNodes				[]string `json:"consensus-nodes"`
-	readyForExecution			bool
 }
 
 type ApplicationSpecificProperties struct {
@@ -72,11 +71,11 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	// if no errors, then it's okay and we can move one
 
 	extPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"EXTENDED_CONTRACT_PROPERTIES"})
-	extPropsAsBytes, _ := json.Marshal(args[0])
+	extPropsAsBytes := json.RawMessage(args[0])
 	APIstub.PutState(extPropsCompositeKey, extPropsAsBytes)		//store according to key
 
 	appPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"APPLICATION_SPECIFIC_PROPERTIES"})
-	appPropsAsBytes, _ := json.Marshal(args[1])
+	appPropsAsBytes := json.RawMessage(args[1])
 	APIstub.PutState(appPropsCompositeKey, appPropsAsBytes)		//store according to key
 
 	return shim.Success(nil)
@@ -122,7 +121,7 @@ func (s *SmartContract) query(APIstub shim.ChaincodeStubInterface, args []string
 		return shim.Error(err.Error())
 	}
 	// read record
-	propertyAsBytes, err := APIstub.GetState(dataCompositeKey)
+	dataAsBytes, err := APIstub.GetState(dataCompositeKey)
 	if err != nil {
 		return shim.Error(err.Error())
 	}
@@ -133,7 +132,7 @@ func (s *SmartContract) query(APIstub shim.ChaincodeStubInterface, args []string
 	buffer.WriteString(args[0])
 	buffer.WriteString("\"")
 	buffer.WriteString(", \"record\":")
-	buffer.WriteString(string(propertyAsBytes))
+	buffer.WriteString(string(dataAsBytes))
 
 	if returnHistory {
 
@@ -224,21 +223,43 @@ func (s *SmartContract) put(APIstub shim.ChaincodeStubInterface, args []string) 
 		return shim.Error("Incorrect number of arguments for invoking: put. Expecting 2")
 	}
 
-	// if s.propsApp.totalRecords >= s.propsApp.maxRecords {
-	// 	return shim.Error("Max number of records reached!")
-	// }
-
-	var newRecord = Record{
-		Data: args[1],
+	// get application specific properties first
+	var appProps ApplicationSpecificProperties
+	appPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"APPLICATION_SPECIFIC_PROPERTIES"})
+	appPropsAsBytes, err := APIstub.GetState(appPropsCompositeKey)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	err = json.Unmarshal(appPropsAsBytes, &appProps)
+	if err != nil {
+		return shim.Error(err.Error())
 	}
 
-	propertyAsBytes, _ := json.Marshal(newRecord)
+	// perform application specific validation
+	if appProps.totalRecords == appProps.maxRecords {
+		return shim.Error("Max number of records reached (total: " + appProps.totalRecords + ", max: " + appProps.maxRecords + ")!")
+	}
+
 	dataCompositeKey, err := APIstub.CreateCompositeKey("data", []string{args[0]})
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	APIstub.PutState(dataCompositeKey, propertyAsBytes)		//store according to key
-	// s.propsApp.totalRecords++
+	// check if data exists
+	exists, _ := APIstub.GetState(dataCompositeKey)
+
+	// store the data
+	var newRecord = Record{
+		Data: args[1],
+	}
+	dataAsBytes, _ := json.Marshal(newRecord)
+	APIstub.PutState(dataCompositeKey, dataAsBytes)		//store according to key
+
+	if exists == nil {
+		appProps.totalRecords++
+		// update app specific properties
+		propertyAsBytes, _ := json.Marshal(appProps)
+		APIstub.PutState(appPropsCompositeKey, propertyAsBytes)
+	}
 
 	return shim.Success(nil)
 }
