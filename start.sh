@@ -59,7 +59,7 @@ done
 
 # chaincode deployment
 export CHAINCODE_FILENAME_NOEXT=xcc
-export CHAINCODE_INSTANTIATE_ARGS='{"Args":["{\"signature-type\":\"multisig\",\"signing-nodes\":[],\"consensus-type\":\"bft\",\"consensus-nodes\":[]}","{\"max-records\":100,\"total-records\":0}"]}'
+export CHAINCODE_INSTANTIATE_ARGS='{"Args":["{\"contract-id\":\"xcc\",\"contract-version\":1,\"available-functions\":[[\"type:query\",\"fn:query\",\"arg0:key(string)\",\"arg1:viewHistory(bool)\"],[\"type:query\",\"fn:queryAll\"],[\"type:invoke\",\"fn:put\",\"arg0:key(string)\",\"arg1:value(string)\"]],\"installed-on-nodes\":[],\"signature-type\":\"multisig\",\"signing-nodes\":[],\"consensus-type\":\"bft\",\"consensus-nodes\":[]}","{\"max-records\":100,\"total-records\":0}"]}'
 
 echo "4. Installing chaincode $CHAINCODE_FILENAME_NOEXT on peers"
 

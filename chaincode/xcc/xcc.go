@@ -11,6 +11,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
@@ -21,6 +22,10 @@ type SmartContract struct {
 }
 
 type ExtendedContractProperties struct {
+	ContractId						string `json:"contract-id"`
+	ContractVersion				int `json:"contract-version"`
+	AvailableFunctions		[][]string `json:"available-functions"`
+	InstalledOnNodes			[]string `json:"installed-on-nodes"`
 	SignatureType					string `json:"signature-type"`			// multisig, threshsig, set?
 	SigningNodes					[]string `json:"signing-nodes"`
 	ConsensusType					string `json:"consensus-type"`			// bft, failstop
@@ -204,7 +209,7 @@ func (s *SmartContract) queryAll(APIstub shim.ChaincodeStubInterface) sc.Respons
 		}
 		buffer.WriteString("{\"key\":")
 		buffer.WriteString("\"")
-		buffer.WriteString(queryResponse.Key)
+		buffer.WriteString(strings.Trim(queryResponse.Key, "data"))
 		buffer.WriteString("\"")
 
 		buffer.WriteString(", \"record\":")
