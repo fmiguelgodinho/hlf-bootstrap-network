@@ -65,6 +65,7 @@ services:
       - osn
 
   orderer0.consensus.com:
+    dns_search: .
     environment:
       - BFTSMART_FRONTEND_ID=1000
     command: ./orderer-bftfrontend.sh
@@ -75,6 +76,7 @@ services:
       - bft-replica3
 
   orderer1.consensus.com:
+    dns_search: .
     environment:
       - BFTSMART_FRONTEND_ID=2000
     command: ./orderer-bftfrontend.sh

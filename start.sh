@@ -55,6 +55,8 @@ for l in {a..f}; do
   -e "CORE_PEER_LOCALMSPID=Peers${L}MSP" \
   -e "CORE_PEER_ADDRESS=peer0.blockchain-${l}.com:7051" \
   cli peer channel update -o orderer0.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/Peers${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
+
+  sleep 15
 done
 
 # chaincode deployment

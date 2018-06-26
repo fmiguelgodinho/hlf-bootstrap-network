@@ -119,6 +119,7 @@ services:
       - osn
 
   orderer0.consensus.com:
+    dns_search: .
     depends_on:
       - zookeeper0
       - zookeeper1
@@ -129,6 +130,7 @@ services:
       - kafka3
 
   orderer1.consensus.com:
+    dns_search: .
     depends_on:
       - zookeeper0
       - zookeeper1
