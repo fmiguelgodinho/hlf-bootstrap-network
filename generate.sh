@@ -47,7 +47,7 @@ for l in {a..f}; do
   fi
 done
 
-#copy key and certificates in case of bft smart
+# copy key and certificates in case of bft smart
 # TODO:REPLACE BY SOMETHING BETTER, WE'RE REUSING CERTIFICATES :(
 mkdir crypto-config/bftsmart
 cp -r crypto-config/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/keystore crypto-config/bftsmart/
@@ -59,6 +59,16 @@ cd crypto-config/bftsmart/signcerts
 mv $(ls) peer.pem
 
 
-#copy key to easier name in case of users
-cd ../../../crypto-config/peerOrganizations/blockchain-a.com/users/User1@blockchain-a.com/msp/keystore
-cp $(ls) User1@blockchain-a.com-priv.pem
+# copy key to easier name in case of users
+cd ../../../crypto-config/peerOrganizations
+export PEERORGS_CERTS_PATH=${PWD}
+
+for l in {a..f}; do
+  cd blockchain-${l}.com/users/User1@blockchain-${l}.com/msp/keystore
+  cp $(ls) User1@blockchain-${l}.com-priv.pem
+
+  cd ../../../Admin@blockchain-${l}.com/msp/keystore
+  cp $(ls) Admin@blockchain-${l}.com-priv.pem
+
+  cd $PEERORGS_CERTS_PATH # back to peer orgs
+done
