@@ -83,6 +83,15 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	appPropsAsBytes := json.RawMessage(args[1])
 	APIstub.PutState(appPropsCompositeKey, appPropsAsBytes)		//store according to key
 
+	provSigCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"PROVIDER_SIGNATURE"})
+	provSigAsBytes, _ := APIstub.GetCreator()	// get provider signature of the contract (which is given by instantiate)
+	APIstub.PutState(provSigCompositeKey, provSigAsBytes)		//store according to key
+
+	contractTimeCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CONTRACT_INIT_TIMESTAMP"})
+	contractTime, _ := APIstub.GetTxTimestamp() // get contract timestamp
+	contractTimeAsBytes := []byte(contractTime.String())
+	APIstub.PutState(contractTimeCompositeKey, contractTimeAsBytes)		//store according to key
+
 	return shim.Success(nil)
 }
 
@@ -274,6 +283,8 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	// gen composite keys
 	extPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"EXTENDED_CONTRACT_PROPERTIES"})
 	appPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"APPLICATION_SPECIFIC_PROPERTIES"})
+	provSigCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"PROVIDER_SIGNATURE"})
+	contractTimeCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CONTRACT_INIT_TIMESTAMP"})
 
 	// read records
 	extPropsAsBytes, err := APIstub.GetState(extPropsCompositeKey)
@@ -284,12 +295,24 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	if err != nil {
 		return shim.Error(err.Error())
 	}
+	provSigAsBytes, err := APIstub.GetState(provSigCompositeKey)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	contractTimeAsBytes, err := APIstub.GetState(contractTimeCompositeKey)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
 
 	var buffer bytes.Buffer
 	buffer.WriteString("{\"extended-contract-properties\":")
 	buffer.WriteString(string(extPropsAsBytes))
 	buffer.WriteString(", \"application-specific-properties\":")
 	buffer.WriteString(string(appPropsAsBytes))
+	buffer.WriteString(", \"contract-provider-signature\":")
+	buffer.WriteString(string(provSigAsBytes))
+	buffer.WriteString(", \"contract-instantiation-timestamp\":")
+	buffer.WriteString(string(contractTimeAsBytes))
 	buffer.WriteString("}")
 
 	return shim.Success(buffer.Bytes())
