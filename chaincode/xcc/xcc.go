@@ -21,6 +21,7 @@ import (
 type SmartContract struct {
 }
 
+// contract extended properties
 type ExtendedContractProperties struct {
 	ContractId						string `json:"contract-id"`
 	ContractVersion				int `json:"contract-version"`
@@ -32,15 +33,22 @@ type ExtendedContractProperties struct {
 	ConsensusNodes				[]string `json:"consensus-nodes"`
 }
 
+// contract applicational properties
 type ApplicationSpecificProperties struct {
 	MaxRecords						int `json:"max-records"`
 	TotalRecords					int `json:"total-records"`
 	// ...for example purposes only
 }
 
+type ClientSignaturePair struct {
+	// the presence of this signature ensures the validity of the contract
+	UserSignature					string `json:"user-signature"`
+	// signature of the system representing the client (a smart hub or an applciation on the client itself capable of communicating with HLF)
+	ProxySignature				string `json:"proxy-signature"`
+}
 
 
-// Structure tags are used by encoding/json library
+// Records held on the ledger: actual data
 type Record struct {
 	Data  								string `json:"data"`							// this where all application context gets stored
 }
@@ -91,6 +99,10 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	contractTime, _ := APIstub.GetTxTimestamp() // get contract timestamp
 	contractTimeAsBytes := []byte(contractTime.String())
 	APIstub.PutState(contractTimeCompositeKey, contractTimeAsBytes)		//store according to key
+
+	clientSigPairsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS"})
+	clientSigPairsAsBytes, _ := json.Marshal([]ClientSignaturePair{})
+	APIstub.PutState(clientSigPairsCompositeKey, clientSigPairsAsBytes)		//store according to key (empty when init)
 
 	return shim.Success(nil)
 }
@@ -309,11 +321,11 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	buffer.WriteString(string(extPropsAsBytes))
 	buffer.WriteString(", \"application-specific-properties\":")
 	buffer.WriteString(string(appPropsAsBytes))
-	buffer.WriteString(", \"contract-provider-signature\":")
+	buffer.WriteString(", \"contract-provider-signature\":\"")
 	buffer.WriteString(string(provSigAsBytes))
-	buffer.WriteString(", \"contract-instantiation-timestamp\":")
+	buffer.WriteString("\", \"contract-instantiation-timestamp\":\"")
 	buffer.WriteString(string(contractTimeAsBytes))
-	buffer.WriteString("}")
+	buffer.WriteString("\"}")
 
 	return shim.Success(buffer.Bytes())
 }
