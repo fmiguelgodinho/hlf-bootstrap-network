@@ -92,7 +92,8 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	APIstub.PutState(appPropsCompositeKey, appPropsAsBytes)		//store according to key
 
 	provSigCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"PROVIDER_SIGNATURE"})
-	provSigAsBytes, _ := APIstub.GetCreator()	// get provider signature of the contract (which is given by instantiate)
+	proposal, _ := APIstub.GetSignedProposal()	// get provider signature of the contract (which is given by instantiate)
+	provSigAsBytes := proposal.Signature
 	APIstub.PutState(provSigCompositeKey, provSigAsBytes)		//store according to key
 
 	contractTimeCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CONTRACT_INIT_TIMESTAMP"})
