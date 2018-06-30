@@ -9,6 +9,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+  "encoding/base64"
 	"fmt"
 	"strconv"
 	"strings"
@@ -41,10 +42,10 @@ type ApplicationSpecificProperties struct {
 }
 
 type ClientSignaturePair struct {
-	// the presence of this signature ensures the validity of the contract
-	UserSignature					string `json:"user-signature"`
-	// signature of the system representing the client (a smart hub or an applciation on the client itself capable of communicating with HLF)
-	ProxySignature				string `json:"proxy-signature"`
+	// public key, identification, of the client
+	PublicKey					string `json:"proxy-signature"`
+	// the presence of this signature ensures the validity of the contract for that client
+	Signature					string `json:"signature"`
 }
 
 
@@ -93,7 +94,7 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 
 	provSigCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"PROVIDER_SIGNATURE"})
 	proposal, _ := APIstub.GetSignedProposal()	// get provider signature of the contract (which is given by instantiate)
-	provSigAsBytes := proposal.Signature
+	provSigAsBytes := []byte(base64.StdEncoding.EncodeToString(proposal.Signature))
 	APIstub.PutState(provSigCompositeKey, provSigAsBytes)		//store according to key
 
 	contractTimeCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CONTRACT_INIT_TIMESTAMP"})
@@ -119,12 +120,17 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 	// Route to the appropriate handler function to interact with the ledger appropriately
 	if function == "getContractDefinition" {
 		return s.getContractDefinition(APIstub)
-	} else if function == "query" {
-		return s.query(APIstub, args)
-	} else if function == "queryAll" {
-		return s.queryAll(APIstub)
-	} else if function == "put" {
-		return s.put(APIstub, args)
+	} else if function == "signContract" {
+		return s.signContract(APIstub, args)
+	} else {
+		// TODO CHECK FOR SIGNED CONTRACT
+		if function == "query" {
+			return s.query(APIstub, args)
+		} else if function == "queryAll" {
+			return s.queryAll(APIstub)
+		} else if function == "put" {
+			return s.put(APIstub, args)
+		}
 	}
 	// search using shim.GetQueryResult?
 
@@ -287,6 +293,37 @@ func (s *SmartContract) put(APIstub shim.ChaincodeStubInterface, args []string) 
 		propertyAsBytes, _ := json.Marshal(appProps)
 		APIstub.PutState(appPropsCompositeKey, propertyAsBytes)
 	}
+
+	return shim.Success(nil)
+}
+
+func (s *SmartContract) signContract(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+
+	if len(args) != 2 {
+		return shim.Error("Incorrect number of arguments for invoking: signContract. Expecting 2")
+	}
+	signerSignature := args[0]
+	signerPublicKey := args[1]
+
+	// TODO store the signature
+	var clientSigPairs []ClientSignaturePair
+	clientSigPairsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS"})
+
+	clientSigPairsAsBytes, err := APIstub.GetState(clientSigPairsCompositeKey)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	err = json.Unmarshal(clientSigPairsAsBytes, &clientSigPairs)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	clientSigPairs = append(clientSigPairs, ClientSignaturePair{PublicKey: signerPublicKey, Signature: signerSignature})
+
+
+
+	dataAsBytes, _ := json.Marshal(clientSigPairs)
+	APIstub.PutState(clientSigPairsCompositeKey, dataAsBytes)		//store according to key
 
 	return shim.Success(nil)
 }
