@@ -102,9 +102,9 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	contractTimeAsBytes := []byte(contractTime.String())
 	APIstub.PutState(contractTimeCompositeKey, contractTimeAsBytes)		//store according to key
 
-	clientSigPairsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS"})
-	clientSigPairsAsBytes, _ := json.Marshal([]ClientSignaturePair{})
-	APIstub.PutState(clientSigPairsCompositeKey, clientSigPairsAsBytes)		//store according to key (empty when init)
+	// clientSigPairsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS"})
+	// clientSigPairsAsBytes, _ := json.Marshal([]ClientSignaturePair{})
+	// APIstub.PutState(clientSigPairsCompositeKey, clientSigPairsAsBytes)		//store according to key (empty when init)
 
 	return shim.Success(nil)
 }
@@ -123,13 +123,19 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 	} else if function == "signContract" {
 		return s.signContract(APIstub, args)
 	} else {
-		// TODO CHECK FOR SIGNED CONTRACT
-		if function == "query" {
-			return s.query(APIstub, args)
-		} else if function == "queryAll" {
-			return s.queryAll(APIstub)
-		} else if function == "put" {
-			return s.put(APIstub, args)
+		var pubKey string
+		pubKey, args := args[0], args[1:]
+		// CHECK FOR SIGNED CONTRACT
+		if s.hasSignedContract(APIstub, pubKey) {
+			if function == "query" {
+				return s.query(APIstub, args)
+			} else if function == "queryAll" {
+				return s.queryAll(APIstub)
+			} else if function == "put" {
+				return s.put(APIstub, args)
+			}
+		} else {
+				return shim.Error("Contract is not signed.")
 		}
 	}
 	// search using shim.GetQueryResult?
@@ -305,25 +311,24 @@ func (s *SmartContract) signContract(APIstub shim.ChaincodeStubInterface, args [
 	signerSignature := args[0]
 	signerPublicKey := args[1]
 
-	// TODO store the signature
-	var clientSigPairs []ClientSignaturePair
-	clientSigPairsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS"})
+	// var clientSigPair ClientSignaturePair
+	clientSigPairCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS", signerPublicKey})
 
-	clientSigPairsAsBytes, err := APIstub.GetState(clientSigPairsCompositeKey)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
-	err = json.Unmarshal(clientSigPairsAsBytes, &clientSigPairs)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
+	// clientSigPairsAsBytes, err := APIstub.GetState(clientSigPairsCompositeKey)
+	// if err != nil {
+	// 	return shim.Error(err.Error())
+	// }
+	// err = json.Unmarshal(clientSigPairsAsBytes, &clientSigPairs)
+	// if err != nil {
+	// 	return shim.Error(err.Error())
+	// }
 
-	clientSigPairs = append(clientSigPairs, ClientSignaturePair{PublicKey: signerPublicKey, Signature: signerSignature})
+	// clientSigPairs = append(clientSigPairs, ClientSignaturePair{PublicKey: signerPublicKey, Signature: signerSignature})
 
+	clientSigPair := ClientSignaturePair{PublicKey: signerPublicKey, Signature: signerSignature}
 
-
-	dataAsBytes, _ := json.Marshal(clientSigPairs)
-	APIstub.PutState(clientSigPairsCompositeKey, dataAsBytes)		//store according to key
+	dataAsBytes, _ := json.Marshal(clientSigPair)
+	APIstub.PutState(clientSigPairCompositeKey, dataAsBytes)		//store according to key
 
 	return shim.Success(nil)
 }
@@ -367,6 +372,28 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 
 	return shim.Success(buffer.Bytes())
 }
+
+func (s *SmartContract) hasSignedContract(APIstub shim.ChaincodeStubInterface, pubKey string) bool {
+
+	clientSigPairCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS", pubKey})
+
+	clientSigPairAsBytes, _ := APIstub.GetState(clientSigPairCompositeKey)
+	if clientSigPairAsBytes != nil {
+		return true
+	}
+	// err = json.Unmarshal(clientSigPairsAsBytes, &clientSigPairs)
+	// if err != nil {
+	// 	return shim.Error(err.Error())
+	// }
+	//
+	// for _, sigPair := range clientSigPairs {
+	// 	if sigPair.PublicKey == pubKey {
+	return false
+	// 	}
+	// }
+	// return shim.Error("Not signed!")
+}
+
 
 // The main function is only relevant in unit test mode. Only included here for completeness.
 func main() {
