@@ -387,9 +387,9 @@ func (s *SmartContract) getContractSignature(APIstub shim.ChaincodeStubInterface
 	}
 
 	var buffer bytes.Buffer
-	buffer.WriteString("{\"signature\":")
+	buffer.WriteString("{\"signature\":\"")
 	buffer.WriteString(clientSigPair.Signature)
-	buffer.WriteString("}")
+	buffer.WriteString("\"}")
 
 	return shim.Success(buffer.Bytes())
 }
