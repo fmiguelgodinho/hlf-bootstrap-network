@@ -122,6 +122,8 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.getContractDefinition(APIstub)
 	} else if function == "signContract" {
 		return s.signContract(APIstub, args)
+	} else if function == "getContractSignature" {
+		return s.getContractSignature(APIstub, args)
 	} else {
 		var pubKey string
 		pubKey, args := args[0], args[1:]
@@ -308,23 +310,12 @@ func (s *SmartContract) signContract(APIstub shim.ChaincodeStubInterface, args [
 	if len(args) != 2 {
 		return shim.Error("Incorrect number of arguments for invoking: signContract. Expecting 2")
 	}
-	signerSignature := args[0]
-	signerPublicKey := args[1]
+
+	signerPublicKey := args[0]
+	signerSignature := args[1]
 
 	// var clientSigPair ClientSignaturePair
 	clientSigPairCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS", signerPublicKey})
-
-	// clientSigPairsAsBytes, err := APIstub.GetState(clientSigPairsCompositeKey)
-	// if err != nil {
-	// 	return shim.Error(err.Error())
-	// }
-	// err = json.Unmarshal(clientSigPairsAsBytes, &clientSigPairs)
-	// if err != nil {
-	// 	return shim.Error(err.Error())
-	// }
-
-	// clientSigPairs = append(clientSigPairs, ClientSignaturePair{PublicKey: signerPublicKey, Signature: signerSignature})
-
 	clientSigPair := ClientSignaturePair{PublicKey: signerPublicKey, Signature: signerSignature}
 
 	dataAsBytes, _ := json.Marshal(clientSigPair)
@@ -373,6 +364,36 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	return shim.Success(buffer.Bytes())
 }
 
+
+func (s *SmartContract) getContractSignature(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+
+	if len(args) != 1 {
+		return shim.Error("Incorrect number of arguments for invoking: getContractSignature. Expecting 1")
+	}
+
+	pubKey := args[0]
+
+	var clientSigPair ClientSignaturePair
+	clientSigPairCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS", pubKey})
+
+	clientSigPairAsBytes, _ := APIstub.GetState(clientSigPairCompositeKey)
+	if clientSigPairAsBytes == nil {
+		return shim.Success(nil)
+	}
+
+	err := json.Unmarshal(clientSigPairAsBytes, &clientSigPair)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	var buffer bytes.Buffer
+	buffer.WriteString("{\"signature\":")
+	buffer.WriteString(clientSigPair.Signature)
+	buffer.WriteString("}")
+
+	return shim.Success(buffer.Bytes())
+}
+
 func (s *SmartContract) hasSignedContract(APIstub shim.ChaincodeStubInterface, pubKey string) bool {
 
 	clientSigPairCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS", pubKey})
@@ -381,17 +402,7 @@ func (s *SmartContract) hasSignedContract(APIstub shim.ChaincodeStubInterface, p
 	if clientSigPairAsBytes != nil {
 		return true
 	}
-	// err = json.Unmarshal(clientSigPairsAsBytes, &clientSigPairs)
-	// if err != nil {
-	// 	return shim.Error(err.Error())
-	// }
-	//
-	// for _, sigPair := range clientSigPairs {
-	// 	if sigPair.PublicKey == pubKey {
 	return false
-	// 	}
-	// }
-	// return shim.Error("Not signed!")
 }
 
 
