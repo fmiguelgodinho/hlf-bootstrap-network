@@ -123,6 +123,8 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.signContract(APIstub, args)
 	} else if function == "getContractSignature" {
 		return s.getContractSignature(APIstub, args)
+	} else if function == "getEndorsementMethod" {
+		return s.getEndorsementMethod(APIstub)
 	} else {
 		var pubKey string
 		pubKey, args := args[0], args[1:]
@@ -401,6 +403,30 @@ func (s *SmartContract) hasSignedContract(APIstub shim.ChaincodeStubInterface, p
 		return true
 	}
 	return false
+}
+
+/**
+* WARNING: this fn is to be called by system chaincode (escc) to identify signing method. not by a client!
+ */
+func (s *SmartContract) getEndorsementMethod(APIstub shim.ChaincodeStubInterface) sc.Response {
+
+	// gen composite key
+	var extProps ExtendedContractProperties
+	extPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"EXTENDED_CONTRACT_PROPERTIES"})
+
+	// read ext props
+	extPropsAsBytes, err := APIstub.GetState(extPropsCompositeKey)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+	err = json.Unmarshal(extPropsAsBytes, &extProps)
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
+	// return endorsement method
+	endorsementMethod := []byte(extProps.SignatureType)
+	return shim.Success(endorsementMethod)
 }
 
 // The main function is only relevant in unit test mode. Only included here for completeness.
