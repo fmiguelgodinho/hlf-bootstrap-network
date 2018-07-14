@@ -8,8 +8,8 @@ package main
  */
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
-  "encoding/base64"
 	"fmt"
 	"strconv"
 	"strings"
@@ -24,34 +24,34 @@ type SmartContract struct {
 
 // contract extended properties
 type ExtendedContractProperties struct {
-	ContractId						string `json:"contract-id"`
-	ContractVersion				int `json:"contract-version"`
-	AvailableFunctions		[][]string `json:"available-functions"`
-	InstalledOnNodes			[]string `json:"installed-on-nodes"`
-	SignatureType					string `json:"signature-type"`			// multisig, threshsig, set?
-	SigningNodes					[]string `json:"signing-nodes"`
-	ConsensusType					string `json:"consensus-type"`			// bft, failstop
-	ConsensusNodes				[]string `json:"consensus-nodes"`
+	ContractId         string     `json:"contract-id"`
+	ContractVersion    int        `json:"contract-version"`
+	AvailableFunctions [][]string `json:"available-functions"`
+	InstalledOnNodes   []string   `json:"installed-on-nodes"`
+	SignatureType      string     `json:"signature-type"` // multisig, threshsig, set?
+	SigningNodes       []string   `json:"signing-nodes"`
+	ConsensusType      string     `json:"consensus-type"` // bft, failstop
+	ConsensusNodes     []string   `json:"consensus-nodes"`
+	ExpiresOn          string     `json:"expires-on"`
 }
 
 // contract applicational properties
 type ApplicationSpecificProperties struct {
-	MaxRecords						int `json:"max-records"`
-	TotalRecords					int `json:"total-records"`
+	MaxRecords   int `json:"max-records"`
+	TotalRecords int `json:"total-records"`
 	// ...for example purposes only
 }
 
 type ClientSignaturePair struct {
 	// public key, identification, of the client
-	PublicKey					string `json:"proxy-signature"`
+	PublicKey string `json:"proxy-signature"`
 	// the presence of this signature ensures the validity of the contract for that client
-	Signature					string `json:"signature"`
+	Signature string `json:"signature"`
 }
-
 
 // Records held on the ledger: actual data
 type Record struct {
-	Data  								string `json:"data"`							// this where all application context gets stored
+	Data string `json:"data"` // this where all application context gets stored
 }
 
 /*
@@ -64,7 +64,6 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	if len(args) != 2 {
 		return shim.Error("Incorrect number of arguments for invoking: initContract. Expecting 2 (1 JSON for ExtendedContractProperties, 1 JSON for ApplicationSpecificProperties)")
 	}
-
 
 	// unmarshalled for validation only
 	var extProps ExtendedContractProperties
@@ -86,21 +85,21 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 
 	extPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"EXTENDED_CONTRACT_PROPERTIES"})
 	extPropsAsBytes := json.RawMessage(args[0])
-	APIstub.PutState(extPropsCompositeKey, extPropsAsBytes)		//store according to key
+	APIstub.PutState(extPropsCompositeKey, extPropsAsBytes) //store according to key
 
 	appPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"APPLICATION_SPECIFIC_PROPERTIES"})
 	appPropsAsBytes := json.RawMessage(args[1])
-	APIstub.PutState(appPropsCompositeKey, appPropsAsBytes)		//store according to key
+	APIstub.PutState(appPropsCompositeKey, appPropsAsBytes) //store according to key
 
 	provSigCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"PROVIDER_SIGNATURE"})
-	proposal, _ := APIstub.GetSignedProposal()	// get provider signature of the contract (which is given by instantiate)
+	proposal, _ := APIstub.GetSignedProposal() // get provider signature of the contract (which is given by instantiate)
 	provSigAsBytes := []byte(base64.StdEncoding.EncodeToString(proposal.Signature))
-	APIstub.PutState(provSigCompositeKey, provSigAsBytes)		//store according to key
+	APIstub.PutState(provSigCompositeKey, provSigAsBytes) //store according to key
 
 	contractTimeCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CONTRACT_INIT_TIMESTAMP"})
 	contractTime, _ := APIstub.GetTxTimestamp() // get contract timestamp
 	contractTimeAsBytes := []byte(contractTime.String())
-	APIstub.PutState(contractTimeCompositeKey, contractTimeAsBytes)		//store according to key
+	APIstub.PutState(contractTimeCompositeKey, contractTimeAsBytes) //store according to key
 
 	// clientSigPairsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS"})
 	// clientSigPairsAsBytes, _ := json.Marshal([]ClientSignaturePair{})
@@ -137,7 +136,7 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 				return s.put(APIstub, args)
 			}
 		} else {
-				return shim.Error("Contract is not signed.")
+			return shim.Error("Contract is not signed.")
 		}
 	}
 	// search using shim.GetQueryResult?
@@ -278,7 +277,7 @@ func (s *SmartContract) put(APIstub shim.ChaincodeStubInterface, args []string) 
 
 	// perform application specific validation
 	if appProps.TotalRecords == appProps.MaxRecords {
-		return shim.Error(fmt.Sprintf("Max number of records reached (total: %d, max: %d)!",  appProps.TotalRecords,  appProps.MaxRecords))
+		return shim.Error(fmt.Sprintf("Max number of records reached (total: %d, max: %d)!", appProps.TotalRecords, appProps.MaxRecords))
 	}
 
 	dataCompositeKey, err := APIstub.CreateCompositeKey("data", []string{args[0]})
@@ -293,7 +292,7 @@ func (s *SmartContract) put(APIstub shim.ChaincodeStubInterface, args []string) 
 		Data: args[1],
 	}
 	dataAsBytes, _ := json.Marshal(newRecord)
-	APIstub.PutState(dataCompositeKey, dataAsBytes)		//store according to key
+	APIstub.PutState(dataCompositeKey, dataAsBytes) //store according to key
 
 	if exists == nil {
 		appProps.TotalRecords++
@@ -319,7 +318,7 @@ func (s *SmartContract) signContract(APIstub shim.ChaincodeStubInterface, args [
 	clientSigPair := ClientSignaturePair{PublicKey: signerPublicKey, Signature: signerSignature}
 
 	dataAsBytes, _ := json.Marshal(clientSigPair)
-	APIstub.PutState(clientSigPairCompositeKey, dataAsBytes)		//store according to key
+	APIstub.PutState(clientSigPairCompositeKey, dataAsBytes) //store according to key
 
 	return shim.Success(nil)
 }
@@ -364,7 +363,6 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	return shim.Success(buffer.Bytes())
 }
 
-
 func (s *SmartContract) getContractSignature(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
 	if len(args) != 1 {
@@ -404,7 +402,6 @@ func (s *SmartContract) hasSignedContract(APIstub shim.ChaincodeStubInterface, p
 	}
 	return false
 }
-
 
 // The main function is only relevant in unit test mode. Only included here for completeness.
 func main() {
