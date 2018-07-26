@@ -277,6 +277,25 @@ services:
       - 16051:7051
       - 16053:7053
 
+  peer0.blockchain-k.com:
+    container_name: peer0.blockchain-k.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-k.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-k.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-k.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-k.com/peers/peer0.blockchain-k.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-k.com/peers/peer0.blockchain-k.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-k.com:/var/hyperledger/production
+    ports:
+      - 26051:7051
+      - 26053:7053
 
 
   peer0.blockchain-l.com:
