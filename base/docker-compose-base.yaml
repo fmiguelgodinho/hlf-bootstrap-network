@@ -221,7 +221,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-h.com
       - CORE_PEER_ADDRESS=peer0.blockchain-h.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-h.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersHMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -244,7 +244,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-i.com
       - CORE_PEER_ADDRESS=peer0.blockchain-i.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-i.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersIMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -266,7 +266,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-j.com
       - CORE_PEER_ADDRESS=peer0.blockchain-j.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-j.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersJMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -286,7 +286,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-k.com
       - CORE_PEER_ADDRESS=peer0.blockchain-k.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-k.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersKMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -307,7 +307,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-l.com
       - CORE_PEER_ADDRESS=peer0.blockchain-l.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-l.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersLMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -328,7 +328,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-m.com
       - CORE_PEER_ADDRESS=peer0.blockchain-m.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-m.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersMMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -348,7 +348,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-n.com
       - CORE_PEER_ADDRESS=peer0.blockchain-n.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-n.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersNMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -369,7 +369,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-o.com
       - CORE_PEER_ADDRESS=peer0.blockchain-o.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-o.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersOMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -389,7 +389,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-p.com
       - CORE_PEER_ADDRESS=peer0.blockchain-p.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-p.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersPMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -409,7 +409,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-q.com
       - CORE_PEER_ADDRESS=peer0.blockchain-q.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-q.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersQMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -429,7 +429,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-r.com
       - CORE_PEER_ADDRESS=peer0.blockchain-r.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-r.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersRMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -449,7 +449,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-s.com
       - CORE_PEER_ADDRESS=peer0.blockchain-s.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-s.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersSMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/
@@ -469,7 +469,7 @@ services:
       - CORE_PEER_ID=peer0.blockchain-t.com
       - CORE_PEER_ADDRESS=peer0.blockchain-t.com:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-t.com:7051
-      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - CORE_PEER_LOCALMSPID=PeersTMSP
       - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
     volumes:
         - /var/run/:/host/var/run/

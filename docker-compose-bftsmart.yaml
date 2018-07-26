@@ -100,7 +100,7 @@ services:
   orderer3.consensus.com:
     dns_search: .
     environment:
-      - BFTSMART_FRONTEND_ID=3000
+      - BFTSMART_FRONTEND_ID=4000
     command: ./orderer-bftfrontend.sh
     depends_on:
       - bft-replica0
