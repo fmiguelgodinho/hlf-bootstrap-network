@@ -33,6 +33,31 @@ services:
     ports:
       - 8050:7050
 
+  orderer2.consensus.com:
+    container_name: orderer2.consensus.com
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
+    volumes:
+    - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer2.consensus.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer2.consensus.com/tls/:/var/hyperledger/orderer/tls
+    - orderer2.consensus.com:/var/hyperledger/production/orderer
+    ports:
+      - 9050:7050
+
+  orderer3.consensus.com:
+    container_name: orderer3.consensus.com
+    extends:
+      file: orderer-base.yaml
+      service: orderer-base
+    volumes:
+    - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer3.consensus.com/msp:/var/hyperledger/orderer/msp
+    - ../crypto-config/ordererOrganizations/consensus.com/orderers/orderer3.consensus.com/tls/:/var/hyperledger/orderer/tls
+    - orderer3.consensus.com:/var/hyperledger/production/orderer
+    ports:
+      - 10050:7050
 
   peer0.blockchain-a.com:
     container_name: peer0.blockchain-a.com
@@ -162,3 +187,276 @@ services:
     ports:
       - 12051:7051
       - 12053:7053
+
+
+## TODO: FRANCISCO. THESE DO NOT SIGN FOR NOW: CHECK IF WE CAN ADD THRESH SIG TO THEM LATER
+
+  peer0.blockchain-g.com:
+    container_name: peer0.blockchain-g.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-g.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-g.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-g.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-g.com/peers/peer0.blockchain-g.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-g.com/peers/peer0.blockchain-g.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-g.com:/var/hyperledger/production
+    ports:
+      - 13051:7051
+      - 13053:7053
+
+
+  peer0.blockchain-h.com:
+    container_name: peer0.blockchain-h.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-h.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-h.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-h.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-h.com/peers/peer0.blockchain-h.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-h.com/peers/peer0.blockchain-h.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-h.com:/var/hyperledger/production
+    ports:
+      - 14051:7051
+      - 14053:7053
+
+
+
+
+  peer0.blockchain-i.com:
+    container_name: peer0.blockchain-i.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-i.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-i.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-i.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-i.com/peers/peer0.blockchain-i.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-i.com/peers/peer0.blockchain-i.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-i.com:/var/hyperledger/production
+    ports:
+      - 15051:7051
+      - 15053:7053
+
+
+
+  peer0.blockchain-j.com:
+    container_name: peer0.blockchain-j.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-j.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-j.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-j.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-j.com/peers/peer0.blockchain-j.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-j.com/peers/peer0.blockchain-j.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-j.com:/var/hyperledger/production
+    ports:
+      - 16051:7051
+      - 16053:7053
+
+
+
+  peer0.blockchain-l.com:
+    container_name: peer0.blockchain-l.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-l.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-l.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-l.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-l.com/peers/peer0.blockchain-l.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-l.com/peers/peer0.blockchain-l.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-l.com:/var/hyperledger/production
+    ports:
+      - 17051:7051
+      - 17053:7053
+
+
+  peer0.blockchain-m.com:
+    container_name: peer0.blockchain-m.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-m.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-m.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-m.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-m.com/peers/peer0.blockchain-m.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-m.com/peers/peer0.blockchain-m.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-m.com:/var/hyperledger/production
+    ports:
+      - 18051:7051
+      - 18053:7053
+
+  peer0.blockchain-n.com:
+    container_name: peer0.blockchain-n.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-n.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-n.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-n.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-n.com/peers/peer0.blockchain-n.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-n.com/peers/peer0.blockchain-n.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-n.com:/var/hyperledger/production
+    ports:
+      - 19051:7051
+      - 19053:7053
+
+
+  peer0.blockchain-o.com:
+    container_name: peer0.blockchain-o.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-o.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-o.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-o.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-o.com/peers/peer0.blockchain-o.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-o.com/peers/peer0.blockchain-o.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-o.com:/var/hyperledger/production
+    ports:
+      - 20051:7051
+      - 20053:7053
+
+  peer0.blockchain-p.com:
+    container_name: peer0.blockchain-p.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-p.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-p.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-p.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-p.com/peers/peer0.blockchain-p.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-p.com/peers/peer0.blockchain-p.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-p.com:/var/hyperledger/production
+    ports:
+      - 21051:7051
+      - 21053:7053
+
+  peer0.blockchain-q.com:
+    container_name: peer0.blockchain-q.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-q.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-q.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-q.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-q.com/peers/peer0.blockchain-q.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-q.com/peers/peer0.blockchain-q.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-q.com:/var/hyperledger/production
+    ports:
+      - 22051:7051
+      - 22053:7053
+
+  peer0.blockchain-r.com:
+    container_name: peer0.blockchain-r.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-r.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-r.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-r.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-r.com/peers/peer0.blockchain-r.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-r.com/peers/peer0.blockchain-r.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-r.com:/var/hyperledger/production
+    ports:
+      - 23051:7051
+      - 23053:7053
+
+  peer0.blockchain-s.com:
+    container_name: peer0.blockchain-s.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-s.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-s.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-s.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-s.com/peers/peer0.blockchain-s.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-s.com/peers/peer0.blockchain-s.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-s.com:/var/hyperledger/production
+    ports:
+      - 24051:7051
+      - 24053:7053
+
+  peer0.blockchain-t.com:
+    container_name: peer0.blockchain-t.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-t.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-t.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-t.com:7051
+      - CORE_PEER_LOCALMSPID=PeersGMSP
+      - THRESH_SIG_GROUP_KEY=AAAABQAAAAYAAAADAQABAAAAgFNLZUYiH+FImV5iKJQmtNXpn9VkBq7gMBrwoDeYZfb1+juiM0ww2MrbAhWFyjJS+VJopO6SAulbQQz3xrHIN1hWia45atNzqbBon5/pAWIx5SplexgaE92w3m2RRFTBeLte2m4VX6YvQ83kslFoPzGAnnahXdU52retngXg9kNH
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-t.com/peers/peer0.blockchain-t.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-t.com/peers/peer0.blockchain-t.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-t.com:/var/hyperledger/production
+    ports:
+      - 25051:7051
+      - 25053:7053

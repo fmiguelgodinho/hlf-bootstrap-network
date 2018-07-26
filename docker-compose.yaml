@@ -8,12 +8,29 @@ version: '2'
 volumes:
   orderer0.consensus.com:
   orderer1.consensus.com:
+  orderer2.consensus.com:
+  orderer3.consensus.com:
+
   peer0.blockchain-a.com:
   peer0.blockchain-b.com:
   peer0.blockchain-c.com:
   peer0.blockchain-d.com:
   peer0.blockchain-e.com:
   peer0.blockchain-f.com:
+  peer0.blockchain-g.com:
+  peer0.blockchain-h.com:
+  peer0.blockchain-i.com:
+  peer0.blockchain-j.com:
+  peer0.blockchain-k.com:
+  peer0.blockchain-l.com:
+  peer0.blockchain-m.com:
+  peer0.blockchain-n.com:
+  peer0.blockchain-o.com:
+  peer0.blockchain-p.com:
+  peer0.blockchain-q.com:
+  peer0.blockchain-r.com:
+  peer0.blockchain-s.com:
+  peer0.blockchain-t.com:
 
 networks:
   hlf:
@@ -37,6 +54,26 @@ services:
     extends:
       file: base/docker-compose-base.yaml
       service: orderer1.consensus.com
+    networks:
+      - hlf
+      - osn
+
+  orderer2.consensus.com:
+    dns_search: .
+    container_name: orderer2.consensus.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: orderer2.consensus.com
+    networks:
+      - hlf
+      - osn
+
+  orderer3.consensus.com:
+    dns_search: .
+    container_name: orderer3.consensus.com
+    extends:
+      file: base/docker-compose-base.yaml
+      service: orderer3.consensus.com
     networks:
       - hlf
       - osn
@@ -92,6 +129,132 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer0.blockchain-f.com
+    networks:
+      - hlf
+
+  peer0.blockchain-g.com:
+    dns_search: .
+    container_name: peer0.blockchain-g.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-g.com
+    networks:
+      - hlf
+
+  peer0.blockchain-h.com:
+    dns_search: .
+    container_name: peer0.blockchain-h.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-h.com
+    networks:
+      - hlf
+
+  peer0.blockchain-i.com:
+    dns_search: .
+    container_name: peer0.blockchain-i.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-i.com
+    networks:
+      - hlf
+
+  peer0.blockchain-j.com:
+    dns_search: .
+    container_name: peer0.blockchain-j.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-j.com
+    networks:
+      - hlf
+
+  peer0.blockchain-k.com:
+    dns_search: .
+    container_name: peer0.blockchain-k.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-k.com
+    networks:
+      - hlf
+
+  peer0.blockchain-l.com:
+    dns_search: .
+    container_name: peer0.blockchain-l.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-l.com
+    networks:
+      - hlf
+
+  peer0.blockchain-m.com:
+    dns_search: .
+    container_name: peer0.blockchain-m.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-m.com
+    networks:
+      - hlf
+
+  peer0.blockchain-n.com:
+    dns_search: .
+    container_name: peer0.blockchain-n.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-n.com
+    networks:
+      - hlf
+
+  peer0.blockchain-o.com:
+    dns_search: .
+    container_name: peer0.blockchain-o.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-o.com
+    networks:
+      - hlf
+
+  peer0.blockchain-p.com:
+    dns_search: .
+    container_name: peer0.blockchain-p.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-p.com
+    networks:
+      - hlf
+
+  peer0.blockchain-q.com:
+    dns_search: .
+    container_name: peer0.blockchain-q.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-q.com
+    networks:
+      - hlf
+
+  peer0.blockchain-r.com:
+    dns_search: .
+    container_name: peer0.blockchain-r.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-r.com
+    networks:
+      - hlf
+
+  peer0.blockchain-s.com:
+    dns_search: .
+    container_name: peer0.blockchain-s.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-s.com
+    networks:
+      - hlf
+
+  peer0.blockchain-t.com:
+    dns_search: .
+    container_name: peer0.blockchain-t.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-t.com
     networks:
       - hlf
 

@@ -85,3 +85,25 @@ services:
       - bft-replica1
       - bft-replica2
       - bft-replica3
+
+  orderer2.consensus.com:
+    dns_search: .
+    environment:
+      - BFTSMART_FRONTEND_ID=3000
+    command: ./orderer-bftfrontend.sh
+    depends_on:
+      - bft-replica0
+      - bft-replica1
+      - bft-replica2
+      - bft-replica3
+
+  orderer3.consensus.com:
+    dns_search: .
+    environment:
+      - BFTSMART_FRONTEND_ID=3000
+    command: ./orderer-bftfrontend.sh
+    depends_on:
+      - bft-replica0
+      - bft-replica1
+      - bft-replica2
+      - bft-replica3

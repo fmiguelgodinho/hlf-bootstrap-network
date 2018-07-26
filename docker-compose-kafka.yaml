@@ -139,3 +139,25 @@ services:
       - kafka1
       - kafka2
       - kafka3
+
+  orderer2.consensus.com:
+    dns_search: .
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3
+
+  orderer3.consensus.com:
+    dns_search: .
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3

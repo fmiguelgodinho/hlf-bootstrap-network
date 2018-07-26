@@ -37,7 +37,7 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-for l in {a..f}; do
+for l in {a..t}; do
   L=${l^^}
   # generate anchor peer transactions
   configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/Peers${L}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Peers${L}
@@ -63,7 +63,7 @@ mv $(ls) peer.pem
 cd ../../../crypto-config/peerOrganizations
 export PEERORGS_CERTS_PATH=${PWD}
 
-for l in {a..f}; do
+for l in {a..t}; do
   cd blockchain-${l}.com/users/User1@blockchain-${l}.com/msp/keystore
   cp $(ls) User1@blockchain-${l}.com-priv.pem
 
