@@ -22,16 +22,23 @@ import (
 type SmartContract struct {
 }
 
+type Node struct {
+	Name         string `json:"name"`
+	Host         string `json:"host"`
+	Port         int    `json:"port"`
+	EventHubPort int    `json:"event-hub-port"`
+}
+
 // contract extended properties
 type ExtendedContractProperties struct {
 	ContractId         string     `json:"contract-id"`
 	ContractVersion    int        `json:"contract-version"`
 	AvailableFunctions [][]string `json:"available-functions"`
-	InstalledOnNodes   []string   `json:"installed-on-nodes"`
-	SignatureType      string     `json:"signature-type"` // multisig, threshsig, set?
+	InstalledOnNodes   []Node     `json:"installed-on-nodes"`
+	SignatureType      string     `json:"signature-type"` // multisig, threshsig
 	SigningNodes       []string   `json:"signing-nodes"`
 	ConsensusType      string     `json:"consensus-type"` // bft, failstop
-	ConsensusNodes     []string   `json:"consensus-nodes"`
+	ConsensusNodes     []Node     `json:"consensus-nodes"`
 	ExpiresOn          string     `json:"expires-on"`
 }
 
