@@ -443,7 +443,7 @@ services:
       - CORE_PEER_LOCALMSPID=PeersRMSP
       - THRESH_SIG_KEY_SHARE=AAAAEgAAAJAa7zx6S7ZR3Q11n1jpHXu0fNOn01tc6uFbgmWb80VecKKUtVMJ1BJMFIMYlN49S2tptGKgx9rFrfl4PRr/GeMztvZAxw+w+gVJkPTZUO3wrayJ6NI4ry5a5Wv0XPRz5Htu4q8Rh1lm0wF1eCvbiQcDNwm5V4y5N0nOe7t3wIGvg8MIxJR8J1gM0kD4igCOqYcAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACANaYBUeXGABuPud7eGFTLnPHPmykqXJ8vjgvHzhNQGU7kvjpBAs6IBLKZD7I1puks3p4JkrltVmA2zOrS6V8q8JhwmdHOxjJf6TM8/Cw+fBgWvHQeWXeBv1WSd2jC7R5E1BcKiAbRgM6IkQHcz+JaYk/SGq6PYNJZevv86lN+MCAAAACADD16mWTs7J7hjL4qBCG/zip3njJzFAEKqkeQZSNA7Af81XmH2PMLJ5lhDlUgap0TpGfaVtX4/h+pO/fmKAeaDt5dIMzmip5w6JkqQLe4cVmX0xw/PLmeCVLy08I2uxE36p0yb7GTHEU6dwD2yicb7qDCdzba0X7rIIRcGPZI+eE=
       - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
-  volumes:
+    volumes:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/blockchain-r.com/peers/peer0.blockchain-r.com/msp:/etc/hyperledger/fabric/msp
         - ../crypto-config/peerOrganizations/blockchain-r.com/peers/peer0.blockchain-r.com/tls:/etc/hyperledger/fabric/tls
