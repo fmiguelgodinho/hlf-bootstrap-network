@@ -61,6 +61,7 @@ done
 
 # chaincode deployment
 export CHAINCODE_FILENAME_NOEXT=xcc
+export CHAINCODE_ENDORSEMENT_POLICY="OR('PeersAMSP.member','PeersBMSP.member','PeersCMSP.member','PeersDMSP.member','PeersEMSP.member','PeersFMSP.member','PeersGMSP.member','PeersHMSP.member','PeersIMSP.member','PeersJMSP.member','PeersKMSP.member','PeersLMSP.member','PeersMMSP.member','PeersNMSP.member','PeersOMSP.member','PeersPMSP.member','PeersQMSP.member','PeersRMSP.member','PeersSMSP.member','PeersTMSP.member')"
 export CHAINCODE_INSTANTIATE_ARGS='{"Args":["{\"contract-id\":\"xcc\",\"contract-version\":1,\"available-functions\":[[\"type:query\",\"fn:query\",\"arg0:key(string)\",\"arg1:viewHistory(bool)\"],[\"type:query\",\"fn:queryAll\"],[\"type:invoke\",\"fn:put\",\"arg0:key(string)\",\"arg1:value(string)\"]],\"installed-on-nodes\":[\"peer0.blockchain-a.com\",\"peer0.blockchain-b.com\",\"peer0.blockchain-c.com\",\"peer0.blockchain-d.com\",\"peer0.blockchain-e.com\",\"peer0.blockchain-f.com\"],\"channel\":\"mainchannel\",\"signature-type\":\"threshsig\",\"expires-on\":\"2018-12-31T23:59:59\",\"signing-nodes\":[\"peer0.blockchain-a.com\",\"peer0.blockchain-b.com\",\"peer0.blockchain-c.com\",\"peer0.blockchain-d.com\",\"peer0.blockchain-e.com\",\"peer0.blockchain-f.com\"],\"consensus-type\":\"bft\",\"consensus-nodes\":[\"orderer0.consensus.com\",\"orderer1.consensus.com\"]}","{\"max-records\":100,\"total-records\":0}"]}'
 
 echo "4. Installing chaincode $CHAINCODE_FILENAME_NOEXT on peers"
@@ -84,7 +85,7 @@ docker exec \
 -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-a.com/users/Admin@blockchain-a.com/msp" \
 -e "CORE_PEER_LOCALMSPID=PeersAMSP" \
 -e "CORE_PEER_ADDRESS=peer0.blockchain-a.com:7051" \
-cli peer chaincode instantiate -o orderer0.consensus.com:7050 -C ${CHANNEL_NAME} -n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -c ${CHAINCODE_INSTANTIATE_ARGS} -P "AND('PeersAMSP.member','PeersBMSP.member','PeersCMSP.member','PeersDMSP.member','PeersEMSP.member','PeersFMSP.member')" --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
+cli peer chaincode instantiate -o orderer0.consensus.com:7050 -C ${CHANNEL_NAME} -n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -c ${CHAINCODE_INSTANTIATE_ARGS} -P ${CHAINCODE_ENDORSEMENT_POLICY} --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
 
 #echo "6. Invoking chaincode $CHAINCODE_FILENAME_NOEXT on channel $CHANNEL_NAME"
 sleep 30
