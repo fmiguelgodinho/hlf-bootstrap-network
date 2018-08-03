@@ -101,11 +101,11 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 
 	// if no errors, then it's okay and we can move one
 	extPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"EXTENDED_CONTRACT_PROPERTIES"})
-	extPropsAsBytes := json.RawMessage(args[0])
+	extPropsAsBytes, _ := json.Marshal(extProps)
 	APIstub.PutState(extPropsCompositeKey, extPropsAsBytes) //store according to key
 
 	appPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"APPLICATION_SPECIFIC_PROPERTIES"})
-	appPropsAsBytes := json.RawMessage(args[1])
+	appPropsAsBytes, _ := json.Marshal(appProps)
 	APIstub.PutState(appPropsCompositeKey, appPropsAsBytes) //store according to key
 
 	return shim.Success(nil)
