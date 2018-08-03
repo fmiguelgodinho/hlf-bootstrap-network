@@ -349,7 +349,7 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	buffer.WriteString(string(extPropsAsBytes))
 	buffer.WriteString(", \"application-specific-properties\":")
 	buffer.WriteString(string(appPropsAsBytes))
-	buffer.WriteString("\"}")
+	buffer.WriteString("}")
 
 	return shim.Success(buffer.Bytes())
 }
