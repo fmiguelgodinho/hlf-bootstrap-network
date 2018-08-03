@@ -34,9 +34,9 @@ type ExtendedContractProperties struct {
 	ContractId         string     `json:"contract-id"`
 	ContractVersion    int        `json:"contract-version"`
 	AvailableFunctions [][]string `json:"available-functions"`
-	InstalledOnNodes   []Node     `json:"installed-on-nodes"`
+	InstalledOnNodes   []string   `json:"installed-on-nodes"`
 	SignatureType      string     `json:"signature-type"` // multisig, threshsig
-	SigningNodes       []string   `json:"signing-nodes"`
+	SigningNodes       []Node     `json:"signing-nodes"`
 	ConsensusType      string     `json:"consensus-type"` // bft, failstop
 	ConsensusNodes     []Node     `json:"consensus-nodes"`
 	ExpiresOn          string     `json:"expires-on"`
