@@ -40,6 +40,9 @@ type ExtendedContractProperties struct {
 	ConsensusType      string     `json:"consensus-type"` // bft, failstop
 	ConsensusNodes     []Node     `json:"consensus-nodes"`
 	ExpiresOn          string     `json:"expires-on"`
+	ValidFrom          string     `json:"valid-from"`
+	ProviderSignature  string     `json:"provider-signature"`
+	DeployedOn         string     `json:"deployed-on"`
 }
 
 // contract applicational properties
@@ -88,8 +91,15 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 		return shim.Error(err.Error())
 	}
 
-	// if no errors, then it's okay and we can move one
+	// get provider signature of the contract (which is given by instantiate)
+	proposal, _ := APIstub.GetSignedProposal()
+	extProps.ProviderSignature = base64.StdEncoding.EncodeToString(proposal.Signature)
 
+	// get contract timestamp
+	contractTime, _ := APIstub.GetTxTimestamp()
+	extProps.DeployedOn = contractTime.String()
+
+	// if no errors, then it's okay and we can move one
 	extPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"EXTENDED_CONTRACT_PROPERTIES"})
 	extPropsAsBytes := json.RawMessage(args[0])
 	APIstub.PutState(extPropsCompositeKey, extPropsAsBytes) //store according to key
@@ -97,20 +107,6 @@ func (s *SmartContract) Init(APIstub shim.ChaincodeStubInterface) sc.Response {
 	appPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"APPLICATION_SPECIFIC_PROPERTIES"})
 	appPropsAsBytes := json.RawMessage(args[1])
 	APIstub.PutState(appPropsCompositeKey, appPropsAsBytes) //store according to key
-
-	provSigCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"PROVIDER_SIGNATURE"})
-	proposal, _ := APIstub.GetSignedProposal() // get provider signature of the contract (which is given by instantiate)
-	provSigAsBytes := []byte(base64.StdEncoding.EncodeToString(proposal.Signature))
-	APIstub.PutState(provSigCompositeKey, provSigAsBytes) //store according to key
-
-	contractTimeCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CONTRACT_INIT_TIMESTAMP"})
-	contractTime, _ := APIstub.GetTxTimestamp() // get contract timestamp
-	contractTimeAsBytes := []byte(contractTime.String())
-	APIstub.PutState(contractTimeCompositeKey, contractTimeAsBytes) //store according to key
-
-	// clientSigPairsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CLIENT_SIGNATURE_PAIRS"})
-	// clientSigPairsAsBytes, _ := json.Marshal([]ClientSignaturePair{})
-	// APIstub.PutState(clientSigPairsCompositeKey, clientSigPairsAsBytes)		//store according to key (empty when init)
 
 	return shim.Success(nil)
 }
@@ -337,8 +333,6 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	// gen composite keys
 	extPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"EXTENDED_CONTRACT_PROPERTIES"})
 	appPropsCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"APPLICATION_SPECIFIC_PROPERTIES"})
-	provSigCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"PROVIDER_SIGNATURE"})
-	contractTimeCompositeKey, _ := APIstub.CreateCompositeKey("props", []string{"CONTRACT_INIT_TIMESTAMP"})
 
 	// read records
 	extPropsAsBytes, err := APIstub.GetState(extPropsCompositeKey)
@@ -349,24 +343,12 @@ func (s *SmartContract) getContractDefinition(APIstub shim.ChaincodeStubInterfac
 	if err != nil {
 		return shim.Error(err.Error())
 	}
-	provSigAsBytes, err := APIstub.GetState(provSigCompositeKey)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
-	contractTimeAsBytes, err := APIstub.GetState(contractTimeCompositeKey)
-	if err != nil {
-		return shim.Error(err.Error())
-	}
 
 	var buffer bytes.Buffer
 	buffer.WriteString("{\"extended-contract-properties\":")
 	buffer.WriteString(string(extPropsAsBytes))
 	buffer.WriteString(", \"application-specific-properties\":")
 	buffer.WriteString(string(appPropsAsBytes))
-	buffer.WriteString(", \"contract-provider-signature\":\"")
-	buffer.WriteString(string(provSigAsBytes))
-	buffer.WriteString("\", \"contract-instantiation-timestamp\":\"")
-	buffer.WriteString(string(contractTimeAsBytes))
 	buffer.WriteString("\"}")
 
 	return shim.Success(buffer.Bytes())
