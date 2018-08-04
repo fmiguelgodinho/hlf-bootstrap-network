@@ -88,14 +88,19 @@ docker exec \
 cli peer chaincode instantiate -o orderer0.consensus.com:7050 -C ${CHANNEL_NAME} -n ${CHAINCODE_FILENAME_NOEXT} -v 1.0 -c ${CHAINCODE_INSTANTIATE_ARGS} -P ${CHAINCODE_ENDORSEMENT_POLICY} --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
 
 #echo "6. Invoking chaincode $CHAINCODE_FILENAME_NOEXT on channel $CHANNEL_NAME"
-sleep 30
+sleep 15
 
-# invoke ledger initiation
-##docker exec \
-#-e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-a.com/peers/peer0.blockchain-a.com/tls/ca.crt" \
-#-e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-a.com/users/Admin@blockchain-a.com/msp" \
-#-e "CORE_PEER_LOCALMSPID=PeersAMSP" \
-#-e "CORE_PEER_ADDRESS=peer0.blockchain-a.com:7051" \
-#cli peer chaincode invoke -o orderer0.consensus.com:7050 --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem -C ${CHANNEL_NAME} -n ${CHAINCODE_FILENAME_NOEXT} -c '{"function":"initLedger","Args":[""]}'
+echo "6. Querying all peers to trigger chaincode for the first time!"
 
-echo "6. DONE!"
+# query chaincode on each peer to fire up its chaincode container
+for l in {a..t}; do
+  L=${l^^}
+  docker exec \
+  -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-${l}.com/peers/peer0.blockchain-${l}.com/tls/ca.crt" \
+  -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-${l}.com/users/Admin@blockchain-${l}.com/msp" \
+  -e "CORE_PEER_LOCALMSPID=Peers${L}MSP" \
+  -e "CORE_PEER_ADDRESS=peer0.blockchain-${l}.com:7051" \
+  cli peer chaincode invoke -o orderer0.consensus.com:7050 --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem -C ${CHANNEL_NAME} -n ${CHAINCODE_FILENAME_NOEXT} -c '{"function":"getContractDefinition","Args":[""]}'
+done
+
+echo "7. DONE!"
