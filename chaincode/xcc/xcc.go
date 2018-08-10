@@ -129,20 +129,20 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 	} else if function == "getEndorsementMethod" {
 		return s.getEndorsementMethod(APIstub)
 	} else {
-		var pubKey string
-		pubKey, args := args[0], args[1:]
+		// var pubKey string
+		// pubKey, args := args[0], args[1:]
 		// CHECK FOR SIGNED CONTRACT
-		if s.hasSignedContract(APIstub, pubKey) {
-			if function == "query" {
-				return s.query(APIstub, args)
-			} else if function == "queryAll" {
-				return s.queryAll(APIstub)
-			} else if function == "put" {
-				return s.put(APIstub, args)
-			}
-		} else {
-			return shim.Error("Contract is not signed.")
+		// if s.hasSignedContract(APIstub, pubKey) {
+		if function == "query" {
+			return s.query(APIstub, args)
+		} else if function == "queryAll" {
+			return s.queryAll(APIstub)
+		} else if function == "put" {
+			return s.put(APIstub, args)
 		}
+		// } else {
+		// 	return shim.Error("Contract is not signed.")
+		// }
 	}
 	// search using shim.GetQueryResult?
 
