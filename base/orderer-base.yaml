@@ -5,7 +5,7 @@ services:
   orderer-base:
     image: fgodinho/orderer:$IMAGE_TAG #hyperledger/fabric-orderer:$IMAGE_TAG
     environment:
-      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LOGLEVEL=error
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
       - ORDERER_GENERAL_GENESISMETHOD=file
       - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
