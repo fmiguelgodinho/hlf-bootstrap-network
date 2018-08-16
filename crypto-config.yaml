@@ -211,3 +211,190 @@ PeerOrgs:
       Count: 1
     Users:
       Count: 1
+
+
+  - Name: PeersU
+    Domain: blockchain-u.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: PeersV
+    Domain: blockchain-v.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: PeersW
+    Domain: blockchain-w.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: PeersX
+    Domain: blockchain-x.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: PeersY
+    Domain: blockchain-y.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersZ
+    Domain: blockchain-z.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsA
+    Domain: bl0ckch41n-a.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsB
+    Domain: bl0ckch41n-b.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsC
+    Domain: bl0ckch41n-c.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsD
+    Domain: bl0ckch41n-d.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: P33rsE
+    Domain: bl0ckch41n-e.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsF
+    Domain: bl0ckch41n-f.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsG
+    Domain: bl0ckch41n-g.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsH
+    Domain: bl0ckch41n-h.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsI
+    Domain: bl0ckch41n-i.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: P33rsJ
+    Domain: bl0ckch41n-j.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsK
+    Domain: bl0ckch41n-k.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsL
+    Domain: bl0ckch41n-l.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsM
+    Domain: bl0ckch41n-m.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsN
+    Domain: bl0ckch41n-n.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: P33rsO
+    Domain: bl0ckch41n-o.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsP
+    Domain: bl0ckch41n-p.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsQ
+    Domain: bl0ckch41n-q.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsR
+    Domain: bl0ckch41n-r.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsS
+    Domain: bl0ckch41n-s.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: P33rsT
+    Domain: bl0ckch41n-t.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsU
+    Domain: bl0ckch41n-u.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsV
+    Domain: bl0ckch41n-v.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsW
+    Domain: bl0ckch41n-w.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+  - Name: P33rsX
+    Domain: bl0ckch41n-x.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1

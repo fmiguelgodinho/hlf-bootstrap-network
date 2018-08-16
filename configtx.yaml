@@ -47,6 +47,36 @@ Profiles:
                     - *Org18
                     - *Org19
                     - *Org20
+                    - *Org21
+                    - *Org22
+                    - *Org23
+                    - *Org24
+                    - *Org25
+                    - *Org26
+                    - *Org27
+                    - *Org28
+                    - *Org29
+                    - *Org30
+                    - *Org31
+                    - *Org32
+                    - *Org33
+                    - *Org34
+                    - *Org35
+                    - *Org36
+                    - *Org37
+                    - *Org38
+                    - *Org39
+                    - *Org40
+                    - *Org41
+                    - *Org42
+                    - *Org43
+                    - *Org44
+                    - *Org45
+                    - *Org46
+                    - *Org47
+                    - *Org48
+                    - *Org49
+                    - *Org50
 
     2P1OGenesis_BFTsmart:
         Capabilities:
@@ -81,6 +111,36 @@ Profiles:
                     - *Org18
                     - *Org19
                     - *Org20
+                    - *Org21
+                    - *Org22
+                    - *Org23
+                    - *Org24
+                    - *Org25
+                    - *Org26
+                    - *Org27
+                    - *Org28
+                    - *Org29
+                    - *Org30
+                    - *Org31
+                    - *Org32
+                    - *Org33
+                    - *Org34
+                    - *Org35
+                    - *Org36
+                    - *Org37
+                    - *Org38
+                    - *Org39
+                    - *Org40
+                    - *Org41
+                    - *Org42
+                    - *Org43
+                    - *Org44
+                    - *Org45
+                    - *Org46
+                    - *Org47
+                    - *Org48
+                    - *Org49
+                    - *Org50
 
     2PSecureChannel:
         Consortium: SampleConsortium
@@ -107,6 +167,36 @@ Profiles:
                 - *Org18
                 - *Org19
                 - *Org20
+                - *Org21
+                - *Org22
+                - *Org23
+                - *Org24
+                - *Org25
+                - *Org26
+                - *Org27
+                - *Org28
+                - *Org29
+                - *Org30
+                - *Org31
+                - *Org32
+                - *Org33
+                - *Org34
+                - *Org35
+                - *Org36
+                - *Org37
+                - *Org38
+                - *Org39
+                - *Org40
+                - *Org41
+                - *Org42
+                - *Org43
+                - *Org44
+                - *Org45
+                - *Org46
+                - *Org47
+                - *Org48
+                - *Org49
+                - *Org50
             Capabilities:
                 <<: *ApplicationCapabilities
 
@@ -359,6 +449,337 @@ Organizations:
 
         AnchorPeers:
             - Host: peer0.blockchain-t.com
+              Port: 7051
+
+    - &Org21
+        Name: PeersU
+
+        ID: PeersUMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-u.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-u.com
+              Port: 7051
+
+    - &Org22
+        Name: PeersV
+
+        ID: PeersVMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-v.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-v.com
+              Port: 7051
+
+    - &Org23
+        Name: PeersW
+
+        ID: PeersWMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-w.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-w.com
+              Port: 7051
+
+    - &Org24
+        Name: PeersX
+
+        ID: PeersXMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-x.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-x.com
+              Port: 7051
+
+    - &Org25
+        Name: PeersY
+
+        ID: PeersYMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-y.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-y.com
+              Port: 7051
+
+
+    - &Org26
+        Name: PeersZ
+
+        ID: PeersZMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-z.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-z.com
+              Port: 7051
+
+    - &Org27
+        Name: P33rsA
+
+        ID: P33rsAMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-a.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-a.com
+              Port: 7051
+
+    - &Org28
+        Name: P33rsB
+
+        ID: P33rsBMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-b.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-b.com
+              Port: 7051
+
+    - &Org29
+        Name: P33rsC
+
+        ID: P33rsCMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-c.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-c.com
+              Port: 7051
+
+    - &Org30
+        Name: P33rsD
+
+        ID: P33rsDMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-d.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-d.com
+              Port: 7051
+
+    - &Org31
+        Name: P33rsE
+
+        ID: P33rsEMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-e.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-e.com
+              Port: 7051
+
+    - &Org32
+        Name: P33rsF
+
+        ID: P33rsFMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-f.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-f.com
+              Port: 7051
+
+    - &Org33
+        Name: P33rsG
+
+        ID: P33rsGMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-g.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-g.com
+              Port: 7051
+
+    - &Org34
+        Name: P33rsH
+
+        ID: P33rsHMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-h.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-h.com
+              Port: 7051
+
+    - &Org35
+        Name: P33rsI
+
+        ID: P33rsIMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-i.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-i.com
+              Port: 7051
+
+    - &Org36
+        Name: P33rsJ
+
+        ID: P33rsJMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-j.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-j.com
+              Port: 7051
+
+    - &Org37
+        Name: P33rsK
+
+        ID: P33rsKMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-k.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-k.com
+              Port: 7051
+
+    - &Org38
+        Name: P33rsL
+
+        ID: P33rsLMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-l.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-l.com
+              Port: 7051
+
+    - &Org39
+        Name: P33rsM
+
+        ID: P33rsMMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-m.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-m.com
+              Port: 7051
+
+    - &Org40
+        Name: P33rsN
+
+        ID: P33rsNMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-n.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-n.com
+              Port: 7051
+
+    - &Org41
+        Name: P33rsO
+
+        ID: P33rsOMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-o.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-o.com
+              Port: 7051
+
+    - &Org42
+        Name: P33rsP
+
+        ID: P33rsPMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-p.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-p.com
+              Port: 7051
+
+    - &Org43
+        Name: P33rsQ
+
+        ID: P33rsQMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-q.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-q.com
+              Port: 7051
+
+    - &Org44
+        Name: P33rsR
+
+        ID: P33rsRMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-r.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-r.com
+              Port: 7051
+
+    - &Org45
+        Name: P33rsS
+
+        ID: P33rsSMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-s.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-s.com
+              Port: 7051
+
+    - &Org46
+        Name: P33rsT
+
+        ID: P33rsTMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-t.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-t.com
+              Port: 7051
+
+    - &Org47
+        Name: P33rsU
+
+        ID: P33rsUMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-u.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-u.com
+              Port: 7051
+
+    - &Org48
+        Name: P33rsV
+
+        ID: P33rsVMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-v.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-v.com
+              Port: 7051
+
+    - &Org49
+        Name: P33rsW
+
+        ID: P33rsWMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-w.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-w.com
+              Port: 7051
+
+    - &Org50
+        Name: P33rsX
+
+        ID: P33rsXMSP
+
+        MSPDir: crypto-config/peerOrganizations/bl0ckch41n-x.com/msp
+
+        AnchorPeers:
+            - Host: peer0.bl0ckch41n-x.com
               Port: 7051
 
 ################################################################################

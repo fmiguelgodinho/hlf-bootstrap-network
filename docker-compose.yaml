@@ -31,6 +31,40 @@ volumes:
   peer0.blockchain-r.com:
   peer0.blockchain-s.com:
   peer0.blockchain-t.com:
+  # 20 up
+  peer0.blockchain-u.com:
+  peer0.blockchain-v.com:
+  peer0.blockchain-w.com:
+  peer0.blockchain-x.com:
+  peer0.blockchain-y.com:
+  peer0.blockchain-z.com:
+  peer0.bl0ckch41n-a.com:
+  peer0.bl0ckch41n-b.com:
+  peer0.bl0ckch41n-c.com:
+  peer0.bl0ckch41n-d.com:
+  # 30 up
+  peer0.bl0ckch41n-e.com:
+  peer0.bl0ckch41n-f.com:
+  peer0.bl0ckch41n-g.com:
+  peer0.bl0ckch41n-h.com:
+  peer0.bl0ckch41n-i.com:
+  peer0.bl0ckch41n-j.com:
+  peer0.bl0ckch41n-k.com:
+  peer0.bl0ckch41n-l.com:
+  peer0.bl0ckch41n-m.com:
+  peer0.bl0ckch41n-n.com:
+  # 40 up
+  peer0.bl0ckch41n-o.com:
+  peer0.bl0ckch41n-p.com:
+  peer0.bl0ckch41n-q.com:
+  peer0.bl0ckch41n-r.com:
+  peer0.bl0ckch41n-s.com:
+  peer0.bl0ckch41n-t.com:
+  peer0.bl0ckch41n-u.com:
+  peer0.bl0ckch41n-v.com:
+  peer0.bl0ckch41n-w.com:
+  peer0.bl0ckch41n-x.com:
+  # 50 up
 
 networks:
   hlf:
@@ -255,6 +289,276 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer0.blockchain-t.com
+    networks:
+      - hlf
+
+  peer0.blockchain-u.com:
+    dns_search: .
+    container_name: peer0.blockchain-u.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-u.com
+    networks:
+      - hlf
+
+  peer0.blockchain-v.com:
+    dns_search: .
+    container_name: peer0.blockchain-v.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-v.com
+    networks:
+      - hlf
+
+  peer0.blockchain-w.com:
+    dns_search: .
+    container_name: peer0.blockchain-w.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-w.com
+    networks:
+      - hlf
+
+  peer0.blockchain-x.com:
+    dns_search: .
+    container_name: peer0.blockchain-x.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-x.com
+    networks:
+      - hlf
+
+  peer0.blockchain-y.com:
+    dns_search: .
+    container_name: peer0.blockchain-y.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-y.com
+    networks:
+      - hlf
+
+  peer0.blockchain-z.com:
+    dns_search: .
+    container_name: peer0.blockchain-z.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.blockchain-z.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-a.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-a.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-a.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-b.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-b.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-b.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-c.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-c.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-c.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-d.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-d.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-d.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-e.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-e.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-e.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-f.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-f.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-f.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-g.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-g.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-g.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-h.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-h.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-h.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-i.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-i.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-i.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-j.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-j.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-j.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-k.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-k.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-k.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-l.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-l.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-l.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-m.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-m.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-m.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-n.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-n.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-n.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-o.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-o.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-o.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-p.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-p.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-p.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-q.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-q.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-q.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-r.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-r.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-r.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-s.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-s.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-s.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-t.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-t.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-t.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-u.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-u.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-u.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-v.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-v.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-v.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-w.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-w.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-w.com
+    networks:
+      - hlf
+
+  peer0.bl0ckch41n-x.com:
+    dns_search: .
+    container_name: peer0.bl0ckch41n-x.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.bl0ckch41n-x.com
     networks:
       - hlf
 
