@@ -493,3 +493,634 @@ services:
     ports:
       - 25051:7051
       - 25053:7053
+
+
+  peer0.blockchain-u.com:
+    container_name: peer0.blockchain-u.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-u.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-u.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-u.com:7051
+      - CORE_PEER_LOCALMSPID=PeersUMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-u.com/peers/peer0.blockchain-u.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-u.com/peers/peer0.blockchain-u.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-u.com:/var/hyperledger/production
+    ports:
+      - 26051:7051
+      - 26053:7053
+
+  peer0.blockchain-v.com:
+    container_name: peer0.blockchain-v.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-v.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-v.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-v.com:7051
+      - CORE_PEER_LOCALMSPID=PeersVMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-v.com/peers/peer0.blockchain-v.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-v.com/peers/peer0.blockchain-v.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-v.com:/var/hyperledger/production
+    ports:
+      - 27051:7051
+      - 27053:7053
+
+  peer0.blockchain-w.com:
+    container_name: peer0.blockchain-w.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-w.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-w.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-w.com:7051
+      - CORE_PEER_LOCALMSPID=PeersWMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-w.com/peers/peer0.blockchain-w.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-w.com/peers/peer0.blockchain-w.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-w.com:/var/hyperledger/production
+    ports:
+      - 28051:7051
+      - 28053:7053
+
+  peer0.blockchain-x.com:
+    container_name: peer0.blockchain-x.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-x.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-x.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-x.com:7051
+      - CORE_PEER_LOCALMSPID=PeersXMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-x.com/peers/peer0.blockchain-x.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-x.com/peers/peer0.blockchain-x.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-x.com:/var/hyperledger/production
+    ports:
+      - 29051:7051
+      - 29053:7053
+
+  peer0.blockchain-y.com:
+    container_name: peer0.blockchain-y.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-y.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-y.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-y.com:7051
+      - CORE_PEER_LOCALMSPID=PeersYMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-y.com/peers/peer0.blockchain-y.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-y.com/peers/peer0.blockchain-y.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-y.com:/var/hyperledger/production
+    ports:
+      - 30051:7051
+      - 30053:7053
+
+  peer0.blockchain-z.com:
+    container_name: peer0.blockchain-z.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.blockchain-z.com
+      - CORE_PEER_ADDRESS=peer0.blockchain-z.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.blockchain-z.com:7051
+      - CORE_PEER_LOCALMSPID=PeersZMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/blockchain-z.com/peers/peer0.blockchain-z.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/blockchain-z.com/peers/peer0.blockchain-z.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.blockchain-z.com:/var/hyperledger/production
+    ports:
+      - 31051:7051
+      - 31053:7053
+
+  peer0.bl0ckch41n-a.com:
+    container_name: peer0.bl0ckch41n-a.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-a.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-a.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-a.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsAMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-a.com/peers/peer0.bl0ckch41n-a.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-a.com/peers/peer0.bl0ckch41n-a.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-a.com:/var/hyperledger/production
+    ports:
+      - 32051:7051
+      - 32053:7053
+
+  peer0.bl0ckch41n-b.com:
+    container_name: peer0.bl0ckch41n-b.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-b.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-b.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-b.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsBMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-b.com/peers/peer0.bl0ckch41n-b.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-b.com/peers/peer0.bl0ckch41n-b.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-b.com:/var/hyperledger/production
+    ports:
+      - 33051:7051
+      - 33053:7053
+
+  peer0.bl0ckch41n-c.com:
+    container_name: peer0.bl0ckch41n-c.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-c.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-c.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-c.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsCMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-c.com/peers/peer0.bl0ckch41n-c.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-c.com/peers/peer0.bl0ckch41n-c.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-c.com:/var/hyperledger/production
+    ports:
+      - 34051:7051
+      - 34053:7053
+
+  peer0.bl0ckch41n-d.com:
+    container_name: peer0.bl0ckch41n-d.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-d.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-d.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-d.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsDMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-d.com/peers/peer0.bl0ckch41n-d.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-d.com/peers/peer0.bl0ckch41n-d.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-d.com:/var/hyperledger/production
+    ports:
+      - 35051:7051
+      - 35053:7053
+
+  peer0.bl0ckch41n-e.com:
+    container_name: peer0.bl0ckch41n-e.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-e.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-e.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-e.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsEMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-e.com/peers/peer0.bl0ckch41n-e.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-e.com/peers/peer0.bl0ckch41n-e.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-e.com:/var/hyperledger/production
+    ports:
+      - 36051:7051
+      - 36053:7053
+
+  peer0.bl0ckch41n-f.com:
+    container_name: peer0.bl0ckch41n-f.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-f.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-f.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-f.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsFMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-f.com/peers/peer0.bl0ckch41n-f.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-f.com/peers/peer0.bl0ckch41n-f.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-f.com:/var/hyperledger/production
+    ports:
+      - 37051:7051
+      - 37053:7053
+
+  peer0.bl0ckch41n-g.com:
+    container_name: peer0.bl0ckch41n-g.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-g.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-g.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-g.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsGMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-g.com/peers/peer0.bl0ckch41n-g.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-g.com/peers/peer0.bl0ckch41n-g.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-g.com:/var/hyperledger/production
+    ports:
+      - 38051:7051
+      - 38053:7053
+
+  peer0.bl0ckch41n-h.com:
+    container_name: peer0.bl0ckch41n-h.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-h.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-h.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-h.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsHMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-h.com/peers/peer0.bl0ckch41n-h.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-h.com/peers/peer0.bl0ckch41n-h.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-h.com:/var/hyperledger/production
+    ports:
+      - 39051:7051
+      - 39053:7053
+
+  peer0.bl0ckch41n-i.com:
+    container_name: peer0.bl0ckch41n-i.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-i.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-i.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-i.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsIMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-i.com/peers/peer0.bl0ckch41n-i.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-i.com/peers/peer0.bl0ckch41n-i.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-i.com:/var/hyperledger/production
+    ports:
+      - 40051:7051
+      - 40053:7053
+
+  peer0.bl0ckch41n-j.com:
+    container_name: peer0.bl0ckch41n-j.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-j.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-j.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-j.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsJMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-j.com/peers/peer0.bl0ckch41n-j.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-j.com/peers/peer0.bl0ckch41n-j.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-j.com:/var/hyperledger/production
+    ports:
+      - 41051:7051
+      - 41053:7053
+
+  peer0.bl0ckch41n-k.com:
+    container_name: peer0.bl0ckch41n-k.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-k.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-k.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-k.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsKMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-k.com/peers/peer0.bl0ckch41n-k.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-k.com/peers/peer0.bl0ckch41n-k.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-k.com:/var/hyperledger/production
+    ports:
+      - 42051:7051
+      - 42053:7053
+
+  peer0.bl0ckch41n-l.com:
+    container_name: peer0.bl0ckch41n-l.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-l.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-l.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-l.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsLMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-l.com/peers/peer0.bl0ckch41n-l.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-l.com/peers/peer0.bl0ckch41n-l.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-l.com:/var/hyperledger/production
+    ports:
+      - 43051:7051
+      - 43053:7053
+
+  peer0.bl0ckch41n-m.com:
+    container_name: peer0.bl0ckch41n-m.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-m.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-m.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-m.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsMMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-m.com/peers/peer0.bl0ckch41n-m.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-m.com/peers/peer0.bl0ckch41n-m.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-m.com:/var/hyperledger/production
+    ports:
+      - 44051:7051
+      - 44053:7053
+
+  peer0.bl0ckch41n-n.com:
+    container_name: peer0.bl0ckch41n-n.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-n.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-n.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-n.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsNMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-n.com/peers/peer0.bl0ckch41n-n.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-n.com/peers/peer0.bl0ckch41n-n.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-n.com:/var/hyperledger/production
+    ports:
+      - 45051:7051
+      - 45053:7053
+
+  peer0.bl0ckch41n-o.com:
+    container_name: peer0.bl0ckch41n-o.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-o.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-o.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-o.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsOMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-o.com/peers/peer0.bl0ckch41n-o.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-o.com/peers/peer0.bl0ckch41n-o.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-o.com:/var/hyperledger/production
+    ports:
+      - 46051:7051
+      - 46053:7053
+
+  peer0.bl0ckch41n-p.com:
+    container_name: peer0.bl0ckch41n-p.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-p.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-p.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-p.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsPMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-p.com/peers/peer0.bl0ckch41n-p.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-p.com/peers/peer0.bl0ckch41n-p.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-p.com:/var/hyperledger/production
+    ports:
+      - 47051:7051
+      - 47053:7053
+
+  peer0.bl0ckch41n-q.com:
+    container_name: peer0.bl0ckch41n-q.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-q.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-q.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-q.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsQMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-q.com/peers/peer0.bl0ckch41n-q.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-q.com/peers/peer0.bl0ckch41n-q.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-q.com:/var/hyperledger/production
+    ports:
+      - 48051:7051
+      - 48053:7053
+
+  peer0.bl0ckch41n-r.com:
+    container_name: peer0.bl0ckch41n-r.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-r.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-r.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-r.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsRMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-r.com/peers/peer0.bl0ckch41n-r.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-r.com/peers/peer0.bl0ckch41n-r.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-r.com:/var/hyperledger/production
+    ports:
+      - 49051:7051
+      - 49053:7053
+
+  peer0.bl0ckch41n-s.com:
+    container_name: peer0.bl0ckch41n-s.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-s.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-s.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-s.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsSMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-s.com/peers/peer0.bl0ckch41n-s.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-s.com/peers/peer0.bl0ckch41n-s.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-s.com:/var/hyperledger/production
+    ports:
+      - 50051:7051
+      - 50053:7053
+
+  peer0.bl0ckch41n-t.com:
+    container_name: peer0.bl0ckch41n-t.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-t.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-t.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-t.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsTMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-t.com/peers/peer0.bl0ckch41n-t.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-t.com/peers/peer0.bl0ckch41n-t.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-t.com:/var/hyperledger/production
+    ports:
+      - 51051:7051
+      - 51053:7053
+
+  peer0.bl0ckch41n-u.com:
+    container_name: peer0.bl0ckch41n-u.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-u.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-u.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-u.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsUMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-u.com/peers/peer0.bl0ckch41n-u.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-u.com/peers/peer0.bl0ckch41n-u.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-u.com:/var/hyperledger/production
+    ports:
+      - 52051:7051
+      - 52053:7053
+
+  peer0.bl0ckch41n-v.com:
+    container_name: peer0.bl0ckch41n-v.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-v.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-v.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-v.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsVMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-v.com/peers/peer0.bl0ckch41n-v.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-v.com/peers/peer0.bl0ckch41n-v.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-v.com:/var/hyperledger/production
+    ports:
+      - 53051:7051
+      - 53053:7053
+
+  peer0.bl0ckch41n-w.com:
+    container_name: peer0.bl0ckch41n-w.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-w.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-w.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-w.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsWMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-w.com/peers/peer0.bl0ckch41n-w.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-w.com/peers/peer0.bl0ckch41n-w.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-w.com:/var/hyperledger/production
+    ports:
+      - 54051:7051
+      - 54053:7053
+
+  peer0.bl0ckch41n-x.com:
+    container_name: peer0.bl0ckch41n-x.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.bl0ckch41n-x.com
+      - CORE_PEER_ADDRESS=peer0.bl0ckch41n-x.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.bl0ckch41n-x.com:7051
+      - CORE_PEER_LOCALMSPID=P33rsXMSP
+      - THRESH_SIG_KEY_SHARE=AAAAFAAAAJANDC7Q+nWFiuUa1WtyK1c6aWDEPHWshcfhXYt5T+UEn80dk4o750DdiIYZCriThBTiIBUsF38PdY8Cww/fdGDbsEJNdZ2d4WN1u950RyCHAPpfGyTL+E3N8lbP38X11avkO2SoiLc7+DLkDQfKSWnJrnZlFU7Uc6DfSG+FfVrJ/CxSFdtUIh0o1OPlCa8nxwUAAACARB0Y0mLjsz3F2sNIOs2Nh5w2v2+C8fb8VOkH9Za2lBHz3s50HBIoxc74/XL6AVHD50e43WYmnkFIGGit35UB5iIIa/D6EHShPmphbag1AU6s6dSx+bVodJqUZM63JkN6lFJeyCmj9mE4E/I/vOiq5XWt0AV8Y39qben0OfcecbkAAAAIIcNnfIK0AAAAAACAQWyZwk1xeNOffG3E3dnj+Pb7oVyqroTKQ+x0Hex6GsGVKJdLSXz7mnCtjB4W9RP4cHWnA5WiMbYOQKawmuYchKwzSM+7Bb+bOnEkZhxHA/ulEbZi6xiFeIpTXvMWYRU+HXexexA1aayFNxDY9uMwpLlvqUQvD+xb6ByCHaX9R9YAAACAHyPp+uetVoZS9+E0sxaJy0l0GTplW+XmrR4gjE92eTVFmFawMIQPXoLusWM66AtR0+S6pY5wDnePPBCWr64NMFlRQ/cfrFAJvY8y4OCWnLgF7E+YyRh92vhPQ7YlQavbKt6mSRtmYUv2gSMueHuQq+IxtFP4FB0fIBDCHjuTjkc=
+      - THRESH_SIG_GROUP_KEY=AAAABwAAABQAAAADAQABAAAAgEQdGNJi47M9xdrDSDrNjYecNr9vgvH2/FTpB/WWtpQR897OdBwSKMXO+P1y+gFRw+dHuN1mJp5BSBhord+VAeYiCGvw+hB0oT5qYW2oNQFOrOnUsfm1aHSalGTOtyZDepRSXsgpo/ZhOBPyP7zoquV1rdAFfGN/am3p9Dn3HnG5
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/bl0ckch41n-x.com/peers/peer0.bl0ckch41n-x.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/bl0ckch41n-x.com/peers/peer0.bl0ckch41n-x.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.bl0ckch41n-x.com:/var/hyperledger/production
+    ports:
+      - 55051:7051
+      - 55053:7053
