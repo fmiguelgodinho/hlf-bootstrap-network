@@ -75,7 +75,7 @@ for l in {a..x}; do
   -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/bl0ckch41n-${l}.com/users/Admin@bl0ckch41n-${l}.com/msp" \
   -e "CORE_PEER_LOCALMSPID=P33rs${L}MSP" \
   -e "CORE_PEER_ADDRESS=peer0.bl0ckch41n-${l}.com:7051" \
-  cli peer channel update -o orderer0.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/Peers${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
+  cli peer channel update -o orderer0.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/P33rs${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
 
   sleep 5
 done
