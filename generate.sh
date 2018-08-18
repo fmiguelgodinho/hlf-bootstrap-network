@@ -37,12 +37,22 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-for l in {a..t}; do
+for l in {a..z}; do
   L=${l^^}
   # generate anchor peer transactions
   configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/Peers${L}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Peers${L}
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate anchor peer update for Peers${L}MSP..."
+    exit 1
+  fi
+done
+
+for l in {a..x}; do
+  L=${l^^}
+  # generate anchor peer transactions
+  configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/P33rs${L}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg P33rs${L}
+  if [ "$?" -ne 0 ]; then
+    echo "Failed to generate anchor peer update for P33rs${L}MSP..."
     exit 1
   fi
 done
