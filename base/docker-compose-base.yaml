@@ -513,8 +513,8 @@ services:
         - ../crypto-config/peerOrganizations/blockchain-u.com/peers/peer0.blockchain-u.com/tls:/etc/hyperledger/fabric/tls
         - peer0.blockchain-u.com:/var/hyperledger/production
     ports:
-      - 26051:7051
-      - 26053:7053
+      - 56051:7051
+      - 56053:7053
 
   peer0.blockchain-v.com:
     container_name: peer0.blockchain-v.com
