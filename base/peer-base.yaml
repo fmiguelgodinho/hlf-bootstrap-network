@@ -27,6 +27,6 @@ services:
       - XSP_DIGEST_INVERVAL_MILLIS=1000
       - XSP_MTU=8096
       - PEER_SIGN_THRESHOLD_MTU=8096
-      - CHAINCODE_INVOKE_TIMEOUT_MILLIS=80000ms
+      - CHAINCODE_INVOKE_TIMEOUT_MILLIS=100000ms
     working_dir: /
     command: ./startPeer.sh
