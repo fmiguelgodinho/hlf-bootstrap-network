@@ -26,5 +26,7 @@ services:
       - XSP_THREAD_POOL_SIZE=100
       - XSP_DIGEST_INVERVAL_MILLIS=1000
       - XSP_MTU=8096
+      - PEER_SIGN_THRESHOLD_MTU=8096
+      - CHAINCODE_INVOKE_TIMEOUT_MILLIS=80000ms
     working_dir: /
     command: ./startPeer.sh
