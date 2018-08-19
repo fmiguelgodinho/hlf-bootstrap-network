@@ -76,7 +76,7 @@ for l in {n..z}; do
   -e "CORE_PEER_ADDRESS=peer0.blockchain-${l}.com:7051" \
   cli peer channel update -o orderer1.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/Peers${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer1.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
 
-  sleep 5
+  #sleep 5
 done
 for l in {a..d}; do
   L=${l^^}
@@ -87,7 +87,7 @@ for l in {a..d}; do
   -e "CORE_PEER_ADDRESS=peer0.blockchain-a${l}.com:7051" \
   cli peer channel update -o orderer2.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/PeersA${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer2.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
 
-  sleep 5
+  #sleep 5
 done
 
 # chaincode deployment
