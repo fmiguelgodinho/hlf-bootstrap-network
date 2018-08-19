@@ -47,6 +47,16 @@ Profiles:
                     - *Org18
                     - *Org19
                     - *Org20
+                    - *Org21
+                    - *Org22
+                    - *Org23
+                    - *Org24
+                    - *Org25
+                    - *Org26
+                    - *Org27
+                    - *Org28
+                    - *Org29
+                    - *Org30
 
     2P1OGenesis_BFTsmart:
         Capabilities:
@@ -81,6 +91,16 @@ Profiles:
                     - *Org18
                     - *Org19
                     - *Org20
+                    - *Org21
+                    - *Org22
+                    - *Org23
+                    - *Org24
+                    - *Org25
+                    - *Org26
+                    - *Org27
+                    - *Org28
+                    - *Org29
+                    - *Org30
 
     2PSecureChannel:
         Consortium: SampleConsortium
@@ -107,6 +127,16 @@ Profiles:
                 - *Org18
                 - *Org19
                 - *Org20
+                - *Org21
+                - *Org22
+                - *Org23
+                - *Org24
+                - *Org25
+                - *Org26
+                - *Org27
+                - *Org28
+                - *Org29
+                - *Org30
             Capabilities:
                 <<: *ApplicationCapabilities
 
@@ -359,6 +389,116 @@ Organizations:
 
         AnchorPeers:
             - Host: peer0.blockchain-t.com
+              Port: 7051
+
+    - &Org21
+        Name: PeersU
+
+        ID: PeersUMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-u.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-u.com
+              Port: 7051
+
+    - &Org22
+        Name: PeersV
+
+        ID: PeersVMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-v.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-v.com
+              Port: 7051
+
+    - &Org23
+        Name: PeersW
+
+        ID: PeersWMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-w.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-w.com
+              Port: 7051
+
+    - &Org24
+        Name: PeersX
+
+        ID: PeersXMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-x.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-x.com
+              Port: 7051
+
+    - &Org25
+        Name: PeersY
+
+        ID: PeersYMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-y.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-y.com
+              Port: 7051
+
+    - &Org26
+        Name: PeersZ
+
+        ID: PeersZMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-z.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-z.com
+              Port: 7051
+
+    - &Org27
+        Name: PeersAA
+
+        ID: PeersAAMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-aa.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-aa.com
+              Port: 7051
+
+    - &Org28
+        Name: PeersAB
+
+        ID: PeersABMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-ab.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-ab.com
+              Port: 7051
+
+    - &Org29
+        Name: PeersAC
+
+        ID: PeersACMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-ac.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-ac.com
+              Port: 7051
+
+    - &Org30
+        Name: PeersAD
+
+        ID: PeersADMSP
+
+        MSPDir: crypto-config/peerOrganizations/blockchain-ad.com/msp
+
+        AnchorPeers:
+            - Host: peer0.blockchain-ad.com
               Port: 7051
 
 ################################################################################

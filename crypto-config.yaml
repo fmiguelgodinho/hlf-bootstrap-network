@@ -204,9 +204,78 @@ PeerOrgs:
     Users:
       Count: 1
 
-
   - Name: PeersT
     Domain: blockchain-t.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersU
+    Domain: blockchain-u.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersV
+    Domain: blockchain-v.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersW
+    Domain: blockchain-w.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersX
+    Domain: blockchain-x.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersY
+    Domain: blockchain-y.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersZ
+    Domain: blockchain-z.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersAA
+    Domain: blockchain-aa.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersAB
+    Domain: blockchain-ab.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersAC
+    Domain: blockchain-ac.com
+    Template:
+      Count: 1
+    Users:
+      Count: 1
+
+  - Name: PeersAD
+    Domain: blockchain-ad.com
     Template:
       Count: 1
     Users:
