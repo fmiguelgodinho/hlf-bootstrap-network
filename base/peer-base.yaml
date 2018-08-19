@@ -25,8 +25,8 @@ services:
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
       - XSP_THREAD_POOL_SIZE=100
       - XSP_DIGEST_INVERVAL_MILLIS=1000
-      - XSP_MTU=8096
-      - PEER_SIGN_THRESHOLD_MTU=8096
+      - XSP_MTU=4096
+      - PEER_SIGN_THRESHOLD_MTU=4096
       - CHAINCODE_INVOKE_TIMEOUT_MILLIS=100000ms
     working_dir: /
     command: ./startPeer.sh
