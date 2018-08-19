@@ -20,7 +20,7 @@ services:
       - ZOO_MY_ID=1
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     networks:
-      - osn
+      - hlf
 
   zookeeper1:
     dns_search: .
@@ -32,7 +32,7 @@ services:
       - ZOO_MY_ID=2
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     networks:
-      - osn
+      - hlf
 
   zookeeper2:
     dns_search: .
@@ -44,7 +44,7 @@ services:
       - ZOO_MY_ID=3
       - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
     networks:
-      - osn
+      - hlf
 
   kafka0:
     dns_search: .
@@ -62,7 +62,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - osn
+      - hlf
 
   kafka1:
     dns_search: .
@@ -80,7 +80,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - osn
+      - hlf
 
   kafka2:
     dns_search: .
@@ -98,7 +98,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - osn
+      - hlf
 
   kafka3:
     dns_search: .
@@ -116,7 +116,7 @@ services:
       - zookeeper1
       - zookeeper2
     networks:
-      - osn
+      - hlf
 
   orderer0.consensus.com:
     dns_search: .

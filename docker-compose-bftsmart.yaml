@@ -21,7 +21,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
     command: ./startReplica.sh 0
     networks:
-      - osn
+      - hlf
 
 
   bft-replica1:
@@ -35,7 +35,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
     command: ./startReplica.sh 1
     networks:
-      - osn
+      - hlf
 
 
   bft-replica2:
@@ -49,7 +49,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
     command: ./startReplica.sh 2
     networks:
-      - osn
+      - hlf
 
   bft-replica3:
     dns_search: .
@@ -62,7 +62,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/hyperledger-bftsmart
     command: ./startReplica.sh 3
     networks:
-      - osn
+      - hlf
 
   orderer0.consensus.com:
     dns_search: .
