@@ -56,7 +56,7 @@ done
 echo "3. Updating channel $CHANNEL_NAME information"
 sleep 15
 
-for l in {a..z}; do
+for l in {a..m}; do
   L=${l^^}
   docker exec \
   -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-${l}.com/peers/peer0.blockchain-${l}.com/tls/ca.crt" \
@@ -67,6 +67,17 @@ for l in {a..z}; do
 
   sleep 5
 done
+for l in {n..z}; do
+  L=${l^^}
+  docker exec \
+  -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-${l}.com/peers/peer0.blockchain-${l}.com/tls/ca.crt" \
+  -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-${l}.com/users/Admin@blockchain-${l}.com/msp" \
+  -e "CORE_PEER_LOCALMSPID=Peers${L}MSP" \
+  -e "CORE_PEER_ADDRESS=peer0.blockchain-${l}.com:7051" \
+  cli peer channel update -o orderer1.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/Peers${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer1.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
+
+  sleep 5
+done
 for l in {a..d}; do
   L=${l^^}
   docker exec \
@@ -74,7 +85,7 @@ for l in {a..d}; do
   -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-a${l}.com/users/Admin@blockchain-a${l}.com/msp" \
   -e "CORE_PEER_LOCALMSPID=PeersA${L}MSP" \
   -e "CORE_PEER_ADDRESS=peer0.blockchain-a${l}.com:7051" \
-  cli peer channel update -o orderer0.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/PeersA${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
+  cli peer channel update -o orderer2.consensus.com:7050 -c ${CHANNEL_NAME} -f ./channel-artifacts/PeersA${L}MSPanchors.tx --tls ${CORE_PEER_TLS_ENABLED} --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/consensus.com/orderers/orderer2.consensus.com/msp/tlscacerts/tlsca.consensus.com-cert.pem
 
   sleep 5
 done
