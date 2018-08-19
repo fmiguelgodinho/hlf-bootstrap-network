@@ -37,16 +37,6 @@ Profiles:
                     - *Org8
                     - *Org9
                     - *Org10
-                    - *Org11
-                    - *Org12
-                    - *Org13
-                    - *Org14
-                    - *Org15
-                    - *Org16
-                    - *Org17
-                    - *Org18
-                    - *Org19
-                    - *Org20
 
     2P1OGenesis_BFTsmart:
         Capabilities:
@@ -71,16 +61,6 @@ Profiles:
                     - *Org8
                     - *Org9
                     - *Org10
-                    - *Org11
-                    - *Org12
-                    - *Org13
-                    - *Org14
-                    - *Org15
-                    - *Org16
-                    - *Org17
-                    - *Org18
-                    - *Org19
-                    - *Org20
 
     2PSecureChannel:
         Consortium: SampleConsortium
@@ -97,16 +77,6 @@ Profiles:
                 - *Org8
                 - *Org9
                 - *Org10
-                - *Org11
-                - *Org12
-                - *Org13
-                - *Org14
-                - *Org15
-                - *Org16
-                - *Org17
-                - *Org18
-                - *Org19
-                - *Org20
             Capabilities:
                 <<: *ApplicationCapabilities
 
