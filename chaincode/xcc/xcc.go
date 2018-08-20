@@ -300,10 +300,10 @@ func (s *SmartContract) put(APIstub shim.ChaincodeStubInterface, args []string) 
 	APIstub.PutState(dataCompositeKey, dataAsBytes) //store according to key
 
 	if exists == nil {
-		appProps.TotalRecords++
+		// appProps.TotalRecords++
 		// update app specific properties
-		propertyAsBytes, _ := json.Marshal(appProps)
-		APIstub.PutState(appPropsCompositeKey, propertyAsBytes)
+		// propertyAsBytes, _ := json.Marshal(appProps)
+		// APIstub.PutState(appPropsCompositeKey, propertyAsBytes)
 	}
 
 	return shim.Success(nil)
