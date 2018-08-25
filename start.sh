@@ -93,7 +93,7 @@ sleep 15
 echo "6. Querying all peers to trigger chaincode for the first time!"
 
 # query chaincode on each peer to fire up its chaincode container
-for l in {a..j}; do
+for l in {a..d}; do
   L=${l^^}
   docker exec \
   -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/blockchain-${l}.com/peers/peer0.blockchain-${l}.com/tls/ca.crt" \
