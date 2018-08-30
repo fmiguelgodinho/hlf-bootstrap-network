@@ -130,7 +130,8 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.getEndorsementMethod(APIstub)
 	} else {
 		// var pubKey string
-		// pubKey, args := args[0], args[1:]
+		// pubkey := args[0]
+		args = args[1:]
 		// CHECK FOR SIGNED CONTRACT
 		// if s.hasSignedContract(APIstub, pubKey) {
 		if function == "query" {
