@@ -63,7 +63,7 @@ PeerOrgs:
     # name collisions
     # ---------------------------------------------------------------------------
     Template:
-      Count: 1
+      Count: 10
       # Start: 5
       # Hostname: {{.Prefix}}{{.Index}} # default
     # ---------------------------------------------------------------------------
@@ -77,137 +77,13 @@ PeerOrgs:
   - Name: PeersB
     Domain: blockchain-b.com
     Template:
-      Count: 1
+      Count: 5
     Users:
       Count: 1
 
   - Name: PeersC
     Domain: blockchain-c.com
     Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersD
-    Domain: blockchain-d.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersE
-    Domain: blockchain-e.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersF
-    Domain: blockchain-f.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-
-  - Name: PeersG
-    Domain: blockchain-g.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-
-  - Name: PeersH
-    Domain: blockchain-h.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-
-  - Name: PeersI
-    Domain: blockchain-i.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-
-  - Name: PeersJ
-    Domain: blockchain-j.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersK
-    Domain: blockchain-k.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersL
-    Domain: blockchain-l.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersM
-    Domain: blockchain-m.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersN
-    Domain: blockchain-n.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersO
-    Domain: blockchain-o.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersP
-    Domain: blockchain-p.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersQ
-    Domain: blockchain-q.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersR
-    Domain: blockchain-r.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersS
-    Domain: blockchain-s.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-
-  - Name: PeersT
-    Domain: blockchain-t.com
-    Template:
-      Count: 1
+      Count: 5
     Users:
       Count: 1

@@ -37,7 +37,7 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-for l in {a..t}; do
+for l in {a..c}; do
   L=${l^^}
   # generate anchor peer transactions
   configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/Peers${L}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Peers${L}

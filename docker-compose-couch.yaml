@@ -53,7 +53,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-b.com:
+  peer1.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb1:5984
@@ -81,7 +81,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-c.com:
+  peer2.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb2:5984
@@ -109,7 +109,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-d.com:
+  peer3.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb3:5984
@@ -137,7 +137,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-e.com:
+  peer4.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb4:5984
@@ -165,7 +165,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-f.com:
+  peer5.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb5:5984
@@ -194,7 +194,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-g.com:
+  peer6.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb6:5984
@@ -222,7 +222,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-h.com:
+  peer7.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb7:5984
@@ -250,7 +250,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-i.com:
+  peer8.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb8:5984
@@ -278,7 +278,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-j.com:
+  peer9.blockchain-a.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb9:5984
@@ -307,7 +307,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-k.com:
+  peer0.blockchain-b.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb10:5984
@@ -335,7 +335,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-l.com:
+  peer1.blockchain-b.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb11:5984
@@ -363,7 +363,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-m.com:
+  peer2.blockchain-b.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb12:5984
@@ -392,7 +392,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-n.com:
+  peer3.blockchain-b.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb13:5984
@@ -420,7 +420,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-o.com:
+  peer4.blockchain-b.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb14:5984
@@ -448,7 +448,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-p.com:
+  peer0.blockchain-c.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb15:5984
@@ -476,7 +476,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-q.com:
+  peer1.blockchain-c.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb16:5984
@@ -505,7 +505,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-r.com:
+  peer2.blockchain-c.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb17:5984
@@ -534,7 +534,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-s.com:
+  peer3.blockchain-c.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb18:5984
@@ -562,7 +562,7 @@ services:
     networks:
       - hlf
 
-  peer0.blockchain-t.com:
+  peer4.blockchain-c.com:
     environment:
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb19:5984
