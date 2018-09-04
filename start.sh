@@ -5,8 +5,8 @@ set -e
 while true; do
     read -p "What do you want to run (Y for Kafka HLF, N for BFTsmart HLF)?" yn
     case $yn in
-        [Yy]* ) docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml down; docker volume prune -f; docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml -f docker-compose-kafka.yaml up -d; break;;
-        [Nn]* ) docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml -f docker-compose-bftsmart.yaml down; docker volume prune -f; docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml -f docker-compose-bftsmart.yaml up -d; break;;
+        [Yy]* ) docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml down; docker volume prune -f; docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml up -d; break;;
+        [Nn]* ) docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml down; docker volume prune -f; docker-compose -f docker-compose.yaml -f docker-compose-couch.yaml up -d; break;;
         * ) echo "Please answer Y or N.";;
     esac
 done
