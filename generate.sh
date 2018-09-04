@@ -16,14 +16,8 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-while true; do
-    read -p "Going to proceed with a Kafka-based ordering service (Y to continue, N for BFTsmart)?" yn
-    case $yn in
-        [Yy]* ) echo "Generating Kafka-based genesis block..."; configtxgen -profile 2P1OGenesis_Kafka -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
-        [Nn]* ) echo "Generating BFTsmart-based genesis block..."; configtxgen -profile 2P1OGenesis_BFTsmart -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block; break;;
-        * ) echo "Please answer Y or N.";;
-    esac
-done
+configtxgen -profile 2P1OGenesis_Solo -channelID systemchannel -outputBlock ./channel-artifacts/genesis.block
+
 
 if [ "$?" -ne 0 ]; then
   echo "Failed to generate orderer genesis block..."
@@ -37,7 +31,7 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-for l in {a..t}; do
+for l in {a..d}; do
   L=${l^^}
   # generate anchor peer transactions
   configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/Peers${L}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Peers${L}
@@ -47,23 +41,12 @@ for l in {a..t}; do
   fi
 done
 
-# copy key and certificates in case of bft smart
-# TODO:REPLACE BY SOMETHING BETTER, WE'RE REUSING CERTIFICATES :(
-mkdir crypto-config/bftsmart
-cp -r crypto-config/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/keystore crypto-config/bftsmart/
-cd crypto-config/bftsmart/keystore
-mv $(ls) key.pem
-cd ../../..
-cp -r crypto-config/ordererOrganizations/consensus.com/orderers/orderer0.consensus.com/msp/signcerts crypto-config/bftsmart/
-cd crypto-config/bftsmart/signcerts
-mv $(ls) peer.pem
-
 
 # copy key to easier name in case of users
 cd ../../../crypto-config/peerOrganizations
 export PEERORGS_CERTS_PATH=${PWD}
 
-for l in {a..t}; do
+for l in {a..d}; do
   cd blockchain-${l}.com/users/User1@blockchain-${l}.com/msp/keystore
   cp $(ls) User1@blockchain-${l}.com-priv.pem
 

@@ -19,7 +19,6 @@ Profiles:
           <<: *ChannelCapabilities
       Orderer:
           <<: *OrdererDefaults
-          OrdererType: solo
           Organizations:
               - *OrdererOrg
           Capabilities:
