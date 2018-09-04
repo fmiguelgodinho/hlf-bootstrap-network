@@ -14,22 +14,22 @@
 ################################################################################
 Profiles:
 
-  2P1OGenesis_Solo:
-      Capabilities:
-          <<: *ChannelCapabilities
-      Orderer:
-          <<: *OrdererDefaults
-          Organizations:
-              - *OrdererOrg
-          Capabilities:
-              <<: *OrdererCapabilities
-      Consortiums:
-          SampleConsortium:
-              Organizations:
-                  - *Org1
-                  - *Org2
-                  - *Org3
-                  - *Org4
+    2P1OGenesis_Solo:
+        Capabilities:
+            <<: *ChannelCapabilities
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *Org1
+                    - *Org2
+                    - *Org3
+                    - *Org4
 
     2PSecureChannel:
         Consortium: SampleConsortium
@@ -116,7 +116,6 @@ Organizations:
             - Host: peer0.blockchain-d.com
               Port: 7051
 
-
 ################################################################################
 #
 #   SECTION: Orderer
@@ -160,15 +159,6 @@ Orderer: &OrdererDefaults
             - kafka1:9092
             - kafka2:9092
             - kafka3:9092
-
-    #JCS: BFT-SMaRt options
-    BFTsmart:
-
-        # ConnectionPoolSize: The size of the connection pool that links the golang component to the java component.
-        ConnectionPoolSize: 20
-
-        # RecvPort: The localhost TCP port from which the java component sends blocks to the golang component.
-        RecvPort: 9999
 
     # Organizations is the list of orgs which are defined as participants on
     # the orderer side of the network
