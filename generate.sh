@@ -43,7 +43,7 @@ done
 
 
 # copy key to easier name in case of users
-cd ../../../crypto-config/peerOrganizations
+cd crypto-config/peerOrganizations
 export PEERORGS_CERTS_PATH=${PWD}
 
 for l in {a..d}; do
