@@ -27,9 +27,6 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *Org1
-                    - *Org2
-                    - *Org3
-                    - *Org4
 
     2PSecureChannel:
         Consortium: SampleConsortium
@@ -37,9 +34,6 @@ Profiles:
             <<: *ApplicationDefaults
             Organizations:
                 - *Org1
-                - *Org2
-                - *Org3
-                - *Org4
             Capabilities:
                 <<: *ApplicationCapabilities
 
@@ -81,39 +75,6 @@ Organizations:
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
             - Host: peer0.blockchain-a.com
-              Port: 7051
-
-    - &Org2
-        Name: PeersB
-
-        ID: PeersBMSP
-
-        MSPDir: crypto-config/peerOrganizations/blockchain-b.com/msp
-
-        AnchorPeers:
-            - Host: peer0.blockchain-b.com
-              Port: 7051
-
-    - &Org3
-        Name: PeersC
-
-        ID: PeersCMSP
-
-        MSPDir: crypto-config/peerOrganizations/blockchain-c.com/msp
-
-        AnchorPeers:
-            - Host: peer0.blockchain-c.com
-              Port: 7051
-
-    - &Org4
-        Name: PeersD
-
-        ID: PeersDMSP
-
-        MSPDir: crypto-config/peerOrganizations/blockchain-d.com/msp
-
-        AnchorPeers:
-            - Host: peer0.blockchain-d.com
               Port: 7051
 
 ################################################################################

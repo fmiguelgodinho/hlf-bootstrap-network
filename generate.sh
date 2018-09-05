@@ -31,27 +31,22 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-for l in {a..d}; do
-  L=${l^^}
-  # generate anchor peer transactions
-  configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/Peers${L}MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Peers${L}
-  if [ "$?" -ne 0 ]; then
-    echo "Failed to generate anchor peer update for Peers${L}MSP..."
-    exit 1
-  fi
-done
+# generate anchor peer transactions
+configtxgen -profile 2PSecureChannel -outputAnchorPeersUpdate ./channel-artifacts/PeersAMSPanchors.tx -channelID $CHANNEL_NAME -asOrg PeersA
+if [ "$?" -ne 0 ]; then
+  echo "Failed to generate anchor peer update for PeersAMSP..."
+  exit 1
+fi
 
 
 # copy key to easier name in case of users
 cd crypto-config/peerOrganizations
 export PEERORGS_CERTS_PATH=${PWD}
 
-for l in {a..d}; do
-  cd blockchain-${l}.com/users/User1@blockchain-${l}.com/msp/keystore
-  cp $(ls) User1@blockchain-${l}.com-priv.pem
+cd blockchain-a.com/users/User1@blockchain-a.com/msp/keystore
+cp $(ls) User1@blockchain-a.com-priv.pem
 
-  cd ../../../Admin@blockchain-${l}.com/msp/keystore
-  cp $(ls) Admin@blockchain-${l}.com-priv.pem
+cd ../../../Admin@blockchain-a.com/msp/keystore
+cp $(ls) Admin@blockchain-a.com-priv.pem
 
-  cd $PEERORGS_CERTS_PATH # back to peer orgs
-done
+cd $PEERORGS_CERTS_PATH # back to peer orgs

@@ -7,11 +7,7 @@ version: '2'
 
 volumes:
   orderer0.consensus.com:
-
   peer0.blockchain-a.com:
-  peer0.blockchain-b.com:
-  peer0.blockchain-c.com:
-  peer0.blockchain-d.com:
 
 networks:
   hlf:
@@ -33,33 +29,6 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer0.blockchain-a.com
-    networks:
-      - hlf
-
-  peer0.blockchain-c.com:
-    dns_search: .
-    container_name: peer0.blockchain-c.com
-    extends:
-      file:  base/docker-compose-base.yaml
-      service: peer0.blockchain-c.com
-    networks:
-      - hlf
-
-  peer0.blockchain-d.com:
-    dns_search: .
-    container_name: peer0.blockchain-d.com
-    extends:
-      file:  base/docker-compose-base.yaml
-      service: peer0.blockchain-d.com
-    networks:
-      - hlf
-
-  peer0.blockchain-b.com:
-    dns_search: .
-    container_name: peer0.blockchain-b.com
-    extends:
-      file:  base/docker-compose-base.yaml
-      service: peer0.blockchain-b.com
     networks:
       - hlf
 
@@ -89,7 +58,5 @@ services:
     depends_on:
       - orderer0.consensus.com
       - peer0.blockchain-a.com
-      - peer0.blockchain-c.com
-      - peer0.blockchain-d.com
     networks:
       - hlf

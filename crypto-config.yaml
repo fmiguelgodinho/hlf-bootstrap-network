@@ -70,24 +70,3 @@ PeerOrgs:
     # ---------------------------------------------------------------------------
     Users:
       Count: 1
-
-  - Name: PeersB
-    Domain: blockchain-b.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersC
-    Domain: blockchain-c.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
-
-  - Name: PeersD
-    Domain: blockchain-d.com
-    Template:
-      Count: 1
-    Users:
-      Count: 1
